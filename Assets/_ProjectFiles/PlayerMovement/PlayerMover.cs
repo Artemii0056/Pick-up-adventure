@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.InputReader.Scripts;
+using UnityEngine;
 
 namespace _ProjectFiles.PlayerMovement
 {

@@ -1,7 +1,16 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = nameof(InteractableConfig), menuName = "Scriptable Objects/InteractableConfig")]
-public class InteractableConfig : ScriptableObject
+namespace _ProjectFiles.InteractableObjects.Scripts
 {
-    
+    [Serializable]
+    public class InteractableConfig 
+    {
+        [field: SerializeField] public InteractableType InteractableType { get; private set; }
+        [field: SerializeField] public InteractionInputType InteractionInputType { get; private set; }
+        
+        [field: SerializeField] public string Info { get; private set; }
+        [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public string ActionLabel { get; private set; }
+    }
 }

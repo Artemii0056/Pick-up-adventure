@@ -2,80 +2,83 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputReader : MonoBehaviour
+namespace _ProjectFiles.InputReader.Scripts
 {
-    public Vector2 MoveValue { get; private set; }
-    public Vector2 LookValue { get; private set; }
-
-    public bool InteractHeld { get; private set; }
-
-    public event Action InteractStarted;
-    public event Action InteractCanceled;
-
-    private PlayerInputActions _input;
-
-    private void Awake()
+    public class PlayerInputReader : MonoBehaviour
     {
-        _input = new PlayerInputActions();
-    }
+        public Vector2 MoveValue { get; private set; }
+        public Vector2 LookValue { get; private set; }
 
-    private void OnEnable()
-    {
-        _input.Enable();
+        public bool InteractHeld { get; private set; }
 
-        _input.Player.Move.performed += OnMovePerformed;
-        _input.Player.Move.canceled += OnMoveCanceled;
+        public event Action InteractStarted;
+        public event Action InteractCanceled;
 
-        _input.Player.Look.performed += OnLookPerformed;
-        _input.Player.Look.canceled += OnLookCanceled;
+        private PlayerInputActions _input;
 
-        _input.Player.Interact.started += OnInteractStarted;
-        _input.Player.Interact.canceled += OnInteractCanceled;
-    }
+        private void Awake()
+        {
+            _input = new PlayerInputActions();
+        }
 
-    private void OnDisable()
-    {
-        _input.Player.Move.performed -= OnMovePerformed;
-        _input.Player.Move.canceled -= OnMoveCanceled;
+        private void OnEnable()
+        {
+            _input.Enable();
 
-        _input.Player.Look.performed -= OnLookPerformed;
-        _input.Player.Look.canceled -= OnLookCanceled;
+            _input.Player.Move.performed += OnMovePerformed;
+            _input.Player.Move.canceled += OnMoveCanceled;
 
-        _input.Player.Interact.started -= OnInteractStarted;
-        _input.Player.Interact.canceled -= OnInteractCanceled;
+            _input.Player.Look.performed += OnLookPerformed;
+            _input.Player.Look.canceled += OnLookCanceled;
 
-        _input.Disable();
-    }
+            _input.Player.Interact.started += OnInteractStarted;
+            _input.Player.Interact.canceled += OnInteractCanceled;
+        }
 
-    private void OnMovePerformed(InputAction.CallbackContext context)
-    {
-        MoveValue = context.ReadValue<Vector2>();
-    }
+        private void OnDisable()
+        {
+            _input.Player.Move.performed -= OnMovePerformed;
+            _input.Player.Move.canceled -= OnMoveCanceled;
 
-    private void OnMoveCanceled(InputAction.CallbackContext context)
-    {
-        MoveValue = Vector2.zero;
-    }
+            _input.Player.Look.performed -= OnLookPerformed;
+            _input.Player.Look.canceled -= OnLookCanceled;
 
-    private void OnLookPerformed(InputAction.CallbackContext context)
-    {
-        LookValue = context.ReadValue<Vector2>();
-    }
+            _input.Player.Interact.started -= OnInteractStarted;
+            _input.Player.Interact.canceled -= OnInteractCanceled;
 
-    private void OnLookCanceled(InputAction.CallbackContext context)
-    {
-        LookValue = Vector2.zero;
-    }
+            _input.Disable();
+        }
 
-    private void OnInteractStarted(InputAction.CallbackContext context)
-    {
-        InteractHeld = true;
-        InteractStarted?.Invoke();
-    }
+        private void OnMovePerformed(InputAction.CallbackContext context)
+        {
+            MoveValue = context.ReadValue<Vector2>();
+        }
 
-    private void OnInteractCanceled(InputAction.CallbackContext context)
-    {
-        InteractHeld = false;
-        InteractCanceled?.Invoke();
+        private void OnMoveCanceled(InputAction.CallbackContext context)
+        {
+            MoveValue = Vector2.zero;
+        }
+
+        private void OnLookPerformed(InputAction.CallbackContext context)
+        {
+            LookValue = context.ReadValue<Vector2>();
+        }
+
+        private void OnLookCanceled(InputAction.CallbackContext context)
+        {
+            LookValue = Vector2.zero;
+        }
+
+        private void OnInteractStarted(InputAction.CallbackContext context)
+        {
+            InteractHeld = true;
+            InteractStarted?.Invoke();
+        }
+
+        private void OnInteractCanceled(InputAction.CallbackContext context)
+        {
+            InteractHeld = false;
+            InteractCanceled?.Invoke();
+        }
     }
 }
