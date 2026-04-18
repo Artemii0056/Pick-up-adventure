@@ -6,7 +6,7 @@ namespace _ProjectFiles.InteractableObjects
     public interface IInteractionFeature
     {
         InteractableItemType Type { get; }
-        InteractData GetInteractData(Player player ,InteractableEntity interactableEntity);
-        void Interact(Player player, InteractableEntity interactableEntity);
+        InteractData GetInteractData(Player player ,ItemView itemView);
+        void Interact(Player player, ItemView itemView);
     }
 }

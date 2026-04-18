@@ -20,32 +20,32 @@ namespace _ProjectFiles.InteractableObjects
                 _features[feature.Type] = feature;
         }
 
-        public void ShowViewData(Player player, InteractableEntity interactableEntity) 
+        public void ShowViewData(Player player, ItemView itemView) 
         {
-            if (!_features.TryGetValue(interactableEntity.InteractableItemType, out var feature))
+            if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 throw new Exception("Interaction feature not found");
 
-            InteractData data = feature.GetInteractData(player, interactableEntity);
+            InteractData data = feature.GetInteractData(player, itemView);
 
             _keyView.UpdateText(data.ActionName);
         }
 
-        public bool TryExecute(Player player, InteractableEntity interactableEntity)
+        public bool TryExecute(Player player, ItemView itemView)
         {
-            if (!_features.TryGetValue(interactableEntity.InteractableItemType, out var feature))
+            if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
 
-            ShowViewData(player, interactableEntity);
+            ShowViewData(player, itemView);
 
             return true;
         }
 
-        public bool TryInteract(Player player, InteractableEntity interactableEntity)
+        public bool TryInteract(Player player, ItemView itemView)
         {
-            if (!_features.TryGetValue(interactableEntity.InteractableItemType, out var feature))
+            if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
             
-            feature.Interact(player, interactableEntity);
+            feature.Interact(player, itemView);
             return true;
         }
     }

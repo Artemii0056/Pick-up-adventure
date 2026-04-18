@@ -2,7 +2,7 @@
 {
     public interface IItemSlotRule
     {
-        bool CanPlace(Slot slot, int itemId);
+        bool CanPlace(SlotView slotView, int itemId);
         bool CanTake(int initialId);
     }
 }

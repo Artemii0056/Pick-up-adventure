@@ -5,9 +5,9 @@ namespace _ProjectFiles.Items
 {
     public class ItemStorage
     {
-        private readonly Dictionary<int, InteractableEntity> _states = new();
+        private readonly Dictionary<int, ItemView> _states = new();
 
-        public void AddState(InteractableEntity state)
+        public void AddState(ItemView state)
         {
             if (_states.ContainsKey(state.Id))
                 throw new KeyNotFoundException(); //TODO Заменить на нормальный эксепшн
@@ -15,7 +15,7 @@ namespace _ProjectFiles.Items
             _states.Add(state.Id, state);
         }
 
-        public InteractableEntity GetState(int id)
+        public ItemView GetState(int id)
         {
             if (_states.ContainsKey(id) == false)
                 throw new KeyNotFoundException(); 

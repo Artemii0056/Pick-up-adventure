@@ -11,7 +11,7 @@
 
             public InteractableItemType Type => InteractableItemType.Chest;
 
-            public InteractData GetInteractData(Player player, InteractableEntity interactableEntity)
+            public InteractData GetInteractData(Player player, ItemView itemView)
             {
                 if (player.HasKey)
                 {
@@ -29,9 +29,9 @@
                 };
             }
 
-            public void Interact(Player player, InteractableEntity interactableEntity)
+            public void Interact(Player player, ItemView itemView)
             {
-                Chest chest = (Chest)interactableEntity;
+                ChestView chestView = (ChestView)itemView;
 
                 if (player.HasKey == false)
                     return;
@@ -41,10 +41,10 @@
 
                 Key key = (Key)player.Hand;
 
-                if (key.ChestKeyType == chest.KeyType)
+                if (key.ChestKeyType == chestView.KeyType)
                 {
-                    chest.Open();
-                    Debug.Log($"Chest {interactableEntity.Id} opened");
+                    chestView.Open();
+                    Debug.Log($"Chest {itemView.Id} opened");
                 }
                 else
                 {

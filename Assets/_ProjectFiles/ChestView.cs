@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _ProjectFiles
 {
-    public class Chest : InteractableEntity
+    public class ChestView : ItemView
     {
        [field: SerializeField] public ChestKeyType KeyType { get; private set; }
 

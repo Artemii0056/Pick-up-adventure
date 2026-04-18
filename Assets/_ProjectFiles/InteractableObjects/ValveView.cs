@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _ProjectFiles.InteractableObjects
 {
-    public class Valve : InteractableEntity
+    public class ValveView : ItemView
     {
         public void RotateStep()
         {

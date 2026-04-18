@@ -1,11 +1,10 @@
 ﻿using _ProjectFiles.RaycastResolvers.Scripts;
 using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _ProjectFiles
 {
-    public class Slot : InteractableEntity
+    public class SlotView : ItemView
     {
         [field: SerializeField] public SlotRuleType SlotRuleType { get; private set; }
         public bool IsEmpty => Item == null;

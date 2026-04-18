@@ -2,7 +2,7 @@
 {
     public class UniversalSlotRule : IItemSlotRule
     {
-        public bool CanPlace(Slot slot, int itemId) => 
+        public bool CanPlace(SlotView slotView, int itemId) => 
             true;
 
         public bool CanTake(int itemId) => 

@@ -9,9 +9,9 @@ namespace _ProjectFiles.Features
     {
         public InteractableItemType Type => InteractableItemType.Slot;
         
-        public InteractData GetInteractData(Player player, InteractableEntity interactableEntity) // Это будет TryGetInteractData
+        public InteractData GetInteractData(Player player, ItemView itemView) // Это будет TryGetInteractData
         {
-            Slot slot = (Slot)interactableEntity;
+            SlotView slotView = (SlotView)itemView;
             
             if (player.Hand is not Item item)
                 return new InteractData
@@ -33,7 +33,7 @@ namespace _ProjectFiles.Features
             };
         }
 
-        public void Interact(Player player, InteractableEntity interactableEntity)
+        public void Interact(Player player, ItemView itemView)
         {
             // if (request.Target is not ItemSlot slot)
             //     return;

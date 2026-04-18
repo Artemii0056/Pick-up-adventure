@@ -14,29 +14,29 @@ public class SlotService
         };
     }
 
-    public bool CanPlace(Slot slot, int itemId)
+    public bool CanPlace(SlotView slotView, int itemId)
     {
-        if (!slot.IsEmpty)
+        if (!slotView.IsEmpty)
             return false;
 
-        if (!_policies.TryGetValue(slot.SlotRuleType, out IItemSlotRule policy))
+        if (!_policies.TryGetValue(slotView.SlotRuleType, out IItemSlotRule policy))
             return false;
 
-        return policy.CanPlace(slot, itemId);
+        return policy.CanPlace(slotView, itemId);
     }
 
-    public bool CanTake(Slot slot)
+    public bool CanTake(SlotView slotView)
     {
-        return !slot.IsEmpty;
+        return !slotView.IsEmpty;
     }
 
-    public void Place(Slot slot, int itemId)
+    public void Place(SlotView slotView, int itemId)
     {
-        slot.SetItem(slot);
+      //  slot.SetItem(slot);
     }
 
-    public string Take(Slot slot)
+    public void Take(SlotView slotView)
     {
-        return slot.RemoveItem();
+       // return slot.RemoveItem();
     }
 }

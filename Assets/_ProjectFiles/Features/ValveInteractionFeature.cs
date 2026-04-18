@@ -8,7 +8,7 @@ namespace _ProjectFiles.Features
     {
         public InteractableItemType Type => InteractableItemType.Valve;
 
-        public InteractData GetInteractData(Player player, InteractableEntity interactableEntity)
+        public InteractData GetInteractData(Player player, ItemView itemView)
         {
             return new InteractData
             {
@@ -17,11 +17,11 @@ namespace _ProjectFiles.Features
             };
         }
 
-        public void Interact(Player player, InteractableEntity interactableEntity)
+        public void Interact(Player player, ItemView itemView)
         {
-            Valve valve = (Valve)interactableEntity;
+            ValveView valveView = (ValveView)itemView;
             
-            valve.RotateStep();
+            valveView.RotateStep();
         }
     }
 }

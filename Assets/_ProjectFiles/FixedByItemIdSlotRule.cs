@@ -2,9 +2,9 @@
 {
     public class FixedByItemIdSlotRule : IItemSlotRule
     {
-        public bool CanPlace(Slot slot, int itemId)
+        public bool CanPlace(SlotView slotView, int itemId)
         {
-            return slot.Id == itemId;
+            return slotView.Id == itemId;
         }
 
         public bool CanTake(int itemId)

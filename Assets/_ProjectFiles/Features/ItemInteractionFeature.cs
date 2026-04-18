@@ -8,12 +8,12 @@ namespace _ProjectFiles.Features
     {
         public InteractableItemType Type => InteractableItemType.Item;
         
-        public InteractData GetInteractData(Player player, InteractableEntity interactableEntity)
+        public InteractData GetInteractData(Player player, ItemView itemView)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Interact(Player player, InteractableEntity interactableEntity)
+        public void Interact(Player player, ItemView itemView)
         {
             throw new System.NotImplementedException();
         }

@@ -8,6 +8,7 @@ using _ProjectFiles.RaycastResolvers.Scripts;
 using _ProjectFiles.UI;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _ProjectFiles
 {
@@ -30,9 +31,9 @@ namespace _ProjectFiles
         private InteractionFeatureService _interactionFeatureService;
         private ItemStorage _storage;
         
-        [SerializeField] private InteractableEntity _interactableEntity;
-        [SerializeField] private InteractableEntity _interactableEntity2;
-        [SerializeField] private InteractableEntity _interactableEntity3;
+        [FormerlySerializedAs("_interactableEntity")] [SerializeField] private ItemView itemView;
+        [SerializeField] private ItemView _interactableEntity2;
+        [SerializeField] private ItemView _interactableEntity3;
 
         private void Awake()
         {
@@ -51,7 +52,7 @@ namespace _ProjectFiles
                 
             }, _keyView);
             
-            _storage.AddState(_interactableEntity);
+            _storage.AddState(itemView);
             _storage.AddState(_interactableEntity2);
             _storage.AddState(_interactableEntity3);
 
@@ -67,7 +68,7 @@ namespace _ProjectFiles
         {
             DrawDebug();
 
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableEntity entity))
+            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out ItemView entity))
             {
                 _keyView.gameObject.SetActive(true);
                 _interactionFeatureService.TryExecute(this, entity);
@@ -80,7 +81,7 @@ namespace _ProjectFiles
 
         private void OnInteractHeld()
         {
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableEntity entity))
+            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out ItemView entity))
             {
                 _interactionFeatureService.TryInteract(this, entity);
             }
