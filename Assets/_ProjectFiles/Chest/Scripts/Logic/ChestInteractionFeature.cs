@@ -1,58 +1,64 @@
 ﻿using _ProjectFiles.Chest.Scripts.View;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
-using _ProjectFiles.Items.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Keys.View;
 using UnityEngine;
 
 namespace _ProjectFiles.Chest.Scripts.Logic
+{
+    public class ChestInteractionFeature : IInteractionFeature
     {
-        public class ChestInteractionFeature : IInteractionFeature
+        public InteractableItemType Type => InteractableItemType.Chest;
+
+        public InteractData GetInteractData(Player.Scripts.Core.Player player, InteractableView interactableView)
         {
-            private const string RequiredItemId = "key";
+            if (interactableView is not ChestView chestView)
+                return default;
 
-            public InteractableItemType Type => InteractableItemType.Chest;
-
-            public InteractData GetInteractData(Player.Scripts.Core.Player player, ItemView itemView)
+            if (player.Hand is not KeyView keyView)
             {
-                if (player.HasKey)
-                {
-                    return new InteractData
-                    {
-                        CanInteract = true,
-                        ActionName = "Открыть" // Сделать SO для этого всего? 
-                    };
-                }
-
                 return new InteractData
                 {
                     CanInteract = false,
-                    ActionName = " Нет кея"
+                    ActionName = "Нет ключа"
                 };
             }
 
-            public void Interact(Player.Scripts.Core.Player player, ItemView itemView)
+            if (keyView.ChestKeyType != chestView.KeyType)
             {
-                ChestView chestView = (ChestView)itemView;
-
-                if (player.HasKey == false)
-                    return;
-
-                if (player.Hand.ItemType != ItemType.Key)
-                    return;
-
-                Key key = (Key)player.Hand;
-
-                if (key.ChestKeyType == chestView.KeyType)
+                return new InteractData
                 {
-                    chestView.Open();
-                    Debug.Log($"Chest {itemView.Id} opened");
-                }
-                else
-                {
-                    Debug.Log($"Заперто!");
-                }
+                    CanInteract = false,
+                    ActionName = "Не подходит"
+                };
             }
+
+            return new InteractData
+            {
+                CanInteract = true,
+                ActionName = "Открыть"
+            };
+        }
+
+        public void Interact(Player.Scripts.Core.Player player, InteractableView interactableView)
+        {
+            if (interactableView is not ChestView chestView)
+                return;
+
+            if (player.Hand is not KeyView keyView)
+                return;
+
+            if (keyView.ChestKeyType != chestView.KeyType)
+            {
+                Debug.Log("Заперто!");
+                return;
+            }
+
+            chestView.Open();
+            player.Hand = null;
+
+            Debug.Log($"Chest {chestView.Id} opened");
         }
     }
+}

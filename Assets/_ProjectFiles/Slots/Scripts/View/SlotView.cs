@@ -1,28 +1,29 @@
-﻿using _ProjectFiles.Items.Scripts.Data;
+﻿using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
 using UnityEngine;
 
 namespace _ProjectFiles.Slots.Scripts.View
 {
-    public class SlotView : ItemView
+    public class SlotView : InteractableView
     {
         [field: SerializeField] public SlotRuleType SlotRuleType { get; private set; }
-        public bool IsEmpty => Item == null;
-        public Item Item { get; private set; }
+        [field: SerializeField] public Transform ItemAnchor { get; private set; }
 
-        public void SetItem(Item item)
+        public ItemView CurrentItemView { get; private set; }
+
+        public bool IsEmpty => CurrentItemView == null;
+
+        public void SetItemView(ItemView itemView)
         {
-            Item = item;
-            //Тут надо найти конфиг
+            CurrentItemView = itemView;
         }
 
-        public Item RemoveItem()
+        public ItemView RemoveItemView()
         {
-            Item item = Item;
-            Item = null;
-            
-            return item;
+            var itemView = CurrentItemView;
+            CurrentItemView = null;
+            return itemView;
         }
     }
 }

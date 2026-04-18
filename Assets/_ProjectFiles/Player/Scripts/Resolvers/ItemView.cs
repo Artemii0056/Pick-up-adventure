@@ -1,17 +1,13 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Items.Scripts.Data;
 using UnityEngine;
 
 namespace _ProjectFiles.Player.Scripts.Resolvers
 {
-    public class ItemView : MonoBehaviour 
+    public class ItemView : InteractableView
     {
-       [field: SerializeField] public int Id { get; private set; }
-       [field: SerializeField] public InteractableItemType InteractableItemType { get; private set; } //Тут точно этот тип
-
-       public void Init(int id, InteractableItemType interactableItemType)
-       {
-           Id = id;
-           InteractableItemType = interactableItemType;
-       }
+        [field: SerializeField] public ItemType ItemType { get; private set; }
+        [field: SerializeField] public string Description { get; private set; }
     }
 }

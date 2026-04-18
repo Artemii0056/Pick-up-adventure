@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.UI;
 
@@ -20,7 +21,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
                 _features[feature.Type] = feature;
         }
 
-        public void ShowViewData(Player.Scripts.Core.Player player, ItemView itemView) 
+        public void ShowViewData(Player.Scripts.Core.Player player, InteractableView itemView) 
         {
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 throw new Exception("Interaction feature not found");
@@ -30,7 +31,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             _keyView.UpdateText(data.ActionName);
         }
 
-        public bool TryExecute(Player.Scripts.Core.Player player, ItemView itemView)
+        public bool TryExecute(Player.Scripts.Core.Player player, InteractableView itemView)
         {
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
@@ -40,7 +41,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             return true;
         }
 
-        public bool TryInteract(Player.Scripts.Core.Player player, ItemView itemView)
+        public bool TryInteract(Player.Scripts.Core.Player player, InteractableView itemView)
         {
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;

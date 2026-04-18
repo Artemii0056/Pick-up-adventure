@@ -1,30 +1,28 @@
-﻿using _ProjectFiles.Items.Scripts.Data;
-using _ProjectFiles.Slots.Scripts.Logic;
+﻿using _ProjectFiles.Slots.Scripts.Logic;
 
 namespace _ProjectFiles.Slots.Scripts.Data
 {
     public class SlotModel 
     {
-        public int Id { get; }
-        public Item CurrentItem { get; private set; }
-
         private readonly ISlotRule _rule;
 
-        public bool IsEmpty => CurrentItem == null;
-
-        public SlotModel(int id, ISlotRule rule, Item initialItem = null)
+        public SlotModel(int id, ISlotRule rule, ItemModel initialItem = null)
         {
             Id = id;
             _rule = rule;
             CurrentItem = initialItem;
         }
+        
+        public bool IsEmpty => CurrentItem == null;
+        public int Id { get; }
+        public ItemModel CurrentItem { get; private set; }
 
         public bool CanTake()
         {
             return CurrentItem != null;
         }
 
-        public Item Take()
+        public ItemModel Take()
         {
             var item = CurrentItem;
             CurrentItem = null;
@@ -39,7 +37,7 @@ namespace _ProjectFiles.Slots.Scripts.Data
             return _rule.CanPlace(model.Id, this);
         }
 
-        public void Place(Item item)
+        public void Place(ItemModel item)
         {
             CurrentItem = item;
         }

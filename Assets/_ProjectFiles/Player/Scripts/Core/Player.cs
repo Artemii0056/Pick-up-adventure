@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _ProjectFiles.Chest.Scripts.Logic;
 using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Items;
 using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Logic;
@@ -30,14 +31,14 @@ namespace _ProjectFiles.Player.Scripts.Core
 
         private IRaycastService _raycastService;
 
-        public Item Hand;
+        public ItemView Hand;
         
         private InteractionFeatureService _interactionFeatureService;
         private ItemStorage _storage;
         
-        [FormerlySerializedAs("_interactableEntity")] [SerializeField] private ItemView itemView;
-        [SerializeField] private ItemView _interactableEntity2;
-        [SerializeField] private ItemView _interactableEntity3;
+        [SerializeField] private ItemView _keyItemView;
+        [SerializeField] private ItemView _noteItemView;
+        [SerializeField] private ItemView _questItemView;
 
         private void Awake()
         {
@@ -56,9 +57,9 @@ namespace _ProjectFiles.Player.Scripts.Core
                 
             }, _keyView);
             
-            _storage.AddState(itemView);
-            _storage.AddState(_interactableEntity2);
-            _storage.AddState(_interactableEntity3);
+            _storage.AddState(new ItemModel(_keyItemView.Id, _keyItemView.ItemType));
+            _storage.AddState(new ItemModel(_noteItemView.Id, _noteItemView.ItemType));
+            _storage.AddState(new ItemModel(_questItemView.Id, _questItemView.ItemType));
 
             _playerInputReader.InteractStarted += OnInteractHeld;
         }
@@ -72,7 +73,7 @@ namespace _ProjectFiles.Player.Scripts.Core
         {
             DrawDebug();
 
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out ItemView entity))
+            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
             {
                 _keyView.gameObject.SetActive(true);
                 _interactionFeatureService.TryExecute(this, entity);
@@ -85,7 +86,7 @@ namespace _ProjectFiles.Player.Scripts.Core
 
         private void OnInteractHeld()
         {
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out ItemView entity))
+            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
             {
                 _interactionFeatureService.TryInteract(this, entity);
             }

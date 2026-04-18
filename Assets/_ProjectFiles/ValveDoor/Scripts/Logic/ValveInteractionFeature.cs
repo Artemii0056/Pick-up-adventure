@@ -1,6 +1,6 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
-using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.ValveDoor.Scripts.View;
 
 namespace _ProjectFiles.ValveDoor.Scripts.Logic
@@ -9,8 +9,11 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
     {
         public InteractableItemType Type => InteractableItemType.Valve;
 
-        public InteractData GetInteractData(Player.Scripts.Core.Player player, ItemView itemView)
+        public InteractData GetInteractData(Player.Scripts.Core.Player player, InteractableView interactableView)
         {
+            if (interactableView is not ValveView)
+                return default;
+
             return new InteractData
             {
                 CanInteract = true,
@@ -18,10 +21,11 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
             };
         }
 
-        public void Interact(Player.Scripts.Core.Player player, ItemView itemView)
+        public void Interact(Player.Scripts.Core.Player player, InteractableView interactableView)
         {
-            ValveView valveView = (ValveView)itemView;
-            
+            if (interactableView is not ValveView valveView)
+                return;
+
             valveView.RotateStep();
         }
     }

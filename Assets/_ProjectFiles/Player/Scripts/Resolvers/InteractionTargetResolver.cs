@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.Player.Scripts.Raycast.Scripts;
+﻿using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Player.Scripts.Raycast.Scripts;
 using UnityEngine;
 
 namespace _ProjectFiles.Player.Scripts.Resolvers
@@ -12,24 +13,22 @@ namespace _ProjectFiles.Player.Scripts.Resolvers
             _raycastService = raycastService;
         }
 
-        public bool TryResolveTarget(Camera camera, float distance, LayerMask mask, out ItemView target) 
-            //тут мне нужен объект, по которому навели. Он будет хранить свой тип и глобальный Id - условный InteractableEntityView
-            //Склоняюсь к фабрикам и разным коллекциям по хранению объектов. Не хочется делать общий с дальнейшими кастами 
+        public bool TryResolveTarget(Camera camera, float distance, LayerMask layerMask, out InteractableView entity)
         {
-            target = null;
+            entity = null;
 
             if (camera == null)
                 return false;
 
             var ray = new Ray(camera.transform.position, camera.transform.forward);
 
-            if (!_raycastService.Raycast(ray, distance, mask, out var hit))
+            if (!_raycastService.Raycast(ray, distance, layerMask, out var hit))
                 return false;
 
-            if (!hit.collider.TryGetComponent(out ItemView entity))
+            if (!hit.collider.TryGetComponent(out InteractableView searchedEntity))
                 return false;
 
-            target = entity;
+            entity = searchedEntity;
             return true;
         }
     }

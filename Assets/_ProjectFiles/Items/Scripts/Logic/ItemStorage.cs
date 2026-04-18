@@ -1,26 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _ProjectFiles.Player.Scripts.Resolvers;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
     public class ItemStorage
     {
-        private readonly Dictionary<int, ItemView> _states = new();
+        private readonly Dictionary<int, ItemModel> _items = new();
 
-        public void AddState(ItemView state)
+        public void AddState(ItemModel item)
         {
-            if (_states.ContainsKey(state.Id))
-                throw new KeyNotFoundException(); //TODO Заменить на нормальный эксепшн
+            if (_items.ContainsKey(item.Id))
+                throw new InvalidOperationException($"Item with id {item.Id} already exists.");
             
-            _states.Add(state.Id, state);
+            _items.Add(item.Id, item);
         }
 
-        public ItemView GetState(int id)
+        public ItemModel GetState(int id)
         {
-            if (_states.ContainsKey(id) == false)
+            if (_items.ContainsKey(id) == false)
                 throw new KeyNotFoundException(); 
             
-            return _states[id];
+            return _items[id];
         }
     }
 }
