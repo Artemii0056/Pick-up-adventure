@@ -1,9 +1,9 @@
-﻿using _ProjectFiles.RaycastResolvers.Scripts;
+﻿using DefaultNamespace;
 using UnityEngine;
 
 namespace _ProjectFiles.InteractableObjects
 {
-    public class Key : InteractableEntity
+    public class Key : Item
     {
         [field: SerializeField] public ChestKeyType ChestKeyType { get; private set; }
     }

@@ -3,10 +3,10 @@
     public enum InteractableItemType
     {
         None = 0,
+        Item,
         Chest,
         NPC,
-        Key,
         Valve,
-        Note
+        Slot
     }
 }

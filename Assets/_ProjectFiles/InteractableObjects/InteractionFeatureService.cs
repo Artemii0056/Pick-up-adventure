@@ -39,5 +39,14 @@ namespace _ProjectFiles.InteractableObjects
 
             return true;
         }
+
+        public bool TryInteract(Player player, InteractableEntity interactableEntity)
+        {
+            if (!_features.TryGetValue(interactableEntity.InteractableItemType, out var feature))
+                return false;
+            
+            feature.Interact(player, interactableEntity);
+            return true;
+        }
     }
 }

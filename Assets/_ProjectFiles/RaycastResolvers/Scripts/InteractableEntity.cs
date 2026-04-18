@@ -6,7 +6,7 @@ namespace _ProjectFiles.RaycastResolvers.Scripts
     public class InteractableEntity : MonoBehaviour 
     {
        [field: SerializeField] public int Id { get; private set; }
-       [field: SerializeField] public InteractableItemType InteractableItemType { get; private set; }
+       [field: SerializeField] public InteractableItemType InteractableItemType { get; private set; } //Тут точно этот тип
 
        public void Init(int id, InteractableItemType interactableItemType)
        {
