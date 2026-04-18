@@ -1,10 +1,10 @@
-﻿using _ProjectFiles.Slots.Scripts.View;
+﻿using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Slots.Scripts.Data;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
-    public interface IItemSlotRule
+    public interface ISlotRule
     {
-        bool CanPlace(SlotView slotView, int itemId);
-        bool CanTake(int initialId);
+        bool CanPlace(int itemId, SlotModel slot);
     }
 }

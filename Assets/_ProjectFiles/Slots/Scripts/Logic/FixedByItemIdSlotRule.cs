@@ -1,17 +1,19 @@
-﻿using _ProjectFiles.Slots.Scripts.View;
+﻿using _ProjectFiles.Slots.Scripts.Data;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
-    public class FixedByItemIdSlotRule : IItemSlotRule
+    public class FixedByIdSlotRule : ISlotRule
     {
-        public bool CanPlace(SlotView slotView, int itemId)
+        private  readonly int _allowedItemId;
+
+        public FixedByIdSlotRule(int allowedItemId)
         {
-            return slotView.Id == itemId;
+            _allowedItemId = allowedItemId;
         }
 
-        public bool CanTake(int itemId)
+        public bool CanPlace(int itemId, SlotModel slot)
         {
-            return true;
+            return itemId == _allowedItemId;
         }
     }
 }

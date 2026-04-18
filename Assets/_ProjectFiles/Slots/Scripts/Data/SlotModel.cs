@@ -1,32 +1,47 @@
 ﻿using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Slots.Scripts.Logic;
 
 namespace _ProjectFiles.Slots.Scripts.Data
 {
     public class SlotModel 
     {
         public int Id { get; }
-        public int? ItemId { get; private set; }
-        public ItemType Type { get; }
+        public Item CurrentItem { get; private set; }
 
-        public SlotModel(int id, int? itemId = null)
+        private readonly ISlotRule _rule;
+
+        public bool IsEmpty => CurrentItem == null;
+
+        public SlotModel(int id, ISlotRule rule, Item initialItem = null)
         {
             Id = id;
-            ItemId = itemId;
+            _rule = rule;
+            CurrentItem = initialItem;
         }
 
-        public bool IsEmpty => ItemId == null;
-
-        public bool CanPlace(ItemModel item) => 
-            IsEmpty && item != null;
-
-        public void Place(ItemModel item)
+        public bool CanTake()
         {
-            ItemId = item.Id;
+            return CurrentItem != null;
         }
 
-        public void Clear()
+        public Item Take()
         {
-            ItemId = null;
+            var item = CurrentItem;
+            CurrentItem = null;
+            return item;
+        }
+
+        public bool CanPlace(ItemModel model)
+        {
+            if (model == null || !IsEmpty)
+                return false;
+
+            return _rule.CanPlace(model.Id, this);
+        }
+
+        public void Place(Item item)
+        {
+            CurrentItem = item;
         }
     }
 }
