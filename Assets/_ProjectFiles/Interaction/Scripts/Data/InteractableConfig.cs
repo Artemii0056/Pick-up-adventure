@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _ProjectFiles.InteractableObjects.Scripts
+namespace _ProjectFiles.Interaction.Scripts.Data
 {
     [Serializable]
     public class InteractableConfig 

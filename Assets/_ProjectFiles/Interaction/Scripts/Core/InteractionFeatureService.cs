@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using _ProjectFiles.InteractableObjects.Scripts;
-using _ProjectFiles.RaycastResolvers.Scripts;
+using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.UI;
 
-namespace _ProjectFiles.InteractableObjects
+namespace _ProjectFiles.Interaction.Scripts.Core
 {
     public class InteractionFeatureService
     {

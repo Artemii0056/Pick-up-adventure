@@ -1,4 +1,4 @@
-namespace _ProjectFiles.InteractableObjects
+namespace _ProjectFiles.Interaction.Scripts.Data
 {
     public struct InteractData
     {

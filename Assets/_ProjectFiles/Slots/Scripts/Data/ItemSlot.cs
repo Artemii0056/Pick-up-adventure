@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _ProjectFiles
+namespace _ProjectFiles.Slots.Scripts.Data
 {
     public class ItemSlot : MonoBehaviour
     {

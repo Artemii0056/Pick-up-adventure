@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using _ProjectFiles.RaycastResolvers.Scripts;
+using _ProjectFiles.Player.Scripts.Resolvers;
 
-namespace _ProjectFiles.Items
+namespace _ProjectFiles.Items.Scripts.Logic
 {
     public class ItemStorage
     {

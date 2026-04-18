@@ -1,8 +1,9 @@
-﻿using _ProjectFiles.RaycastResolvers.Scripts;
-using DefaultNamespace;
+﻿using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Slots.Scripts.Data;
 using UnityEngine;
 
-namespace _ProjectFiles
+namespace _ProjectFiles.Slots.Scripts.View
 {
     public class SlotView : ItemView
     {

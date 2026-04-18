@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
-using _ProjectFiles.Features;
-using _ProjectFiles.InputReader.Scripts;
-using _ProjectFiles.InteractableObjects;
+using _ProjectFiles.Chest.Scripts.Logic;
+using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Items;
-using _ProjectFiles.Raycast.Scripts;
-using _ProjectFiles.RaycastResolvers.Scripts;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Items.Scripts.Logic;
+using _ProjectFiles.NPC.Scripts.Logic;
+using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
+using _ProjectFiles.Player.Scripts.Raycast.Scripts;
+using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.UI;
-using DefaultNamespace;
+using _ProjectFiles.ValveDoor.Scripts.Logic;
 using UnityEngine;
 using UnityEngine.Serialization;
 

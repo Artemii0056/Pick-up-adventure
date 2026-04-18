@@ -1,7 +1,7 @@
-﻿using _ProjectFiles.Raycast.Scripts;
+﻿using _ProjectFiles.Player.Scripts.Raycast.Scripts;
 using UnityEngine;
 
-namespace _ProjectFiles.RaycastResolvers.Scripts
+namespace _ProjectFiles.Player.Scripts.Resolvers
 {
     public class InteractionTargetResolver
     {

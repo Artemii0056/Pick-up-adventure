@@ -1,4 +1,4 @@
-﻿using _ProjectFiles.InputReader.Scripts;
+﻿using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using UnityEngine;
 
 namespace _ProjectFiles.Player.Scripts.Movements

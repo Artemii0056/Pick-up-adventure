@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using _ProjectFiles.InteractableObjects.Scripts;
+using _ProjectFiles.Chest.Configs;
+using _ProjectFiles.Keys.Config;
 using _ProjectFiles.ResourceLoader.Scripts;
+using _ProjectFiles.ValveDoor.Configs;
 
 namespace _ProjectFiles.StaticDatas.Scripts
 {

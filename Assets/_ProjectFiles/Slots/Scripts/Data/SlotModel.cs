@@ -1,4 +1,6 @@
-﻿namespace _ProjectFiles
+﻿using _ProjectFiles.Items.Scripts.Data;
+
+namespace _ProjectFiles.Slots.Scripts.Data
 {
     public class SlotModel 
     {

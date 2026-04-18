@@ -1,8 +1,8 @@
-﻿using _ProjectFiles.InteractableObjects;
-using _ProjectFiles.InteractableObjects.Scripts;
-using _ProjectFiles.RaycastResolvers.Scripts;
+﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
 
-namespace _ProjectFiles.Features
+namespace _ProjectFiles.Items.Scripts.Logic
 {
     public class ItemInteractionFeature: IInteractionFeature
     {

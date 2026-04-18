@@ -1,4 +1,4 @@
-﻿namespace _ProjectFiles
+﻿namespace _ProjectFiles.Items.Scripts.Data
 {
     public enum ItemType
     {

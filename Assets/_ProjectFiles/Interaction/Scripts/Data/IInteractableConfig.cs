@@ -1,4 +1,4 @@
-﻿namespace _ProjectFiles.InteractableObjects.Scripts
+﻿namespace _ProjectFiles.Interaction.Scripts.Data
 {
     public interface IInteractableConfig
     {

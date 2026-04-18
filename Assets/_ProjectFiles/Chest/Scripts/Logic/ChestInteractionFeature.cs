@@ -1,9 +1,12 @@
-﻿    using _ProjectFiles.InteractableObjects;
-    using _ProjectFiles.InteractableObjects.Scripts;
-    using _ProjectFiles.RaycastResolvers.Scripts;
-    using UnityEngine;
+﻿using _ProjectFiles.Chest.Scripts.View;
+using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Keys.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
+using UnityEngine;
 
-    namespace _ProjectFiles.Features
+namespace _ProjectFiles.Chest.Scripts.Logic
     {
         public class ChestInteractionFeature : IInteractionFeature
         {

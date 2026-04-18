@@ -1,42 +1,46 @@
 ﻿using System.Collections.Generic;
-using _ProjectFiles;
+using _ProjectFiles.Slots.Scripts.Data;
+using _ProjectFiles.Slots.Scripts.View;
 
-public class SlotService
+namespace _ProjectFiles.Slots.Scripts.Logic
 {
-    private readonly Dictionary<SlotRuleType, IItemSlotRule> _policies;
-
-    public SlotService()
+    public class SlotService
     {
-        _policies = new Dictionary<SlotRuleType, IItemSlotRule>
+        private readonly Dictionary<SlotRuleType, IItemSlotRule> _policies;
+
+        public SlotService()
         {
-            { SlotRuleType.Universal, new UniversalSlotRule() },
-            { SlotRuleType.FixedByItemId, new FixedByItemIdSlotRule() }
-        };
-    }
+            _policies = new Dictionary<SlotRuleType, IItemSlotRule>
+            {
+                { SlotRuleType.Universal, new UniversalSlotRule() },
+                { SlotRuleType.FixedByItemId, new FixedByItemIdSlotRule() }
+            };
+        }
 
-    public bool CanPlace(SlotView slotView, int itemId)
-    {
-        if (!slotView.IsEmpty)
-            return false;
+        public bool CanPlace(SlotView slotView, int itemId)
+        {
+            if (!slotView.IsEmpty)
+                return false;
 
-        if (!_policies.TryGetValue(slotView.SlotRuleType, out IItemSlotRule policy))
-            return false;
+            if (!_policies.TryGetValue(slotView.SlotRuleType, out IItemSlotRule policy))
+                return false;
 
-        return policy.CanPlace(slotView, itemId);
-    }
+            return policy.CanPlace(slotView, itemId);
+        }
 
-    public bool CanTake(SlotView slotView)
-    {
-        return !slotView.IsEmpty;
-    }
+        public bool CanTake(SlotView slotView)
+        {
+            return !slotView.IsEmpty;
+        }
 
-    public void Place(SlotView slotView, int itemId)
-    {
-      //  slot.SetItem(slot);
-    }
+        public void Place(SlotView slotView, int itemId)
+        {
+            //  slot.SetItem(slot);
+        }
 
-    public void Take(SlotView slotView)
-    {
-       // return slot.RemoveItem();
+        public void Take(SlotView slotView)
+        {
+            // return slot.RemoveItem();
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace _ProjectFiles
+﻿using _ProjectFiles.Items.Scripts.Data;
+
+namespace _ProjectFiles
 {
     public class ItemModel
     {

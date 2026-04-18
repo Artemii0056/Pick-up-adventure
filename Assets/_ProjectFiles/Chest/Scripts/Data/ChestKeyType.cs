@@ -1,4 +1,4 @@
-namespace _ProjectFiles
+namespace _ProjectFiles.Chest.Scripts.Data
 {
     public enum ChestKeyType
     {

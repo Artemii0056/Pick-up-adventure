@@ -1,7 +1,7 @@
-﻿using _ProjectFiles.InteractableObjects.Scripts;
+﻿using _ProjectFiles.Interaction.Scripts.Data;
 using UnityEngine;
 
-namespace _ProjectFiles.RaycastResolvers.Scripts
+namespace _ProjectFiles.Player.Scripts.Resolvers
 {
     public class ItemView : MonoBehaviour 
     {

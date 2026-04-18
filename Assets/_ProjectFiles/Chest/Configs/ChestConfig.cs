@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.Interaction.Scripts.Data;
+using UnityEngine;
 
-namespace _ProjectFiles.InteractableObjects.Scripts
+namespace _ProjectFiles.Chest.Configs
 {
     [CreateAssetMenu(fileName = nameof(ChestConfig), menuName = "StaticData/Interactable" + nameof(ChestConfig))]
     public class ChestConfig : ScriptableObject

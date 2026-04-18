@@ -1,9 +1,10 @@
-﻿using _ProjectFiles.InteractableObjects;
-using _ProjectFiles.InteractableObjects.Scripts;
-using _ProjectFiles.RaycastResolvers.Scripts;
-using DefaultNamespace;
+﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Slots.Scripts.View;
 
-namespace _ProjectFiles.Features
+namespace _ProjectFiles.Slots.Scripts.Logic
 {
     public class SlotInteractionFeature : IInteractionFeature
     {

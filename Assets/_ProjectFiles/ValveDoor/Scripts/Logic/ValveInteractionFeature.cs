@@ -1,8 +1,9 @@
-﻿using _ProjectFiles.InteractableObjects;
-using _ProjectFiles.InteractableObjects.Scripts;
-using _ProjectFiles.RaycastResolvers.Scripts;
+﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.ValveDoor.Scripts.View;
 
-namespace _ProjectFiles.Features
+namespace _ProjectFiles.ValveDoor.Scripts.Logic
 {
     public class ValveInteractionFeature : IInteractionFeature
     {

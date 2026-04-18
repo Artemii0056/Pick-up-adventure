@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.Interaction.Scripts.Data;
+using UnityEngine;
 
-namespace _ProjectFiles.InteractableObjects.Scripts
+namespace _ProjectFiles.Keys.Config
 {
     [CreateAssetMenu(fileName = nameof(KeyConfig), menuName = "StaticData/Interactable" + nameof(KeyConfig))]
     public class KeyConfig : ScriptableObject

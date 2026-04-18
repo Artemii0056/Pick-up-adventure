@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _ProjectFiles.Raycast.Scripts
+namespace _ProjectFiles.Player.Scripts.Raycast.Scripts
 {
     public interface IRaycastService
     {

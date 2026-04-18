@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _ProjectFiles.Cameras.Scripts
+namespace _ProjectFiles.Player.Scripts.Cameras.Scripts
 {
     public class CameraProvider : ICameraProvider
     {

@@ -1,7 +1,7 @@
-﻿using _ProjectFiles.RaycastResolvers.Scripts;
+﻿using _ProjectFiles.Player.Scripts.Resolvers;
 using UnityEngine;
 
-namespace _ProjectFiles.InteractableObjects
+namespace _ProjectFiles.ValveDoor.Scripts.View
 {
     public class ValveView : ItemView
     {

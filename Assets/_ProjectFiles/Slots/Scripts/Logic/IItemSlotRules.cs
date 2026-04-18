@@ -1,4 +1,6 @@
-﻿namespace _ProjectFiles
+﻿using _ProjectFiles.Slots.Scripts.View;
+
+namespace _ProjectFiles.Slots.Scripts.Logic
 {
     public interface IItemSlotRule
     {

@@ -1,7 +1,6 @@
-﻿using _ProjectFiles;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace _ProjectFiles.Items.Scripts.Data
 {
     public class Item : MonoBehaviour //TODO Обязательно разделить это(логику работы) на вьюшку и модель!!!
     {

@@ -1,7 +1,8 @@
-﻿using _ProjectFiles.RaycastResolvers.Scripts;
+﻿using _ProjectFiles.Chest.Scripts.Data;
+using _ProjectFiles.Player.Scripts.Resolvers;
 using UnityEngine;
 
-namespace _ProjectFiles
+namespace _ProjectFiles.Chest.Scripts.View
 {
     public class ChestView : ItemView
     {

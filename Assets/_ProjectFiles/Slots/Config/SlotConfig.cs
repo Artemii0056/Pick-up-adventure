@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.Slots.Scripts.Data;
+using UnityEngine;
 
-namespace _ProjectFiles.Slots
+namespace _ProjectFiles.Slots.Config
 {
     public class SlotConfig
     {

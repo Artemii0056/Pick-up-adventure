@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _ProjectFiles.InputReader.Scripts
+namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
 {
     public class PlayerInputReader : MonoBehaviour
     {
