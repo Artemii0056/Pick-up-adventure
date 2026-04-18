@@ -2,7 +2,10 @@
 {
     public class GlobalIdService : IGlobalIdService
     {
-        private int _current = 1;
+        private int _current;
+
+        public GlobalIdService(int current) => 
+            _current = current;
 
         public int GetNext() => 
             _current++;

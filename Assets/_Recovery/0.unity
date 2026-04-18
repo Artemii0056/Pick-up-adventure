@@ -354,12 +354,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _debug: 1
-  HasKey: 1
-  _keyView: {fileID: 713472654}
-  Hand: {fileID: 0}
-  _interactableEntity: {fileID: 0}
-  _interactableEntity2: {fileID: 0}
-  _interactableEntity3: {fileID: 0}
+  HasKey: 0
+  _keyView: {fileID: 0}
 --- !u!4 &344835261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7818108540775168797, guid: a09f95ca39f3483479dd1693c94b0939, type: 3}
@@ -593,7 +589,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713472653}
-  - component: {fileID: 713472654}
   m_Layer: 5
   m_Name: InfoContainer
   m_TagString: Untagged
@@ -621,20 +616,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &713472654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713472652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32187471b9dd42e7b1f790b345585c75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.UI.InfoKeyView
-  _text: {fileID: 1984118109}
-  _keyChar: 69
 --- !u!1001 &823612474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -709,16 +690,30 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 823612479}
+      addedObject: {fileID: 823612476}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 823612482}
+      addedObject: {fileID: 823612479}
   m_SourcePrefab: {fileID: 100100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
 --- !u!1 &823612475 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
   m_PrefabInstance: {fileID: 823612474}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &823612476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823612475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8b83d57e23437cb78e84e8eae7e5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.RaycastResolvers.Scripts.InteractableEntity
+  <Id>k__BackingField: 0
+  <InteractableItemType>k__BackingField: 0
 --- !u!65 &823612479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -740,21 +735,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.7480812, y: 1.9656401, z: 1.6353853}
   m_Center: {x: 0.0038015125, y: 1.0095148, z: 0.033364426}
---- !u!114 &823612482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823612475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922cd6bfd2ee4bbdbd7b023053bb0a27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Chest
-  <Id>k__BackingField: 2
-  <InteractableItemType>k__BackingField: 1
-  <KeyType>k__BackingField: 1
 --- !u!1001 &831002716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1655,13 +1635,27 @@ PrefabInstance:
       addedObject: {fileID: 1829547884}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64ae0b0d15eefbb43a94ae8d734e057e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1829547886}
+      addedObject: {fileID: 1829547883}
   m_SourcePrefab: {fileID: 100100000, guid: 64ae0b0d15eefbb43a94ae8d734e057e, type: 3}
 --- !u!1 &1829547882 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 64ae0b0d15eefbb43a94ae8d734e057e, type: 3}
   m_PrefabInstance: {fileID: 1829547881}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1829547883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829547882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8b83d57e23437cb78e84e8eae7e5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.RaycastResolvers.Scripts.InteractableEntity
+  <Id>k__BackingField: 0
+  <InteractableItemType>k__BackingField: 0
 --- !u!65 &1829547884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1683,21 +1677,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.17298736, y: 0.49980795, z: 0.053873792}
   m_Center: {x: -0.013661624, y: 0.12977666, z: -0.0013446854}
---- !u!114 &1829547886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829547882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8008ae08cef147fb8a393e547987804d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.InteractableObjects.Key
-  <Id>k__BackingField: 3
-  <InteractableItemType>k__BackingField: 3
-  <ChestKeyType>k__BackingField: 1
 --- !u!1 &1984118107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,8 +1827,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 669531171769566524}
-  - component: {fileID: 669531171769566525}
   - component: {fileID: 669531171769566526}
+  - component: {fileID: 669531171769566525}
   m_Layer: 6
   m_Name: NPC
   m_TagString: Untagged
@@ -1908,8 +1887,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8b83d57e23437cb78e84e8eae7e5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.RaycastResolvers.Scripts.InteractableEntity
-  <Id>k__BackingField: 1
-  <InteractableItemType>k__BackingField: 2
+  <Id>k__BackingField: 0
+  <InteractableItemType>k__BackingField: 0
 --- !u!33 &923258236752083380
 MeshFilter:
   m_ObjectHideFlags: 0
