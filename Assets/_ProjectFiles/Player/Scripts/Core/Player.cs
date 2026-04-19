@@ -2,8 +2,6 @@
 using _ProjectFiles.Chest.Scripts.Logic;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Items;
-using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
@@ -13,7 +11,6 @@ using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.UI;
 using _ProjectFiles.ValveDoor.Scripts.Logic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _ProjectFiles.Player.Scripts.Core
 {
@@ -21,7 +18,6 @@ namespace _ProjectFiles.Player.Scripts.Core
     {
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private bool _debug;
-        [SerializeField] public bool HasKey;
         
         [SerializeField] private InfoKeyView _keyView;
         
@@ -30,26 +26,30 @@ namespace _ProjectFiles.Player.Scripts.Core
         private InteractionTargetResolver _interactionTargetResolver;
 
         private IRaycastService _raycastService;
-
-        public ItemView Hand;
         
+        private IHandService _playerHandService;
+
         private InteractionFeatureService _interactionFeatureService;
-        private ItemStorage _storage;
+        private IItemStorage _storage; //Сделать несколько стороджей
         
         [SerializeField] private ItemView _keyItemView;
-        [SerializeField] private ItemView _noteItemView;
-        [SerializeField] private ItemView _questItemView;
+
+         [SerializeField] private ItemView _chestItemView;
+        // [SerializeField] private ItemView _questItemView;
 
         private void Awake()
         {
             _storage = new ItemStorage();
+            PlayerHandModel playerHandModel = new PlayerHandModel();
+            _playerHandService = new PlayerHandService(playerHandModel, _storage);
+            
             _raycastService = new RaycastService();
             _interactionTargetResolver = new InteractionTargetResolver(_raycastService);
                 
-            ChestInteractionFeature chest = new ChestInteractionFeature();
-            ItemInteractionFeature item = new ItemInteractionFeature();
+            ChestInteractionFeature chest = new ChestInteractionFeature(_storage);
+            ItemInteractionFeature item = new ItemInteractionFeature(_storage);
             NpcInteractionFeature npc = new NpcInteractionFeature();
-            SlotInteractionFeature slot = new SlotInteractionFeature();
+            SlotInteractionFeature slot = new SlotInteractionFeature(new SlotStorage());
             ValveInteractionFeature valve = new ValveInteractionFeature();
             _interactionFeatureService = new InteractionFeatureService(new List<IInteractionFeature>
             {
@@ -58,8 +58,9 @@ namespace _ProjectFiles.Player.Scripts.Core
             }, _keyView);
             
             _storage.AddState(new ItemModel(_keyItemView.Id, _keyItemView.ItemType));
-            _storage.AddState(new ItemModel(_noteItemView.Id, _noteItemView.ItemType));
-            _storage.AddState(new ItemModel(_questItemView.Id, _questItemView.ItemType));
+            _storage.AddState(new ItemModel(_chestItemView.Id, _chestItemView.ItemType));
+            // _storage.AddState(new ItemModel(_noteItemView.Id, _noteItemView.ItemType));
+            // _storage.AddState(new ItemModel(_questItemView.Id, _questItemView.ItemType));
 
             _playerInputReader.InteractStarted += OnInteractHeld;
         }
@@ -76,7 +77,7 @@ namespace _ProjectFiles.Player.Scripts.Core
             if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
             {
                 _keyView.gameObject.SetActive(true);
-                _interactionFeatureService.TryExecute(this, entity);
+                _interactionFeatureService.TryExecute(_playerHandService, entity);
             }
             else
             {
@@ -88,7 +89,7 @@ namespace _ProjectFiles.Player.Scripts.Core
         {
             if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
             {
-                _interactionFeatureService.TryInteract(this, entity);
+                _interactionFeatureService.TryInteract(_playerHandService, entity);
             }
         }
 

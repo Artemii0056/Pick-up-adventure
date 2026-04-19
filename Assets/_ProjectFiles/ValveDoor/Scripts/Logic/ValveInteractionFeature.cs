@@ -1,6 +1,7 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.ValveDoor.Scripts.View;
 
 namespace _ProjectFiles.ValveDoor.Scripts.Logic
@@ -9,19 +10,23 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
     {
         public InteractableItemType Type => InteractableItemType.Valve;
 
-        public InteractData GetInteractData(Player.Scripts.Core.Player player, InteractableView interactableView)
+        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
         {
-            if (interactableView is not ValveView)
-                return default;
+            data = default;
 
-            return new InteractData
+            if (interactableView is not ValveView)
+                return false;
+
+            data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Крутить",
+                ActionName = "Крутить"
             };
+
+            return true;
         }
 
-        public void Interact(Player.Scripts.Core.Player player, InteractableView interactableView)
+        public void Interact(IHandService handService, InteractableView interactableView)
         {
             if (interactableView is not ValveView valveView)
                 return;

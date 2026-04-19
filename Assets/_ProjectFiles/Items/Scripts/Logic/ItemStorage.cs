@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using _ProjectFiles.Player.Scripts.Resolvers;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
-    public class ItemStorage
+    public class ItemStorage : IItemStorage
     {
         private readonly Dictionary<int, ItemModel> _items = new();
 

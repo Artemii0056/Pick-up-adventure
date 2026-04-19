@@ -1,21 +1,37 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.NPC.Scripts.View;
+using _ProjectFiles.Player.Scripts.Core;
 
 namespace _ProjectFiles.NPC.Scripts.Logic
 {
     public class NpcInteractionFeature : IInteractionFeature
     {
         public InteractableItemType Type => InteractableItemType.NPC;
-        public InteractData GetInteractData(Player.Scripts.Core.Player player, InteractableView interactableView)
+
+        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
         {
-            throw new System.NotImplementedException();
+            data = default;
+
+            if (interactableView is not NpcView)
+                return false;
+
+            data = new InteractData
+            {
+                CanInteract = true,
+                ActionName = "Говорить"
+            };
+
+            return true;
         }
 
-        public void Interact(Player.Scripts.Core.Player player, InteractableView interactableView)
+        public void Interact(IHandService handService, InteractableView interactableView)
         {
-            throw new System.NotImplementedException();
+             if (interactableView is not NpcView npcView)
+                 return;
+
+            npcView.StartDialog();
         }
     }
 }

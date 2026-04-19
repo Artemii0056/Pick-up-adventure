@@ -1,32 +1,63 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
-    public class ItemInteractionFeature: IInteractionFeature
+    public class ItemInteractionFeature : IInteractionFeature
     {
+        private readonly IItemStorage _itemStorage;
+
+        public ItemInteractionFeature(IItemStorage itemStorage) =>
+            _itemStorage = itemStorage;
+
         public InteractableItemType Type => InteractableItemType.Item;
 
-        public InteractData GetInteractData(Player.Scripts.Core.Player player, InteractableView interactableView)
+        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
         {
-            if (interactableView is not ItemView itemView)
-                return default;
+            data = default;
 
-            return new InteractData
+            if (interactableView is not ItemView itemView)
+                return false;
+
+            if (handService.HasItem)
+                return false;
+
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+
+            if (itemModel == null)
+                return false;
+
+            data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Осмотреть"
+                ActionName = "Взять"
             };
+
+            return true;
         }
 
-        public void Interact(Player.Scripts.Core.Player player, InteractableView interactableView)
+        public void Interact(IHandService handService, InteractableView interactableView)
         {
             if (interactableView is not ItemView itemView)
                 return;
 
-            // дальше логика предмета
+            if (handService.HasItem)
+                return;
+
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+
+            if (itemModel == null)
+                return;
+
+            handService.Put(itemModel);
+
+            // Тут потом:
+            // 1. визуально увести предмет в руку / в inspect
+            // 2. отключить коллайдер
+            // 3. если записка — открыть анимацию
         }
     }
 }
