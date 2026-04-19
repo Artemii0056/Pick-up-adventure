@@ -1,6 +1,7 @@
 ﻿using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Player.Scripts.View;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.Slots.Scripts.View;
@@ -8,17 +9,17 @@ using UnityEngine;
 
 namespace _ProjectFiles.Interaction.Scripts.Core
 {
-    public class ItemTransferService //TODO В сервис
+    public class ItemTransferService : IItemTransferService
     {
         private readonly ISlotStorage _slotStorage;
         private readonly IItemStorage _itemStorage;
-        private readonly Transform _handTransform;
+        private readonly PlayerHandView _handView;
 
-        public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, Transform handTransform)
+        public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, PlayerHandView handView)
         {
             _slotStorage = slotStorage;
             _itemStorage = itemStorage;
-            _handTransform = handTransform;
+            _handView = handView;
         }
 
         public bool TryTakeItem(IHandService handService, ItemView itemView)
@@ -67,7 +68,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         
         private void MoveToHand(ItemView itemView)
         {
-            itemView.transform.SetParent(_handTransform);
+            itemView.transform.SetParent(_handView.Transform);
             itemView.transform.localPosition = new Vector3(-0.3f, -0.2f, 0.5f);
             itemView.transform.localRotation = Quaternion.identity;
         }

@@ -9,9 +9,9 @@ namespace _ProjectFiles.Player.Scripts.Core
         private readonly PlayerHandModel _playerHandModel;
         private IItemStorage _itemStorage;
 
-        public PlayerHandService(PlayerHandModel playerHandModel, IItemStorage itemStorage)
+        public PlayerHandService(IItemStorage itemStorage)
         {
-            _playerHandModel = playerHandModel;
+            _playerHandModel = new PlayerHandModel();
             _itemStorage = itemStorage;
         }
 

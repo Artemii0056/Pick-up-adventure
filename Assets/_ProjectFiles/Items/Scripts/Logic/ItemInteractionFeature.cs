@@ -9,9 +9,9 @@ namespace _ProjectFiles.Items.Scripts.Logic
     public class ItemInteractionFeature : IInteractionFeature
     {
         private readonly IItemStorage _itemStorage;
-        private readonly ItemTransferService _transferService;
+        private readonly IItemTransferService _transferService;
 
-        public ItemInteractionFeature(IItemStorage itemStorage, ItemTransferService transferService)
+        public ItemInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;

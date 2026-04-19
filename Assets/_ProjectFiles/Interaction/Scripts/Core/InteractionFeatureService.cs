@@ -7,12 +7,12 @@ using _ProjectFiles.UI;
 
 namespace _ProjectFiles.Interaction.Scripts.Core
 {
-    public class InteractionFeatureService
+    public class InteractionFeatureService : IInteractionFeatureService
     {
         private readonly InfoKeyView _keyView;
         private readonly Dictionary<InteractableItemType, IInteractionFeature> _features;
 
-        public InteractionFeatureService(List<IInteractionFeature> features, InfoKeyView keyView)
+        public InteractionFeatureService(IEnumerable<IInteractionFeature> features, InfoKeyView keyView)
         {
             _keyView = keyView;
             _features = new Dictionary<InteractableItemType, IInteractionFeature>();
@@ -38,6 +38,11 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 
             feature.Interact(handService, itemView);
             return true;
+        }
+
+        public void Hide()
+        {
+            //Хайд перетащить  сюда? 
         }
 
         private void ShowViewData(IHandService handService, InteractableView itemView)

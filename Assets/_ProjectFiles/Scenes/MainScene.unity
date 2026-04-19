@@ -325,7 +325,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4440682957700670144, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
+    - {fileID: 3994196851291794711, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1752138326071659798, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
@@ -356,29 +358,22 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _debug: 1
   _playerHandView: {fileID: 720090116}
   _keyView: {fileID: 713472654}
-  _playerInputReader: {fileID: 193352671}
   _keyItemView: {fileID: 1829547885}
   _chestItemView: {fileID: 823612482}
+  _characterController: {fileID: 193352673}
   Slots:
   - {fileID: 1313714377}
   - {fileID: 1575717279}
   - {fileID: 628633809}
   - {fileID: 1110107015}
   - {fileID: 1627805103}
---- !u!114 &193352671 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4440682957700670144, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
+--- !u!143 &193352673 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 5019237877358924180, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
   m_PrefabInstance: {fileID: 180843671}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193352664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5c5bd1e13917c4a8605bf885af8995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputReader
 --- !u!4 &193352674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1752138326071659798, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
@@ -928,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a62de3c58a9407987151acb0809a155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Player.Scripts.View.PlayerHandView
-  <HandTransform>k__BackingField: {fileID: 720090117}
+  <Transform>k__BackingField: {fileID: 0}
 --- !u!4 &720090117
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,6 +1197,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48c4335c9b485ce49a9ab4f4f6f52150, type: 3}
+--- !u!1 &880689153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880689155}
+  - component: {fileID: 880689154}
+  m_Layer: 0
+  m_Name: GameLifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &880689154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880689153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f20aa9cd0ddb2449f5e7f5f68f7d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!4 &880689155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880689153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.28209, y: 1.77851, z: 23.56331}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &939902223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,3 +2860,4 @@ SceneRoots:
   - {fileID: 1831748493}
   - {fileID: 1326254165}
   - {fileID: 518468286}
+  - {fileID: 880689155}

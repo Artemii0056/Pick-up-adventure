@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _ProjectFiles.Player.Scripts.Resolvers
 {
-    public class InteractionTargetResolver
+    public class InteractionTargetResolver : IInteractionTargetResolver
     {
         private readonly IRaycastService _raycastService;
 
@@ -31,5 +31,10 @@ namespace _ProjectFiles.Player.Scripts.Resolvers
             entity = searchedEntity;
             return true;
         }
+    }
+
+    public interface IInteractionTargetResolver
+    {
+        bool TryResolveTarget(Camera camera, float distance, LayerMask layerMask, out InteractableView entity);
     }
 }

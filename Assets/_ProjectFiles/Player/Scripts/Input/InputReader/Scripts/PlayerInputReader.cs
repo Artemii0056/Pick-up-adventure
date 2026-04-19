@@ -1,25 +1,26 @@
 using System;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
 {
-    public class PlayerInputReader : MonoBehaviour
+    public class PlayerInputReader : IPlayerInputReader
     {
+        public event Action InteractStarted;
+        public event Action InteractCanceled;
+
+        private readonly PlayerInputActions _input;
+
+        public PlayerInputReader()
+        {
+            _input = new PlayerInputActions();
+        }
+        
         public Vector2 MoveValue { get; private set; }
         public Vector2 LookValue { get; private set; }
 
         public bool InteractHeld { get; private set; }
-
-        public event Action InteractStarted;
-        public event Action InteractCanceled;
-
-        private PlayerInputActions _input;
-
-        private void Awake()
-        {
-            _input = new PlayerInputActions();
-        }
 
         private void OnEnable()
         {

@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1752138326071659798}
   - component: {fileID: 5019237877358924180}
-  - component: {fileID: 4440682957700670144}
-  - component: {fileID: 3994196851291794711}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -61,37 +59,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &4440682957700670144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823053696274813177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5c5bd1e13917c4a8605bf885af8995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputReader
---- !u!114 &3994196851291794711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823053696274813177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 039188d196a9419d961ae6c94595d8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.PlayerMovement.PlayerMover
-  _inputReader: {fileID: 4440682957700670144}
-  _cameraRoot: {fileID: 7835123823235165293}
-  _moveSpeed: 5
-  _gravity: -9.81
-  _lookSensitivity: 0.5
-  _minPitch: -80
-  _maxPitch: 80
 --- !u!1 &1866022099527019121
 GameObject:
   m_ObjectHideFlags: 0

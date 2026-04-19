@@ -1,149 +1,87 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _ProjectFiles.Chest.Scripts.Data;
-using _ProjectFiles.Chest.Scripts.Logic;
 using _ProjectFiles.Chest.Scripts.View;
-using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
-using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Keys.View;
-using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
-using _ProjectFiles.Player.Scripts.Raycast.Scripts;
-using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Player.Scripts.Movements;
+using _ProjectFiles.Player.Scripts.Rotation;
 using _ProjectFiles.Player.Scripts.View;
 using _ProjectFiles.Slots.Scripts.Data;
-using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.Slots.Scripts.View;
 using _ProjectFiles.UI;
-using _ProjectFiles.ValveDoor.Scripts.Logic;
 using UnityEngine;
+using VContainer;
 
 namespace _ProjectFiles.Player.Scripts.Core
 {
     public class Player : MonoBehaviour
     {
         [SerializeField] private LayerMask _layerMask;
-        [SerializeField] private bool _debug;
         
         [SerializeField] private PlayerHandView _playerHandView;
         
         [SerializeField] private InfoKeyView _keyView;
         
-        [SerializeField] private PlayerInputReader _playerInputReader;
-
-        private InteractionTargetResolver _interactionTargetResolver;
-
-        private IRaycastService _raycastService;
-        
-        private IHandService _playerHandService;
-
-        private InteractionFeatureService _interactionFeatureService;
-        private IItemStorage _storage; //Сделать несколько стороджей
-        private IChestStorage _chestStorage;
-        private ISlotStorage _slotStorage;
-        
         [SerializeField] private KeyView _keyItemView;
 
          [SerializeField] private ChestView _chestItemView;
+         
+         [SerializeField] private CharacterController _characterController;
 
          public List<SlotView> Slots;
+         
+         private ISlotModelFactory _slotModelFactory;
+         private IKeyModelFactory _keyModelFactory;
+         private IChestModelFactory _chestModelFactor;
 
-        private void Awake()
+       public IPlayerInteractionController _playerInteractionController;
+         
+         private IPlayerRotator _playerRotator;
+         private IPlayerMover _playerMover;
+         
+         [Inject]
+         public void Constructor(ISlotModelFactory slotModelFactory, IKeyModelFactory keyModelFactory, IChestModelFactory chestModelFactor, IPlayerRotator playerRotator, IPlayerMover playerMover, IPlayerInteractionController playerInteractionController)
+         {
+             _slotModelFactory = slotModelFactory;
+             _keyModelFactory = keyModelFactory;
+             _chestModelFactor = chestModelFactor;
+
+             _playerInteractionController = playerInteractionController;
+             
+             _playerRotator = playerRotator;
+             _playerRotator.Init(Camera.main.transform, transform);
+             
+             _playerMover = playerMover;
+             _playerMover.Init(transform, _characterController);
+         }
+
+         private void Start()
+         {
+             _playerInteractionController.SetLayer(_layerMask);
+             _playerInteractionController.Start();
+             
+             foreach (var slot2 in Slots)
+             {
+                 _slotModelFactory.Create(slot2.SlotRuleType , slot2.Id);
+             }
+
+             _keyModelFactory.CreateKeyModel(_keyItemView.Id, _keyItemView.ItemType, ChestKeyType.None);
+             _chestModelFactor.CreateKeyModel(_chestItemView.Id, InteractableItemType.Chest);
+         }
+
+         private void OnDisable()
         {
-            _slotStorage = new SlotStorage();
-            _chestStorage = new ChestStorage();
-            _storage = new ItemStorage();
-            PlayerHandModel playerHandModel = new PlayerHandModel();
-            _playerHandService = new PlayerHandService(playerHandModel, _storage);
-
-            ItemTransferService transferService = new ItemTransferService(_slotStorage, _storage, _playerHandView.HandTransform);
-            int counter = 3;
-
-            foreach (var slot2 in Slots)
-            {
-                ISlotRule slotRule;
-                
-                if (slot2.SlotRuleType == SlotRuleType.Universal)
-                {
-                    slotRule = new UniversalSlotRule();
-                }
-                else
-                {
-                    slotRule = new FixedByIdSlotRule(counter++); 
-                }
-                
-                Debug.Log(slot2.Id + "  Инт");
-                
-                _slotStorage.AddState(new SlotModel(slot2.Id, slotRule));
-            }
-            
-            
-            _raycastService = new RaycastService();
-            _interactionTargetResolver = new InteractionTargetResolver(_raycastService);
-                
-            ChestInteractionFeature chest = new ChestInteractionFeature(_chestStorage);
-            ItemInteractionFeature item = new ItemInteractionFeature(_storage, transferService);
-            NpcInteractionFeature npc = new NpcInteractionFeature();
-            SlotInteractionFeature slot = new SlotInteractionFeature(_slotStorage, transferService);
-            ValveInteractionFeature valve = new ValveInteractionFeature();
-            _interactionFeatureService = new InteractionFeatureService(new List<IInteractionFeature>
-            {
-                chest , item, npc, slot, valve
-                
-            }, _keyView);
-            
-            _storage.AddState(new KeyModel(_keyItemView.Id, _keyItemView.ItemType, ChestKeyType.None));
-            
-            _chestStorage.AddState(new ChestModel(_chestItemView.Id, InteractableItemType.Chest));
-            // _storage.AddState(new ItemModel(_noteItemView.Id, _noteItemView.ItemType));
-            // _storage.AddState(new ItemModel(_questItemView.Id, _questItemView.ItemType));
-
-            _playerInputReader.InteractStarted += OnInteractHeld;
-        }
-
-        private void OnDisable()
-        {
-            _playerInputReader.InteractStarted -= OnInteractHeld;
+            _playerInteractionController.Dispose();
         }
 
         private void Update()
         {
-            DrawDebug();
-
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
-            {
-                //_keyView.gameObject.SetActive(true);
-                _interactionFeatureService.TryExecute(_playerHandService, entity);
-            }
-            else
-            {
-                //_keyView.gameObject.SetActive(false);
-            }
-        }
-
-        private void OnInteractHeld()
-        {
-            if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
-            {
-                _interactionFeatureService.TryInteract(_playerHandService, entity);
-            }
-        }
-
-        private void DrawDebug()
-        {
-#if UNITY_EDITOR
-            if (!_debug)
-                return;
-
-            var camera = Camera.main;
-            Debug.DrawRay(
-                camera.transform.position,
-                camera.transform.forward * 5f,
-                Color.green
-            );
-#endif
+            _playerInteractionController.Tick();
+            _playerRotator.Tick();
+            _playerMover.Tick();
         }
     }
 }
