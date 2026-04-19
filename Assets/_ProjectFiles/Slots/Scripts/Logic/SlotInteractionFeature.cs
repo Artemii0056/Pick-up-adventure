@@ -27,10 +27,10 @@ namespace _ProjectFiles.Slots.Scripts.Logic
             if (interactableView is not SlotView slotView)
                 return false;
 
-            if (!handService.HasItem)
-                return false;
+            // if (handService.HasItem == false) //это странно
+            //     return false;
 
-            SlotModel slotModel = (SlotModel)_slotStorage.GetState(slotView.Id);
+            SlotModel slotModel = _slotStorage.GetState(slotView.Id);
 
             if (slotModel == null)
                 return false;

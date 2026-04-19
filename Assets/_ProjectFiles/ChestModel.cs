@@ -1,19 +1,23 @@
 ﻿using _ProjectFiles.Chest.Scripts.Data;
-using _ProjectFiles.Items.Scripts.Data;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
+using _ProjectFiles.Interaction.Scripts.Data;
 
 namespace _ProjectFiles
 {
-    public class ChestModel : ItemModel
+    public class ChestModel 
     {
-        public ChestModel(int id, ItemType type, bool isOpened) : base(id, type)
+        private readonly InteractableItemType _type;
+
+        public ChestModel(int id, InteractableItemType type) 
         {
+            _type = type;
             Id = id;
-            IsOpened = isOpened;
+            IsOpened = false;
+            ReqiereKeyType = ChestKeyType.None;
         }
 
         public int Id { get; }
         public bool IsOpened { get; private set; }
+        public InteractableItemType Type { get; private set; }
         public ChestKeyType ReqiereKeyType { get; private set; }
 
         public void Open()

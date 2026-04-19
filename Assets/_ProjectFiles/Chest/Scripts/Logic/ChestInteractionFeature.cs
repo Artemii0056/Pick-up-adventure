@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.Chest.Scripts.View;
+﻿using _ProjectFiles.Chest.Scripts.Data;
+using _ProjectFiles.Chest.Scripts.View;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
@@ -11,10 +12,10 @@ namespace _ProjectFiles.Chest.Scripts.Logic
 {
     public class ChestInteractionFeature : IInteractionFeature
     {
-        private readonly IItemStorage _itemStorage; 
+        private readonly IChestStorage _chestStorage; 
 
-        public ChestInteractionFeature(IItemStorage itemStorage) => 
-            _itemStorage = itemStorage;
+        public ChestInteractionFeature(IChestStorage chestStorage) => 
+            _chestStorage = chestStorage;
 
         public InteractableItemType Type => InteractableItemType.Chest;
         
@@ -22,10 +23,16 @@ namespace _ProjectFiles.Chest.Scripts.Logic
         {
             data = default;
             
+            data = new InteractData
+            {
+                CanInteract = false,
+                ActionName = "Открыть"
+            };
+            
             if (interactableView is not ChestView chestView)
                 return false;
 
-            ChestModel chestModel = (ChestModel)_itemStorage.GetState(chestView.Id);
+            ChestModel chestModel = _chestStorage.GetState(chestView.Id);
 
             if (chestModel.IsOpened)
                 return false;
@@ -59,7 +66,7 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (interactableView is not ChestView chestView)
                 return;
 
-            ChestModel chestModel = (ChestModel)_itemStorage.GetState(chestView.Id);
+            ChestModel chestModel = (ChestModel)_chestStorage.GetState(chestView.Id);
 
             if (chestModel.IsOpened)
                 return;

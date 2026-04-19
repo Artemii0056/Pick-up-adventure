@@ -4,7 +4,6 @@ using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.UI;
-using Unity.VisualScripting;
 
 namespace _ProjectFiles.Interaction.Scripts.Core
 {
@@ -46,8 +45,11 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 throw new Exception("Interaction feature not found");
 
-            if (feature.TryGetInteractData(handService, itemView, out InteractData interactData))
-                _keyView.UpdateText(interactData.ActionName);
+            if (feature.TryGetInteractData(handService, itemView, out InteractData interactData)) //Todo тут подумать
+            {
+            }
+
+            _keyView.UpdateText(interactData.ActionName);
         }
     }
 }

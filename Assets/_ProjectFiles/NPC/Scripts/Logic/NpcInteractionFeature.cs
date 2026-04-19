@@ -10,7 +10,8 @@ namespace _ProjectFiles.NPC.Scripts.Logic
     {
         public InteractableItemType Type => InteractableItemType.NPC;
 
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
+        public bool TryGetInteractData(IHandService handService, InteractableView interactableView,
+            out InteractData data)
         {
             data = default;
 
@@ -28,8 +29,8 @@ namespace _ProjectFiles.NPC.Scripts.Logic
 
         public void Interact(IHandService handService, InteractableView interactableView)
         {
-             if (interactableView is not NpcView npcView)
-                 return;
+            if (interactableView is not NpcView npcView)
+                return;
 
             npcView.StartDialog();
         }

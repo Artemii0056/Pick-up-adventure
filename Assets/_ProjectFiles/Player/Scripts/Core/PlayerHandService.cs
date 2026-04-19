@@ -5,7 +5,7 @@ namespace _ProjectFiles.Player.Scripts.Core
 {
     public class PlayerHandService : IHandService
     {
-        private PlayerHandModel _playerHandModel;
+        private readonly PlayerHandModel _playerHandModel;
         private IItemStorage _itemStorage;
 
         public PlayerHandService(PlayerHandModel playerHandModel, IItemStorage itemStorage)
