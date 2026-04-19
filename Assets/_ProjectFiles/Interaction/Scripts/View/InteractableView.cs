@@ -5,13 +5,13 @@ namespace _ProjectFiles.Interaction.Scripts.View
 {
     public class InteractableView : MonoBehaviour
     {
-        [field: SerializeField] public int Id { get; private set; }
         [field: SerializeField] public InteractableItemType InteractableItemType { get; private set; }
+        
+        public int Id { get; private set; }
 
-        public void Init(int id, InteractableItemType interactableItemType)
+        public void SetId(int id)
         {
             Id = id;
-            InteractableItemType = interactableItemType;
         }
     }
 }

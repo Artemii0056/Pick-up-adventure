@@ -1,4 +1,5 @@
 ﻿using _ProjectFiles;
+using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
@@ -8,13 +9,16 @@ public class KeySlotInitializer
 {
     private readonly IKeyModelFactory _keyModelFactory;
     private readonly ISlotModelFactory _slotModelFactory;
+    private readonly IGlobalIdService _globalIdService;
 
     public KeySlotInitializer(
         IKeyModelFactory keyModelFactory,
-        ISlotModelFactory slotModelFactory)
+        ISlotModelFactory slotModelFactory,
+        IGlobalIdService globalIdService)
     {
         _keyModelFactory = keyModelFactory;
         _slotModelFactory = slotModelFactory;
+        _globalIdService = globalIdService;
     }
 
     public void Initialize(KeySlotStarter starter)
@@ -22,7 +26,7 @@ public class KeySlotInitializer
         SlotModel slotModel = _slotModelFactory.Create(starter.SlotView.SlotRuleType, starter.SlotView.Id);
 
         KeyModel keyModel = _keyModelFactory.CreateKeyModel(
-            starter.ItemId,
+            _globalIdService.GetNext(),
             starter.ItemType,
             starter.ChestKeyType);
 

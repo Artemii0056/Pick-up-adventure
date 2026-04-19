@@ -4,6 +4,6 @@ namespace _ProjectFiles.Note.Script.Data
 {
     public interface INoteModelFactory
     {
-        NoteModel CreateKeyModel(int id, ItemType type);
+        NoteModel CreateNoteModel(int id, ItemType type);
     }
 }

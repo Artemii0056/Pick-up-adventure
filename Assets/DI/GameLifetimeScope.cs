@@ -1,8 +1,11 @@
+using _ProjectFiles.Bootstrap;
 using _ProjectFiles.Chest.Scripts.Data;
 using _ProjectFiles.Chest.Scripts.Logic;
+using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Keys.Scripts.Data;
+using _ProjectFiles.Note.Script.Data;
 using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
@@ -27,6 +30,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<Player>();
         builder.RegisterComponentInHierarchy<PlayerHandView>();
         builder.RegisterComponentInHierarchy<InfoKeyView>();
+        builder.RegisterComponentInHierarchy<Bootstrapper>();
+        
         
         
         builder.Register<SlotStorage>(Lifetime.Singleton).As<ISlotStorage>();
@@ -46,6 +51,10 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<PlayerMover>(Lifetime.Singleton).As<IPlayerMover>();
         
         builder.Register<ResourceLoader>(Lifetime.Singleton).As<IResourceLoader>();
+        
+        builder.Register<GlobalIdService>(Lifetime.Singleton).As<IGlobalIdService>();
+        
+        
 
         RegisterInteractionFeatures(builder);
         RegisterInteractionFactories(builder);
@@ -67,6 +76,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ISlotModelFactory, SlotModelFactory>(Lifetime.Singleton);
         builder.Register<IKeyModelFactory, KeyModelFactory>(Lifetime.Singleton);
         builder.Register<IChestModelFactory, ChestModelFactory>(Lifetime.Singleton);
+        builder.Register<INoteModelFactory, NoteModelFactory>(Lifetime.Singleton);
  
     }
 }

@@ -4,8 +4,8 @@
     {
         private int _current;
 
-        public GlobalIdService(int current) => 
-            _current = current;
+        public GlobalIdService() => 
+            _current = 0;
 
         public int GetNext() => 
             _current++;

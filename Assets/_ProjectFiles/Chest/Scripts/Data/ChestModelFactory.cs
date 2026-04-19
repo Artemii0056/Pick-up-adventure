@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.Interaction.Scripts.Data;
+﻿using _ProjectFiles.GlobalId.Scripts;
+using _ProjectFiles.Interaction.Scripts.Data;
 
 namespace _ProjectFiles.Chest.Scripts.Data
 {

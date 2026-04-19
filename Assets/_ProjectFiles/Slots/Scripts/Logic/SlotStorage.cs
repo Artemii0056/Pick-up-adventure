@@ -15,8 +15,6 @@ namespace _ProjectFiles.Slots.Scripts.Logic
             if (_slots.ContainsKey(item.Id))
                 throw new InvalidOperationException($"Item with id {item.Id} already exists.");
             
-            Debug.Log(item.Id);
-            
             _slots.Add(item.Id, item);
         }
         

@@ -10,7 +10,7 @@ namespace _ProjectFiles.Note.Script.Data
         public NoteModelFactory(IItemStorage itemStorage) => 
             _itemStorage = itemStorage;
 
-        public NoteModel CreateKeyModel(int id, ItemType type)
+        public NoteModel CreateNoteModel(int id, ItemType type)
         {
             NoteModel noteModel = new NoteModel(id, type);
             

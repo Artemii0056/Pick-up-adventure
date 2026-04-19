@@ -1,4 +1,5 @@
 ﻿using _ProjectFiles.Chest.Scripts.Data;
+using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Logic;
 
@@ -8,8 +9,10 @@ namespace _ProjectFiles.Keys.Scripts.Data
     {
         private readonly IItemStorage _itemStorage;
 
-        public KeyModelFactory(IItemStorage itemStorage) => 
+        public KeyModelFactory(IItemStorage itemStorage)
+        {
             _itemStorage = itemStorage;
+        }
 
         public KeyModel CreateKeyModel(int key, ItemType type, ChestKeyType chestKeyType)
         {

@@ -7,7 +7,8 @@ namespace _ProjectFiles.Slots.Scripts.Data
     {
         private readonly ISlotStorage _slotStorage;
 
-        public SlotModelFactory(ISlotStorage slotStorage) => _slotStorage = slotStorage;
+        public SlotModelFactory(ISlotStorage slotStorage) => 
+            _slotStorage = slotStorage;
 
         public SlotModel Create(SlotRuleType slotRuleType, int slotId)
         {

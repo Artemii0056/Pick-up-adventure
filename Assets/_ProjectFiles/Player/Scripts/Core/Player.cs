@@ -69,6 +69,7 @@ namespace _ProjectFiles.Player.Scripts.Core
             playerInputReader.OnEnable();
         }
 
+
         private void Start()
         {
             _playerInteractionController.SetLayer(_layerMask);
