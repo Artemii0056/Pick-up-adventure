@@ -22,7 +22,7 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
 
         public bool InteractHeld { get; private set; }
 
-        private void OnEnable()
+        public void OnEnable()
         {
             _input.Enable();
 
@@ -36,7 +36,7 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
             _input.Player.Interact.canceled += OnInteractCanceled;
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             _input.Player.Move.performed -= OnMovePerformed;
             _input.Player.Move.canceled -= OnMoveCanceled;

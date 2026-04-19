@@ -2,6 +2,6 @@
 {
     public interface ISlotModelFactory
     {
-        SlotModel Create(SlotRuleType slotRuleType, int id);
+        SlotModel Create(SlotRuleType slotRuleType, int slotId);
     }
 }

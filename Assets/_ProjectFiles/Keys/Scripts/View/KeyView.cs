@@ -2,7 +2,7 @@
 using _ProjectFiles.Player.Scripts.Resolvers;
 using UnityEngine;
 
-namespace _ProjectFiles.Keys.View
+namespace _ProjectFiles.Keys.Scripts.View
 {
     public class KeyView : ItemView
     {

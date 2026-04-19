@@ -1,6 +1,5 @@
 ﻿using _ProjectFiles.Chest.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Data;
-using UnityEngine;
 
 namespace _ProjectFiles.Keys.Scripts.Data
 {

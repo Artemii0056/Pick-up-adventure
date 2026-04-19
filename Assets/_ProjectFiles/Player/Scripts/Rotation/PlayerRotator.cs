@@ -25,8 +25,6 @@ namespace _ProjectFiles.Player.Scripts.Rotation
             _minPitch = config.MinPitch;
             _maxPitch = config.MaxPitch;
             _lookSensitivity = config.LookSensitivity;
-
-            _lookSensitivity = 10f;
         }
 
         public void Init(Transform cameraRoot, Transform playerRoot)

@@ -6,7 +6,6 @@ namespace _ProjectFiles.Interaction.Scripts.Data
     [Serializable]
     public class InteractableConfig 
     {
-       // [field: SerializeField] public InteractableType InteractableType { get; private set; } //
         [field: SerializeField] public InteractionInputType InteractionInputType { get; private set; }
         
         [field: SerializeField] public string Info { get; private set; }

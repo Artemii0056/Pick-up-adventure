@@ -10,5 +10,7 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
         bool InteractHeld { get; }
         event Action InteractStarted;
         event Action InteractCanceled;
+        void OnEnable();
+        void OnDisable();
     }
 }

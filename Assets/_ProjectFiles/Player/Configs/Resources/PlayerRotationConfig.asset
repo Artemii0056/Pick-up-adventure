@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be89785baf854fa29415f0b2f94bcd9d, type: 3}
   m_Name: PlayerRotationConfig
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Player.Scripts.Rotation._ProjectFiles.Player.Scripts.Movements.Configs.PlayerRotationConfig
-  <LookSensitivity>k__BackingField: 10
+  <LookSensitivity>k__BackingField: 0.5
   <MinPitch>k__BackingField: -80
   <MaxPitch>k__BackingField: 80

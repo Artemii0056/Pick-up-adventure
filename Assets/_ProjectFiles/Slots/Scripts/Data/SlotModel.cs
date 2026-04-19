@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.Slots.Scripts.Logic;
+﻿using System;
+using _ProjectFiles.Slots.Scripts.Logic;
 
 namespace _ProjectFiles.Slots.Scripts.Data
 {
@@ -17,14 +18,12 @@ namespace _ProjectFiles.Slots.Scripts.Data
         public int Id { get; }
         public ItemModel CurrentItem { get; private set; }
 
-        public bool CanTake()
-        {
-            return CurrentItem != null;
-        }
-
         public ItemModel Take()
         {
-            var item = CurrentItem;
+            if (IsEmpty)
+                throw new InvalidOperationException($"Slot {Id} is empty");
+
+            ItemModel item = CurrentItem;
             CurrentItem = null;
             return item;
         }

@@ -6,12 +6,10 @@ namespace _ProjectFiles.Keys.Scripts.Data
 {
     public class KeyModelFactory : IKeyModelFactory
     {
-        private IItemStorage _itemStorage;
+        private readonly IItemStorage _itemStorage;
 
-        public KeyModelFactory(IItemStorage itemStorage)
-        {
+        public KeyModelFactory(IItemStorage itemStorage) => 
             _itemStorage = itemStorage;
-        }
 
         public KeyModel CreateKeyModel(int key, ItemType type, ChestKeyType chestKeyType)
         {

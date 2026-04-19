@@ -23,8 +23,7 @@ namespace _ProjectFiles.Player.Scripts.Movements
 
             _moveSpeed = config.MoveSpeed;
             _gravity = config.Gravity;
-
-
+            
             _inputReader = inputReader;
 
             Cursor.lockState = CursorLockMode.Locked;
@@ -45,10 +44,8 @@ namespace _ProjectFiles.Player.Scripts.Movements
             Vector3 moveDirection = _playerTransform.right * moveInput.x + _playerTransform.forward * moveInput.y;
             Vector3 horizontalVelocity = moveDirection * _moveSpeed;
 
-            if (_characterController.isGrounded && _verticalVelocity < 0f)
-            {
+            if (_characterController.isGrounded && _verticalVelocity < 0f) 
                 _verticalVelocity = -2f;
-            }
 
             _verticalVelocity += _gravity * Time.deltaTime;
 
