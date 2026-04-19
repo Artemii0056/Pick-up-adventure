@@ -1,10 +1,13 @@
-﻿namespace _ProjectFiles.Player.Scripts.Core
+﻿using _ProjectFiles.Player.Scripts.Resolvers;
+
+namespace _ProjectFiles.Player.Scripts.Core
 {
     public interface IHandService
     {
-        void Put(ItemModel item);
+        void Put(ItemModel item, ItemView view);
         void Clear();
         bool HasItem { get; }
         ItemModel CurrentItem { get;}
+        ItemView CurrentItemView { get; }
     }
 }

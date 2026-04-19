@@ -6,10 +6,13 @@ using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Items.Scripts.Logic;
+using _ProjectFiles.Keys.Scripts.Data;
+using _ProjectFiles.Keys.View;
 using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Raycast.Scripts;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.Player.Scripts.View;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.Slots.Scripts.View;
@@ -23,6 +26,8 @@ namespace _ProjectFiles.Player.Scripts.Core
     {
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private bool _debug;
+        
+        [SerializeField] private PlayerHandView _playerHandView;
         
         [SerializeField] private InfoKeyView _keyView;
         
@@ -39,12 +44,11 @@ namespace _ProjectFiles.Player.Scripts.Core
         private IChestStorage _chestStorage;
         private ISlotStorage _slotStorage;
         
-        [SerializeField] private ItemView _keyItemView;
+        [SerializeField] private KeyView _keyItemView;
 
          [SerializeField] private ChestView _chestItemView;
-         
-         public List<SlotView> Slots { get; set; }
-        // [SerializeField] private ItemView _questItemView;
+
+         public List<SlotView> Slots;
 
         private void Awake()
         {
@@ -53,6 +57,9 @@ namespace _ProjectFiles.Player.Scripts.Core
             _storage = new ItemStorage();
             PlayerHandModel playerHandModel = new PlayerHandModel();
             _playerHandService = new PlayerHandService(playerHandModel, _storage);
+
+            ItemTransferService transferService = new ItemTransferService(_slotStorage, _storage, _playerHandView.HandTransform);
+            int counter = 3;
 
             foreach (var slot2 in Slots)
             {
@@ -64,19 +71,22 @@ namespace _ProjectFiles.Player.Scripts.Core
                 }
                 else
                 {
-                    slotRule = new FixedByIdSlotRule(1); 
+                    slotRule = new FixedByIdSlotRule(counter++); 
                 }
+                
+                Debug.Log(slot2.Id + "  Инт");
                 
                 _slotStorage.AddState(new SlotModel(slot2.Id, slotRule));
             }
+            
             
             _raycastService = new RaycastService();
             _interactionTargetResolver = new InteractionTargetResolver(_raycastService);
                 
             ChestInteractionFeature chest = new ChestInteractionFeature(_chestStorage);
-            ItemInteractionFeature item = new ItemInteractionFeature(_storage);
+            ItemInteractionFeature item = new ItemInteractionFeature(_storage, transferService);
             NpcInteractionFeature npc = new NpcInteractionFeature();
-            SlotInteractionFeature slot = new SlotInteractionFeature(new SlotStorage());
+            SlotInteractionFeature slot = new SlotInteractionFeature(_slotStorage, transferService);
             ValveInteractionFeature valve = new ValveInteractionFeature();
             _interactionFeatureService = new InteractionFeatureService(new List<IInteractionFeature>
             {
@@ -84,7 +94,7 @@ namespace _ProjectFiles.Player.Scripts.Core
                 
             }, _keyView);
             
-            _storage.AddState(new ItemModel(_keyItemView.Id, _keyItemView.ItemType));
+            _storage.AddState(new KeyModel(_keyItemView.Id, _keyItemView.ItemType, ChestKeyType.None));
             
             _chestStorage.AddState(new ChestModel(_chestItemView.Id, InteractableItemType.Chest));
             // _storage.AddState(new ItemModel(_noteItemView.Id, _noteItemView.ItemType));
@@ -104,12 +114,12 @@ namespace _ProjectFiles.Player.Scripts.Core
 
             if (_interactionTargetResolver.TryResolveTarget(Camera.main, 5f, _layerMask, out InteractableView entity))
             {
-                _keyView.gameObject.SetActive(true);
+                //_keyView.gameObject.SetActive(true);
                 _interactionFeatureService.TryExecute(_playerHandService, entity);
             }
             else
             {
-                _keyView.gameObject.SetActive(false);
+                //_keyView.gameObject.SetActive(false);
             }
         }
 

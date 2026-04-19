@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using _ProjectFiles.Interaction.Scripts.Core;
+﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
@@ -12,10 +10,12 @@ namespace _ProjectFiles.Slots.Scripts.Logic
     public class SlotInteractionFeature : IInteractionFeature
     {
         private readonly ISlotStorage _slotStorage;
+        private readonly ItemTransferService _transferService;
 
-        public SlotInteractionFeature(ISlotStorage slotStorage)
+        public SlotInteractionFeature(ISlotStorage slotStorage, ItemTransferService transferService)
         {
             _slotStorage = slotStorage;
+            _transferService = transferService;
         }
 
         public InteractableItemType Type => InteractableItemType.Slot;
@@ -27,12 +27,10 @@ namespace _ProjectFiles.Slots.Scripts.Logic
             if (interactableView is not SlotView slotView)
                 return false;
 
-            // if (handService.HasItem == false) //это странно
-            //     return false;
+            if (!handService.HasItem)
+                return false;
 
-            SlotModel slotModel = _slotStorage.GetState(slotView.Id);
-
-            if (slotModel == null)
+            if (!_slotStorage.TryGetState(slotView.Id, out SlotModel slotModel))
                 return false;
 
             if (!slotModel.CanPlace(handService.CurrentItem))
@@ -55,47 +53,13 @@ namespace _ProjectFiles.Slots.Scripts.Logic
             if (!handService.HasItem)
                 return;
 
-            SlotModel slotModel = _slotStorage.GetState(slotView.Id);
-
-            if (slotModel == null)
+            if (!_slotStorage.TryGetState(slotView.Id, out SlotModel slotModel))
                 return;
 
             if (!slotModel.CanPlace(handService.CurrentItem))
                 return;
 
-            slotModel.Place(handService.CurrentItem);
-            handService.Clear();
-
-            // Тут потом:
-            // 1. визуально вернуть предмет в slotView.ItemAnchor
-            // 2. обновить slotView.CurrentItemView
+            _transferService.TryPlaceToSlot(handService, slotView);
         }
-    }
-
-    public class SlotStorage : ISlotStorage //TODO Обязательно сделать один дженериковый класс!
-    {
-        private readonly Dictionary<int, SlotModel> _slots = new();
-
-        public void AddState(SlotModel item)
-        {
-            if (_slots.ContainsKey(item.Id))
-                throw new InvalidOperationException($"Item with id {item.Id} already exists.");
-            
-            _slots.Add(item.Id, item);
-        }
-
-        public SlotModel GetState(int id)
-        {
-            if (_slots.ContainsKey(id) == false)
-                throw new KeyNotFoundException(); 
-            
-            return _slots[id];
-        }
-    }
-
-    public interface ISlotStorage
-    {
-        void AddState(SlotModel item);
-        SlotModel GetState(int id);
     }
 }

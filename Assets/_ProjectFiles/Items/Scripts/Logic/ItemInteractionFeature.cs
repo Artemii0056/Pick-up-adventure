@@ -9,9 +9,13 @@ namespace _ProjectFiles.Items.Scripts.Logic
     public class ItemInteractionFeature : IInteractionFeature
     {
         private readonly IItemStorage _itemStorage;
+        private readonly ItemTransferService _transferService;
 
-        public ItemInteractionFeature(IItemStorage itemStorage) =>
+        public ItemInteractionFeature(IItemStorage itemStorage, ItemTransferService transferService)
+        {
             _itemStorage = itemStorage;
+            _transferService = transferService;
+        }
 
         public InteractableItemType Type => InteractableItemType.Item;
 
@@ -44,20 +48,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
             if (interactableView is not ItemView itemView)
                 return;
 
-            if (handService.HasItem)
-                return;
-
-            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
-
-            if (itemModel == null)
-                return;
-
-            handService.Put(itemModel);
-
-            // Тут потом:
-            // 1. визуально увести предмет в руку / в inspect
-            // 2. отключить коллайдер
-            // 3. если записка — открыть анимацию
+            _transferService.TryTakeItem(handService, itemView);
         }
     }
 }

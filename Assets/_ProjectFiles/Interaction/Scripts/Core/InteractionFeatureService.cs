@@ -45,11 +45,15 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 throw new Exception("Interaction feature not found");
 
-            if (feature.TryGetInteractData(handService, itemView, out InteractData interactData)) //Todo тут подумать
+            if (feature.TryGetInteractData(handService, itemView, out InteractData interactData)) 
             {
+                _keyView.gameObject.SetActive(true); //TODO Плохо, что тут. Надо бы логику разнести и не выключать/включать постоянно 
+               _keyView.UpdateText(interactData.ActionName);
             }
-
-            _keyView.UpdateText(interactData.ActionName);
+            else
+            {
+                _keyView.gameObject.SetActive(false);
+            }
         }
     }
 }
