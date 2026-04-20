@@ -51,7 +51,6 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
         public void Hide()
         {
-            Debug.Log("Hide");
             IsActive = false;
             _pickUpCanvas.gameObject.SetActive(false);
             Object.Destroy(_currentPreviewInstance.gameObject);

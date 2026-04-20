@@ -6,7 +6,7 @@ using _ProjectFiles.Player.Scripts.Core;
 
 namespace _ProjectFiles.NPC.Scripts.Logic
 {
-    public class NpcInteractionFeature : IInteractionFeature
+    public class NpcTapInteractionFeature : ITapInteractionFeature
     {
         public InteractableItemType Type => InteractableItemType.NPC;
 

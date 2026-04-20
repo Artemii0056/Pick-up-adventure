@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
-    public class ItemInteractionFeature : IInteractionFeature
+    public class ItemTapInteractionFeature : ITapInteractionFeature
     {
         private readonly IItemStorage _itemStorage;
         private readonly IItemTransferService _transferService;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IFirstPickUpItemState _firstPickUpItemState;
 
-        public ItemInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems, IFirstPickUpItemState firstPickUpItemState)
+        public ItemTapInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems, IFirstPickUpItemState firstPickUpItemState)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;

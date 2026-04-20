@@ -1,4 +1,5 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Resolvers;
@@ -10,7 +11,7 @@ namespace _ProjectFiles.Player.Scripts.Core
     {
         private readonly IPlayerInputReader _playerInputReader;
         private readonly IInteractionTargetResolver _interactionTargetResolver;
-        private readonly IInteractionFeatureService _interactionFeatureService;
+        private readonly ITapInteractionFeatureResolver _tapInteractionFeatureResolver;
         private readonly IHandService _handService;
         
         private LayerMask _interactionLayerMask;
@@ -18,12 +19,12 @@ namespace _ProjectFiles.Player.Scripts.Core
         public PlayerInteractionController(
             IPlayerInputReader playerInputReader,
             IInteractionTargetResolver interactionTargetResolver,
-            IInteractionFeatureService interactionFeatureService,
+            ITapInteractionFeatureResolver tapInteractionFeatureResolver,
             IHandService handService)
         {
             _playerInputReader = playerInputReader;
             _interactionTargetResolver = interactionTargetResolver;
-            _interactionFeatureService = interactionFeatureService;
+            _tapInteractionFeatureResolver = tapInteractionFeatureResolver;
             _handService = handService;
         }
 
@@ -45,11 +46,11 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView target))
             {
-                _interactionFeatureService.TryExecute(_handService, target);
+                _tapInteractionFeatureResolver.TryExecute(_handService, target);
                 return;
             }
 
-            _interactionFeatureService.Hide();
+            _tapInteractionFeatureResolver.Hide();
         }
 
         public void Dispose()
@@ -65,7 +66,7 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView target))
             {
-                _interactionFeatureService.TryInteract(_handService, target);
+                _tapInteractionFeatureResolver.TryInteract(_handService, target);
             }
         }
 

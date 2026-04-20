@@ -9,11 +9,11 @@ using UnityEngine;
 
 namespace _ProjectFiles.Chest.Scripts.Logic
 {
-    public class ChestInteractionFeature : IInteractionFeature
+    public class ChestTapInteractionFeature : ITapInteractionFeature
     {
         private readonly IChestStorage _chestStorage; 
 
-        public ChestInteractionFeature(IChestStorage chestStorage) => 
+        public ChestTapInteractionFeature(IChestStorage chestStorage) => 
             _chestStorage = chestStorage;
 
         public InteractableItemType Type => InteractableItemType.Chest;

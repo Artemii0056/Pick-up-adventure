@@ -6,7 +6,7 @@ using _ProjectFiles.ValveDoor.Scripts.View;
 
 namespace _ProjectFiles.ValveDoor.Scripts.Logic
 {
-    public class ValveInteractionFeature : IInteractionFeature
+    public class ValveTapInteractionFeature : ITapInteractionFeature
     {
         public InteractableItemType Type => InteractableItemType.Valve;
 

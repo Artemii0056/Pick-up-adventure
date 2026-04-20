@@ -3,6 +3,7 @@ using _ProjectFiles.Chest.Scripts.Data;
 using _ProjectFiles.Chest.Scripts.Logic;
 using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Note.Script.Data;
@@ -65,13 +66,13 @@ public class GameLifetimeScope : LifetimeScope
 
     private void RegisterInteractionFeatures(IContainerBuilder builder)
     {
-        builder.Register<IInteractionFeature, ChestInteractionFeature>(Lifetime.Singleton);
-        builder.Register<IInteractionFeature, ItemInteractionFeature>(Lifetime.Singleton);
-        builder.Register<IInteractionFeature, NpcInteractionFeature>(Lifetime.Singleton);
-        builder.Register<IInteractionFeature, SlotInteractionFeature>(Lifetime.Singleton);
-        builder.Register<IInteractionFeature, ValveInteractionFeature>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeature, ChestTapInteractionFeature>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeature, ItemTapInteractionFeature>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeature, NpcTapInteractionFeature>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeature, SlotTapInteractionFeature>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeature, ValveTapInteractionFeature>(Lifetime.Singleton);
 
-        builder.Register<IInteractionFeatureService, InteractionFeatureService>(Lifetime.Singleton);
+        builder.Register<ITapInteractionFeatureResolver, TapInteractionFeatureResolver>(Lifetime.Singleton);
     }
     
     private void RegisterInteractionFactories(IContainerBuilder builder)

@@ -7,12 +7,12 @@ using _ProjectFiles.Slots.Scripts.View;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
-    public class SlotInteractionFeature : IInteractionFeature
+    public class SlotTapInteractionFeature : ITapInteractionFeature
     {
         private readonly ISlotStorage _slotStorage;
         private readonly IItemTransferService _transferService;
 
-        public SlotInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService)
+        public SlotTapInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService)
         {
             _slotStorage = slotStorage;
             _transferService = transferService;
