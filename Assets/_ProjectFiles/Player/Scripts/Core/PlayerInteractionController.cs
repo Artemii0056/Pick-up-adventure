@@ -11,21 +11,21 @@ namespace _ProjectFiles.Player.Scripts.Core
     {
         private readonly IPlayerInputReader _playerInputReader;
         private readonly IInteractionTargetResolver _interactionTargetResolver;
-        private readonly ITapInteractionFeatureResolver _tapInteractionFeatureResolver;
         private readonly IHandService _handService;
+        private readonly IInteractionFeatureService _interactionFeatureService;
         
         private LayerMask _interactionLayerMask;
 
         public PlayerInteractionController(
             IPlayerInputReader playerInputReader,
             IInteractionTargetResolver interactionTargetResolver,
-            ITapInteractionFeatureResolver tapInteractionFeatureResolver,
-            IHandService handService)
+            IHandService handService,
+            IInteractionFeatureService interactionFeatureService)
         {
             _playerInputReader = playerInputReader;
             _interactionTargetResolver = interactionTargetResolver;
-            _tapInteractionFeatureResolver = tapInteractionFeatureResolver;
             _handService = handService;
+            _interactionFeatureService = interactionFeatureService;
         }
 
         public void SetLayer(LayerMask interactionLayerMask) => 
@@ -38,19 +38,14 @@ namespace _ProjectFiles.Player.Scripts.Core
 
         public void Tick()
         {
-            DrawDebug();
-
             if (_interactionTargetResolver.TryResolveTarget(
                     Camera.main,
                     5f,
                     _interactionLayerMask,
-                    out InteractableView target))
+                    out InteractableView interactableView))
             {
-                _tapInteractionFeatureResolver.TryExecute(_handService, target);
-                return;
+                _interactionFeatureService.TryExecute(_handService, interactableView);
             }
-
-            _tapInteractionFeatureResolver.Hide();
         }
 
         public void Dispose()
@@ -64,24 +59,10 @@ namespace _ProjectFiles.Player.Scripts.Core
                     Camera.main,
                     5f,
                     _interactionLayerMask,
-                    out InteractableView target))
+                    out InteractableView interactableView))
             {
-                _tapInteractionFeatureResolver.TryInteract(_handService, target);
+                _interactionFeatureService.TryInteract(_handService, interactableView);
             }
-        }
-
-        private void DrawDebug()
-        {
-#if UNITY_EDITOR
-            Camera camera = Camera.main;
-            if (camera == null)
-                return;
-
-            Debug.DrawRay(
-                camera.transform.position,
-                camera.transform.forward * 5f,
-                Color.green);
-#endif
         }
     }
 }
