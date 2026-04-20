@@ -24,11 +24,11 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices
         public bool TryGetInteractData(IHandService handService, InteractableView itemView, out InteractData interactData)
         {
             interactData = default;
-            
+
             if (!_features.TryGetValue(itemView.InteractableItemType, out ITapInteractionFeature feature))
                 return false;
 
-            return true;
+            return feature.TryGetInteractData(itemView, out interactData);
         }
 
         public bool TryInteract(IHandService handService, InteractableView itemView)
@@ -36,7 +36,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
 
-            feature.Interact(handService, itemView);
+            feature.Interact(itemView);
             return true;
         }
     }

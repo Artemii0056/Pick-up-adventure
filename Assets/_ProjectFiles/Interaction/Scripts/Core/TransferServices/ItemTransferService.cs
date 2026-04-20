@@ -14,6 +14,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         private readonly IItemStorage _itemStorage;
         private readonly PlayerHandView _handView;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
+        private readonly IHandService _handService;
 
         public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, PlayerHandView handView, IStoragePickedUpItems storagePickedUpItems)
         {
@@ -23,9 +24,9 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             _storagePickedUpItems = storagePickedUpItems;
         }
 
-        public bool TryTakeItem(IHandService handService, ItemView itemView)
+        public bool TryTakeItem(ItemView itemView)
         {
-            if (handService.HasItem)
+            if (_handService.HasItem)
                 return false;
 
             ItemModel itemModel = _itemStorage.GetState(itemView.Id);
@@ -40,19 +41,19 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             
             _storagePickedUpItems.AddState(itemModel.Type, itemView.Id);
 
-            handService.Put(itemModel, itemView);
+            _handService.Put(itemModel, itemView);
             MoveToHand(itemView);
 
             return true;
         }
 
-        public bool TryPlaceToSlot(IHandService handService, SlotView slotView)
+        public bool TryPlaceToSlot(SlotView slotView)
         {
-            if (!handService.HasItem)
+            if (!_handService.HasItem)
                 return false;
 
-            ItemModel itemModel = handService.CurrentItem;
-            ItemView itemView = handService.CurrentItemView;
+            ItemModel itemModel = _handService.CurrentItem;
+            ItemView itemView = _handService.CurrentItemView;
 
             if (_slotStorage.TryGetState(slotView.Id, out var slotModel) == false)
                 return false;
@@ -65,7 +66,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 
             MoveToSlot(itemView, slotView);
 
-            handService.Clear();
+            _handService.Clear();
 
             return true;
         }

@@ -34,6 +34,7 @@ namespace _ProjectFiles.Player.Scripts.Core
         public void Start()
         {
             _playerInputReader.InteractStarted += OnInteractStarted;
+            _playerInputReader.InteractCanceled += OnInteractCanceled;
         }
 
         public void Tick()
@@ -44,13 +45,19 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView interactableView))
             {
-                _interactionFeatureService.TryExecute(_handService, interactableView);
+                _interactionFeatureService.ShowViewData(_handService, interactableView);;
             }
         }
 
         public void Dispose()
         {
             _playerInputReader.InteractStarted -= OnInteractStarted;
+            _playerInputReader.InteractCanceled -= OnInteractCanceled;
+        }
+
+        private void OnInteractCanceled()
+        {
+            _interactionFeatureService.Cancel();
         }
 
         private void OnInteractStarted()
@@ -61,7 +68,7 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView interactableView))
             {
-                _interactionFeatureService.TryInteract(_handService, interactableView);
+                _interactionFeatureService.Interact(_handService, interactableView);
             }
         }
     }

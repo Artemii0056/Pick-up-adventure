@@ -1,6 +1,5 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Player.Scripts.Core;
 
 namespace _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices
 {
@@ -9,16 +8,12 @@ namespace _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices
         InteractionInputType Type { get; }
         
         bool TryGetInteractData(
-            IHandService handService,
             InteractableView interactableView,
             out InteractData interactData);
 
-        bool TryStartInteraction(
-            IHandService handService,
+        bool TryInteract(
             InteractableView interactableView);
-
-        void CancelInteraction(IHandService handService);
-
-        void Tick(IHandService handService, float deltaTime);
+        
+        void CancelInteract();
     }
 }

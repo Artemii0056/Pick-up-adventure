@@ -1,56 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices;
+using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.UI;
-using UnityEngine.UI;
 
 namespace _ProjectFiles.Interaction.Scripts.Core
 {
     public class InteractionFeatureService : IInteractionFeatureService
     {
         private readonly InfoKeyView _keyView;
+        private readonly ITapInteractionFeatureResolver _tapResolver;
+        private readonly IHoldInteractionFeatureResolver _holdResolver;
         
-        //private Dictionary<InteractionInputType, ITapInteractionFeature> _features;
+       // private readonly Dictionary<InteractionInputType, IInteractionInputExecutor> _executors;
 
-        public InteractionFeatureService(InfoKeyView keyView)
+        public InteractionFeatureService(InfoKeyView keyView,
+            IHoldInteractionFeatureResolver holdResolver,
+            ITapInteractionFeatureResolver tapResolver)
         {
             _keyView = keyView;
+            _holdResolver = holdResolver;
+            _tapResolver = tapResolver;
         }
-        
-        private void ShowViewData(IHandService handService, InteractableView itemView)
+
+        public void Interact(IHandService handService, InteractableView itemView)
         {
-            if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
-                throw new Exception("Interaction feature not found");
-
-            if (feature.TryGetInteractData(handService, itemView, out InteractData interactData)) 
+            // if (itemView == null)
+            //     return;
+            //
+            // if (_executors.TryGetValue(itemView.InteractionInputType, out var executor) == false)
+            //     return;
+            //
+            // executor.TryStartInteraction(handService, itemView);
+            
+            if (itemView == null)
+                return;
+            
+            switch (itemView.InteractionInputType) //TODO Вроде как пофиксил и можно под один интерфейс пихнуть 
             {
-                _keyView.gameObject.SetActive(true); //TODO Плохо, что тут. Надо бы логику разнести и не выключать/включать постоянно 
-                _keyView.UpdateText(interactData.ActionName);
-            }
-            else
-            {
-                _keyView.gameObject.SetActive(false);
+                case InteractionInputType.Tap:
+                    _tapResolver.TryInteract(handService, itemView);
+                    break;
+            
+                case InteractionInputType.Hold:
+                    _holdResolver.TryInteract( itemView);
+                    break;
             }
         }
-    }
 
-    internal interface IInteractionInputExecutor
-    {
-        InteractionInputType InputType { get; }
+        public void Cancel()
+        {
+            _holdResolver.CancelInteract();
+        }
 
-        bool TryGetInteractData(
+        public void ShowViewData(IHandService handService, InteractableView itemView)
+        {
+            if (itemView == null)
+            {
+                HideViewData();
+                return;
+            }
+
+            if (TryGetInteractData(handService, itemView, out InteractData interactData) == false)
+            {
+                HideViewData();
+                return;
+            }
+
+            if (interactData.CanInteract == false)
+            {
+                HideViewData();
+                return;
+            }
+
+            _keyView.gameObject.SetActive(true);
+            _keyView.UpdateText(interactData.ActionName);
+        }
+
+        private bool TryGetInteractData(
             IHandService handService,
-            InteractableView interactableView,
-            out InteractData interactData);
+            InteractableView itemView,
+            out InteractData interactData)
+        {
+            interactData = default;
 
-        bool TryStartInteraction(
-            IHandService handService,
-            InteractableView interactableView);
+            if (_tapResolver.TryGetInteractData(handService, itemView, out interactData))
+                return true;
 
-        void CancelInteraction(IHandService handService);
+            if (_holdResolver.TryGetInteractData(itemView, out interactData))
+                return true;
 
-        void Tick(IHandService handService, float deltaTime);
+            return false;
+        }
+
+        private void HideViewData()
+        {
+            _keyView.gameObject.SetActive(false);
+        }
     }
 }

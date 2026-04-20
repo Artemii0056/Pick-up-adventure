@@ -2,7 +2,6 @@
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.NPC.Scripts.View;
-using _ProjectFiles.Player.Scripts.Core;
 
 namespace _ProjectFiles.NPC.Scripts.Logic
 {
@@ -10,7 +9,7 @@ namespace _ProjectFiles.NPC.Scripts.Logic
     {
         public InteractableItemType Type => InteractableItemType.NPC;
 
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView,
+        public bool TryGetInteractData(InteractableView interactableView,
             out InteractData data)
         {
             data = default;
@@ -27,7 +26,7 @@ namespace _ProjectFiles.NPC.Scripts.Logic
             return true;
         }
 
-        public void Interact(IHandService handService, InteractableView interactableView)
+        public void Interact(InteractableView interactableView)
         {
             if (interactableView is not NpcView npcView)
                 return;

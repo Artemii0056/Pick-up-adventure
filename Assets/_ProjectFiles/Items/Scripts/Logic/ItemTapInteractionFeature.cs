@@ -13,25 +13,27 @@ namespace _ProjectFiles.Items.Scripts.Logic
         private readonly IItemTransferService _transferService;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IFirstPickUpItemState _firstPickUpItemState;
+        private readonly IHandService _handService;
 
-        public ItemTapInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems, IFirstPickUpItemState firstPickUpItemState)
+        public ItemTapInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems, IFirstPickUpItemState firstPickUpItemState, IHandService handService)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;
             _storagePickedUpItems = storagePickedUpItems;
             _firstPickUpItemState = firstPickUpItemState;
+            _handService = handService;
         }
 
         public InteractableItemType Type => InteractableItemType.Item;
 
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
+        public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
             data = default;
 
             if (interactableView is not ItemView itemView)
                 return false;
 
-            if (handService.HasItem)
+            if (_handService.HasItem)
                 return false;
 
             ItemModel itemModel = _itemStorage.GetState(itemView.Id);
@@ -48,7 +50,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
             return true;
         }
         
-        public void Interact(IHandService handService, InteractableView interactableView)
+        public void Interact(InteractableView interactableView)
         {
             if (interactableView is not ItemView itemView)
                 return;
@@ -62,7 +64,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
             if (alreadySeen)
             {
-                _transferService.TryTakeItem(handService, itemView);
+                _transferService.TryTakeItem(itemView);
                 return;
             }
 

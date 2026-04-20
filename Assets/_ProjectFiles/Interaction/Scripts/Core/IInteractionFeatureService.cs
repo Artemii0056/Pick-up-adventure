@@ -5,10 +5,8 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 {
     public interface IInteractionFeatureService
     {
-        void Update(IHandService handService, InteractableView interactableView);
-        void Clear();
-        void StartInteraction(IHandService handService, InteractableView interactableView);
-        void CancelInteraction(IHandService handService);
-        void Tick(IHandService handService, float deltaTime);
+        void ShowViewData(IHandService handService, InteractableView itemView);
+        void Interact(IHandService handService, InteractableView itemView);
+        void Cancel();
     }
 }

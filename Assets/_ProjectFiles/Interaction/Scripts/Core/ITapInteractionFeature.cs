@@ -7,7 +7,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
     public interface ITapInteractionFeature
     {
         InteractableItemType Type { get; }
-        bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data);
-        void Interact(IHandService handService, InteractableView interactableView);
+        bool TryGetInteractData(InteractableView interactableView, out InteractData data);
+        void Interact(InteractableView interactableView);
     }
 }

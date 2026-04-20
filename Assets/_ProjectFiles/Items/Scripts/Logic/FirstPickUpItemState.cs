@@ -15,17 +15,15 @@ namespace _ProjectFiles.Items.Scripts.Logic
         private Transform _currentPreview;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IItemTransferService _transferService;
-        private readonly IHandService _handService;
         private readonly IItemStorage _itemStorage;
         
         private GameObject _currentPreviewInstance;
 
-        public FirstPickUpItemState(IPlayerInputReader inputReader, IStoragePickedUpItems storagePickedUpItems, IItemTransferService transferService, IHandService handService, IItemStorage itemStorage)
+        public FirstPickUpItemState(IPlayerInputReader inputReader, IStoragePickedUpItems storagePickedUpItems, IItemTransferService transferService, IItemStorage itemStorage)
         {
             _inputReader = inputReader;
             _storagePickedUpItems = storagePickedUpItems;
             _transferService = transferService;
-            _handService = handService;
             _itemStorage = itemStorage;
             _inputReader.InteractStarted += OnInteractStarted;
         }
@@ -91,7 +89,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
             Hide();
             _storagePickedUpItems.AddState(itemModel.Type, itemModel.Id);
-            _transferService.TryTakeItem(_handService, itemView);
+            _transferService.TryTakeItem(itemView);
             
         }
     }

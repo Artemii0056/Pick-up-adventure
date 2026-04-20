@@ -1,31 +1,53 @@
-﻿using _ProjectFiles.Interaction.Scripts.Data;
+﻿using System;
+using System.Collections.Generic;
+using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Player.Scripts.Core;
 
 namespace _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices
 {
     public class HoldInteractionFeatureResolver : IHoldInteractionFeatureResolver
     {
+        private readonly Dictionary<InteractableItemType, IHoldInteractionFeature> _features;
+
+        private IHoldInteractionFeature _activeFeature;
+
+        private IHoldInteractionFeature _returningFeature;
+
+        public HoldInteractionFeatureResolver(IEnumerable<IHoldInteractionFeature> features)
+        {
+            _features = new Dictionary<InteractableItemType, IHoldInteractionFeature>();
+            
+            foreach (var feature in features)
+                _features[feature.Type] = feature;
+        }
+
         public InteractionInputType Type => InteractionInputType.Hold;
 
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData interactData)
+        public bool TryGetInteractData(InteractableView interactableView, out InteractData interactData)
         {
-            throw new System.NotImplementedException();
+            interactData = default;
+
+            if (!_features.TryGetValue(interactableView.InteractableItemType, out var feature))
+                return false;
+
+            return feature.TryGetInteractData(interactableView, out interactData);
         }
 
-        public bool TryStartInteraction(IHandService handService, InteractableView interactableView)
+        public bool TryInteract(InteractableView itemView)
         {
-            throw new System.NotImplementedException();
+            if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
+                return false;
+
+            feature.Interact(itemView);
+            return true;
         }
 
-        public void CancelInteraction(IHandService handService)
+        public void CancelInteract()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Tick(IHandService handService, float deltaTime)
-        {
-            throw new System.NotImplementedException();
+            foreach (var features in _features.Values)
+            {
+                features.StopInteract();
+            }
         }
     }
 }

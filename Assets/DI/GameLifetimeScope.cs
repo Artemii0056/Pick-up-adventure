@@ -1,8 +1,10 @@
+using _ProjectFiles;
 using _ProjectFiles.Bootstrap;
 using _ProjectFiles.Chest.Scripts.Data;
 using _ProjectFiles.Chest.Scripts.Logic;
 using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Keys.Scripts.Data;
@@ -70,9 +72,13 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ITapInteractionFeature, ItemTapInteractionFeature>(Lifetime.Singleton);
         builder.Register<ITapInteractionFeature, NpcTapInteractionFeature>(Lifetime.Singleton);
         builder.Register<ITapInteractionFeature, SlotTapInteractionFeature>(Lifetime.Singleton);
-        builder.Register<ITapInteractionFeature, ValveTapInteractionFeature>(Lifetime.Singleton);
+        
+        builder.Register<IHoldInteractionFeature, ValveInteractionFeature>(Lifetime.Singleton); //TODO !!!
 
         builder.Register<ITapInteractionFeatureResolver, TapInteractionFeatureResolver>(Lifetime.Singleton);
+        builder.Register<IHoldInteractionFeatureResolver, HoldInteractionFeatureResolver>(Lifetime.Singleton);
+        builder.Register<IInteractionFeatureService, InteractionFeatureService>(Lifetime.Singleton);
+        builder.Register<IValveRotationService, ValveRotationService>(Lifetime.Singleton);
     }
     
     private void RegisterInteractionFactories(IContainerBuilder builder)

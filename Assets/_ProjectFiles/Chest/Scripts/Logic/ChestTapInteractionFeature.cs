@@ -12,13 +12,17 @@ namespace _ProjectFiles.Chest.Scripts.Logic
     public class ChestTapInteractionFeature : ITapInteractionFeature
     {
         private readonly IChestStorage _chestStorage; 
+        private readonly IHandService _handService;
 
-        public ChestTapInteractionFeature(IChestStorage chestStorage) => 
+        public ChestTapInteractionFeature(IChestStorage chestStorage, IHandService handService)
+        {
             _chestStorage = chestStorage;
+            _handService = handService;
+        }
 
         public InteractableItemType Type => InteractableItemType.Chest;
         
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
+        public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
             data = default;
             
@@ -36,10 +40,10 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (chestModel.IsOpened)
                 return false;
 
-            if (handService.HasItem == false)
+            if (_handService.HasItem == false)
                 return false;
 
-            if (handService.CurrentItem is not KeyModel keyModel)
+            if (_handService.CurrentItem is not KeyModel keyModel)
                 return false;
 
             if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
@@ -54,7 +58,7 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             return true;
         }
 
-        public void Interact(IHandService handService, InteractableView interactableView)
+        public void Interact(InteractableView interactableView)
         {
             if (interactableView is not ChestView chestView)
                 return;
@@ -64,12 +68,12 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (chestModel.IsOpened)
                 return;
             
-            if (!handService.HasItem)
+            if (!_handService.HasItem)
                 return;
             
-            Debug.Log(handService.CurrentItem.GetType());
+            Debug.Log(_handService.CurrentItem.GetType());
             
-            if (handService.CurrentItem is not KeyModel keyModel)
+            if (_handService.CurrentItem is not KeyModel keyModel)
                 return;
             
             // if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
@@ -77,7 +81,7 @@ namespace _ProjectFiles.Chest.Scripts.Logic
 
             chestModel.Open();
             chestView.Open();
-            handService.Clear();
+            _handService.Clear();
 
             Debug.Log($"Chest {chestView.Id} opened");
         }

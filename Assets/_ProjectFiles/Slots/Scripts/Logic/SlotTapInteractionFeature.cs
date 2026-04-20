@@ -11,29 +11,31 @@ namespace _ProjectFiles.Slots.Scripts.Logic
     {
         private readonly ISlotStorage _slotStorage;
         private readonly IItemTransferService _transferService;
+        private readonly IHandService _handService;
 
-        public SlotTapInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService)
+        public SlotTapInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService, IHandService handService)
         {
             _slotStorage = slotStorage;
             _transferService = transferService;
+            _handService = handService;
         }
 
         public InteractableItemType Type => InteractableItemType.Slot;
 
-        public bool TryGetInteractData(IHandService handService, InteractableView interactableView, out InteractData data)
+        public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
             data = default;
 
             if (interactableView is not SlotView slotView)
                 return false;
 
-            if (!handService.HasItem)
+            if (!_handService.HasItem)
                 return false;
 
             if (!_slotStorage.TryGetState(slotView.Id, out SlotModel slotModel))
                 return false;
 
-            if (!slotModel.CanPlace(handService.CurrentItem))
+            if (!slotModel.CanPlace(_handService.CurrentItem))
                 return false;
 
             data = new InteractData
@@ -45,21 +47,21 @@ namespace _ProjectFiles.Slots.Scripts.Logic
             return true;
         }
 
-        public void Interact(IHandService handService, InteractableView interactableView)
+        public void Interact(InteractableView interactableView)
         {
             if (interactableView is not SlotView slotView)
                 return;
 
-            if (!handService.HasItem)
+            if (!_handService.HasItem)
                 return;
 
             if (!_slotStorage.TryGetState(slotView.Id, out SlotModel slotModel))
                 return;
 
-            if (!slotModel.CanPlace(handService.CurrentItem))
+            if (!slotModel.CanPlace(_handService.CurrentItem))
                 return;
 
-            _transferService.TryPlaceToSlot(handService, slotView);
+            _transferService.TryPlaceToSlot(slotView);
         }
     }
 }

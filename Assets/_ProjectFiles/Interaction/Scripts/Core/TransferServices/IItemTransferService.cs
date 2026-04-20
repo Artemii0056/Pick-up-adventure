@@ -6,7 +6,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 {
     public interface IItemTransferService
     {
-        bool TryTakeItem(IHandService handService, ItemView itemView);
-        bool TryPlaceToSlot(IHandService handService, SlotView slotView);
+        bool TryTakeItem(ItemView itemView);
+        bool TryPlaceToSlot(SlotView slotView);
     }
 }
