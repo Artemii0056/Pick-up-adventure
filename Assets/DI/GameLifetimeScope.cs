@@ -31,6 +31,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerHandView>();
         builder.RegisterComponentInHierarchy<InfoKeyView>();
         builder.RegisterComponentInHierarchy<Bootstrapper>();
+        builder.RegisterComponentInHierarchy<PickUpCanvas>();
         
         
         
@@ -55,6 +56,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<GlobalIdService>(Lifetime.Singleton).As<IGlobalIdService>();
         builder.Register<StoragePickedUpItems>(Lifetime.Singleton).As<IStoragePickedUpItems>();
         
+        builder.Register<FirstPickUpItemState>(Lifetime.Singleton).As<IFirstPickUpItemState>();
         
 
         RegisterInteractionFeatures(builder);

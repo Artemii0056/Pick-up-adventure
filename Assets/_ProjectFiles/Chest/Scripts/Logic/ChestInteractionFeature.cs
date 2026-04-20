@@ -72,8 +72,8 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (handService.CurrentItem is not KeyModel keyModel)
                 return;
             
-            if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
-                return;
+            // if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
+            //     return;
 
             chestModel.Open();
             chestView.Open();

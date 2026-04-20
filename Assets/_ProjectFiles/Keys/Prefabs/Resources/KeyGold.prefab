@@ -156,8 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c0a945ad2744b693435c1d7b257def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Keys.View.KeyView
-  <Id>k__BackingField: 3
   <InteractableItemType>k__BackingField: 1
   <ItemType>k__BackingField: 1
-  <Description>k__BackingField: 
+  <Description>k__BackingField: "\u042D\u0442\u043E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F
+    \u043E \u043A\u043B\u044E\u0447\u0435"
+  <Prefab>k__BackingField: {fileID: 8128675638440921346}
   <ChestKeyType>k__BackingField: 1
