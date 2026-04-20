@@ -693,6 +693,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7818108540775168797, guid: a09f95ca39f3483479dd1693c94b0939, type: 3}
   m_PrefabInstance: {fileID: 1141166341}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &511804218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e46f2ecf8cf3b7b4bbe31830adc9d958, type: 3}
+  m_PrefabInstance: {fileID: 1097225396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513595377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1507,6 +1512,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &919639061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8907002125951520107, guid: 939ce228e1044bf48b34eaaf6028340b, type: 3}
+  m_PrefabInstance: {fileID: 1823924622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &939902223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e46f2ecf8cf3b7b4bbe31830adc9d958, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.088
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e46f2ecf8cf3b7b4bbe31830adc9d958, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2944,7 +2954,7 @@ GameObject:
   - component: {fileID: 1854574266}
   - component: {fileID: 1854574265}
   - component: {fileID: 1854574264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Valve
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -2965,9 +2975,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.ValveDoor.Scripts.View.ValveView
   <InteractableItemType>k__BackingField: 4
   <InteractionInputType>k__BackingField: 2
-  <ItemType>k__BackingField: 0
-  <Description>k__BackingField: "\u042D\u0442\u043EValve"
-  <Prefab>k__BackingField: {fileID: 0}
+  _valveTransform: {fileID: 919639061}
+  _doorTransform: {fileID: 511804218}
+  _doorMaxOffsetY: 2
+  _valveMaxAngle: 360
 --- !u!65 &1854574265
 BoxCollider:
   m_ObjectHideFlags: 0

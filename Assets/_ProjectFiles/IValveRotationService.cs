@@ -9,9 +9,10 @@ namespace _ProjectFiles
     {
         void StartRotate(ValveView valveView, ValveModel valveModel);
         void StopRotate();
+        void Tick();
     }
 
- public class ValveRotationService : IValveRotationService, ITickable
+    public class ValveRotationService : IValveRotationService
     {
         private readonly float _forwardSpeed = 1f;
         private readonly float _backwardSpeed = 1f;
@@ -40,12 +41,12 @@ namespace _ProjectFiles
             float progress = _activeModel.Progress;
 
             if (_isRotating)
-                progress += _forwardSpeed * Time.deltaTime;
+                progress = Mathf.MoveTowards(progress, 1f, _forwardSpeed * Time.deltaTime);
             else
-                progress -= _backwardSpeed * Time.deltaTime;
+                progress = Mathf.MoveTowards(progress, 0f, _backwardSpeed * Time.deltaTime);
 
             _activeModel.SetProgress(progress);
-            _activeView.Render(_activeModel.Progress); //Как то тут связать данные, например от нуля до единицы
+            _activeView.Render(_activeModel.Progress);
 
             if (!_isRotating && _activeModel.Progress <= 0f)
             {

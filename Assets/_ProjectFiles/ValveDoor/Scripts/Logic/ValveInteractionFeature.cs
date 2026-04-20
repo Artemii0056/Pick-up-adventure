@@ -41,7 +41,7 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
             
             Debug.Log("ValveInteractionFeature Interact");
 
-            _valveRotationService.StartRotate(valveView, new ValveModel());
+            _valveRotationService.StartRotate(valveView, valveView.Model);
         }
         
         public void StopInteract()

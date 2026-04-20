@@ -17,18 +17,25 @@ namespace _ProjectFiles.Bootstrap
         private IGlobalIdService _globalIdService;
         private INoteModelFactory _noteModelFactory;
         private IFirstPickUpItemState _firstPickUpItemState;
+        private IValveRotationService _valveRotationService;
         
         [SerializeField] private KeySlotStarter _keySlotStarter;
         [SerializeField] private NoteSlotStarter _noteSlotStarter;
 
         [Inject]
-        public void Init(IKeyModelFactory keyModelFactory, ISlotModelFactory slotModelFactory, IGlobalIdService globalIdService, INoteModelFactory noteModelFactory, IFirstPickUpItemState firstPickUpItemState)
+        public void Init(IKeyModelFactory keyModelFactory, 
+            ISlotModelFactory slotModelFactory, 
+            IGlobalIdService globalIdService,
+            INoteModelFactory noteModelFactory,
+            IFirstPickUpItemState firstPickUpItemState,
+            IValveRotationService valveRotationService)
         {
             _keyModelFactory = keyModelFactory;
             _slotModelFactory = slotModelFactory;
             _globalIdService = globalIdService;
             _noteModelFactory = noteModelFactory;
             _firstPickUpItemState = firstPickUpItemState;
+            _valveRotationService = valveRotationService;
         }   
         
         private void Start()
@@ -46,6 +53,8 @@ namespace _ProjectFiles.Bootstrap
             {
                 _firstPickUpItemState.Tick();
             }
+            
+            _valveRotationService.Tick();
         }
     }
 }
