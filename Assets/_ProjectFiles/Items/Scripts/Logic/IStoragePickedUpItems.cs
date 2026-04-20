@@ -6,5 +6,6 @@ namespace _ProjectFiles.Items.Scripts.Logic
     {
         void AddState(ItemType item, int id);
         ItemType GetState(int id);
+        bool HasItem(int itemModelId, ItemType itemModelType);
     }
 }

@@ -8,5 +8,6 @@ namespace _ProjectFiles.Player.Scripts.Resolvers
     {
         [field: SerializeField] public ItemType ItemType { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
     }
 }

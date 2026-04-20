@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8271508728083195551}
   - component: {fileID: 7737028472900762472}
   m_Layer: 6
-  m_Name: Key
+  m_Name: KeySilver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,8 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c0a945ad2744b693435c1d7b257def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Keys.View.KeyView
-  <Id>k__BackingField: 3
   <InteractableItemType>k__BackingField: 1
   <ItemType>k__BackingField: 1
   <Description>k__BackingField: 
-  <ChestKeyType>k__BackingField: 1
+  <ChestKeyType>k__BackingField: 2

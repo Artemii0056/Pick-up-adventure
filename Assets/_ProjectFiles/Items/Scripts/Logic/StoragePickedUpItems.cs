@@ -17,5 +17,13 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
         public ItemType GetState(int id) => 
             _items[id];
+
+        public bool HasItem(int itemModelId, ItemType itemModelType)
+        {
+            if (_items.ContainsKey(itemModelId))
+                return true;
+
+            return false;
+        }
     }
 }

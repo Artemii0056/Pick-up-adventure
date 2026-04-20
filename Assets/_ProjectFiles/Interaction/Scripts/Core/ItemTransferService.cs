@@ -13,12 +13,14 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         private readonly ISlotStorage _slotStorage;
         private readonly IItemStorage _itemStorage;
         private readonly PlayerHandView _handView;
+        private readonly IStoragePickedUpItems _storagePickedUpItems;
 
-        public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, PlayerHandView handView)
+        public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, PlayerHandView handView, IStoragePickedUpItems storagePickedUpItems)
         {
             _slotStorage = slotStorage;
             _itemStorage = itemStorage;
             _handView = handView;
+            _storagePickedUpItems = storagePickedUpItems;
         }
 
         public bool TryTakeItem(IHandService handService, ItemView itemView)
@@ -35,6 +37,8 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             {
                 slot.Take();
             }
+            
+            _storagePickedUpItems.AddState(itemModel.Type, itemView.Id);
 
             handService.Put(itemModel, itemView);
             MoveToHand(itemView);

@@ -3,6 +3,7 @@ using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.UI;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
@@ -49,10 +50,34 @@ namespace _ProjectFiles.Items.Scripts.Logic
         {
             if (interactableView is not ItemView itemView)
                 return;
-            
-            //Тут Сделать логику с новым/повторным подбором?
 
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+            
+            if (_storagePickedUpItems.HasItem(itemModel.Id, itemModel.Type))
+            {
+                _transferService.TryTakeItem(handService, itemView);
+                return;
+            }
+            
+            //TODO Состояние по первому подбору
+            //TODO А теперь нужен сервис с подбором
+            
             _transferService.TryTakeItem(handService, itemView);
+        }
+    }
+
+    public class FirstPickUpItemState
+    {
+        private PickUpCanvas _pickUpCanvas;
+
+        public FirstPickUpItemState(PickUpCanvas pickUpCanvas)
+        {
+            _pickUpCanvas = pickUpCanvas;
+        }
+
+        public void Show()
+        {
+            _pickUpCanvas.gameObject.SetActive(true);
         }
     }
 }
