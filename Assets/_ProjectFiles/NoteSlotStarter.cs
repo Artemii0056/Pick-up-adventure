@@ -1,10 +1,9 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _ProjectFiles
 {
     public class NoteSlotStarter : ItemSlotStarter
     {
-        [SerializeField] private TextMeshProUGUI _text;
+        [SerializeField] private string _text;
     }
 }

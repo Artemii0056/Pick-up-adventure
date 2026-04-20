@@ -1,41 +1,28 @@
-﻿using _ProjectFiles;
-using _ProjectFiles.GlobalId.Scripts;
+﻿using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
-using UnityEngine;
 
-public class KeySlotInitializer
+namespace _ProjectFiles
 {
-    private readonly IKeyModelFactory _keyModelFactory;
-    private readonly ISlotModelFactory _slotModelFactory;
-    private readonly IGlobalIdService _globalIdService;
-
-    public KeySlotInitializer(
-        IKeyModelFactory keyModelFactory,
-        ISlotModelFactory slotModelFactory,
-        IGlobalIdService globalIdService)
+    public class KeySlotInitializer : BaseSlotInitializer<KeySlotStarter, KeyModel>
     {
-        _keyModelFactory = keyModelFactory;
-        _slotModelFactory = slotModelFactory;
-        _globalIdService = globalIdService;
-    }
+        private readonly IKeyModelFactory _keyModelFactory;
 
-    public void Initialize(KeySlotStarter starter)
-    {
-        SlotModel slotModel = _slotModelFactory.Create(starter.SlotView.SlotRuleType, starter.SlotView.Id);
+        public KeySlotInitializer(
+            IKeyModelFactory keyModelFactory,
+            ISlotModelFactory slotModelFactory,
+            IGlobalIdService globalIdService)
+            : base(slotModelFactory, globalIdService)
+        {
+            _keyModelFactory = keyModelFactory;
+        }
 
-        KeyModel keyModel = _keyModelFactory.CreateKeyModel(
-            _globalIdService.GetNext(),
-            starter.ItemType,
-            starter.ChestKeyType);
-
-        slotModel.Place(keyModel);
-
-        ItemView itemView = Object.Instantiate(starter.ItemPrefab, starter.SlotView.ItemAnchor);
-        itemView.transform.localPosition = Vector3.zero;
-        itemView.transform.localRotation = Quaternion.identity;
-
-        starter.SlotView.SetItemView(itemView);
+        protected override KeyModel CreateItemModel(KeySlotStarter starter, int itemId)
+        {
+            return _keyModelFactory.CreateKeyModel(
+                itemId,
+                starter.ItemType,
+                starter.ChestKeyType);
+        }
     }
 }

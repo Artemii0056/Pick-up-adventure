@@ -1,48 +1,26 @@
 ﻿using _ProjectFiles.GlobalId.Scripts;
-using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Note.Script.Data;
-using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
-using UnityEngine;
 
 namespace _ProjectFiles
 {
-    public class NoteSlotInitializer
+    public class NoteSlotInitializer : BaseSlotInitializer<NoteSlotStarter, NoteModel>
     {
         private readonly INoteModelFactory _noteModelFactory;
-        private readonly ISlotModelFactory _slotModelFactory;
-        private readonly IGlobalIdService _globalIdService;
 
         public NoteSlotInitializer(
             ISlotModelFactory slotModelFactory,
-            IGlobalIdService globalIdService, 
+            IGlobalIdService globalIdService,
             INoteModelFactory noteModelFactory)
+            : base(slotModelFactory, globalIdService)
         {
-            _slotModelFactory = slotModelFactory;
-            _globalIdService = globalIdService;
+            _noteModelFactory = noteModelFactory;
             _noteModelFactory = noteModelFactory;
         }
 
-        public void Initialize(NoteSlotStarter starter)
+        protected override NoteModel CreateItemModel(NoteSlotStarter starter, int itemId)
         {
-            SlotModel slotModel =
-                _slotModelFactory.Create(starter.SlotView.SlotRuleType, starter.SlotView.Id);
-
-            int itemId = _globalIdService.GetNext();
-
-            NoteModel model =
-                _noteModelFactory.CreateNoteModel(itemId, starter.ItemType);
-
-            slotModel.Place(model);
-
-            ItemView itemView =
-                Object.Instantiate(starter.ItemPrefab, starter.SlotView.ItemAnchor);
-
-            itemView.SetId(itemId);
-            itemView.transform.localPosition = Vector3.zero;
-            itemView.transform.localRotation = Quaternion.identity;
-
-            starter.SlotView.SetItemView(itemView);
+            return _noteModelFactory.CreateNoteModel(itemId, starter.ItemType);
         }
     }
 }

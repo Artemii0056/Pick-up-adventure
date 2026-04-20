@@ -75,10 +75,10 @@ namespace _ProjectFiles.Player.Scripts.Core
             _playerInteractionController.SetLayer(_layerMask);
             _playerInteractionController.Start();
 
-            foreach (var slot2 in Slots)
-            {
-                _slotModelFactory.Create(slot2.SlotRuleType, slot2.Id); //Сюда нужно передать id предмета, а не слота
-            }
+            // foreach (var slot2 in Slots)
+            // {
+            //     _slotModelFactory.Create(slot2.SlotRuleType, slot2.Id); //Сюда нужно передать id предмета, а не слота
+            // }
 
             _keyModelFactory.CreateKeyModel(_keyItemView.Id, _keyItemView.ItemType, ChestKeyType.None);
             _chestModelFactor.CreateKeyModel(_chestItemView.Id, InteractableItemType.Chest);

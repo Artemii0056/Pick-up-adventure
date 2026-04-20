@@ -1056,7 +1056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922cd6bfd2ee4bbdbd7b023053bb0a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Chest
-  <Id>k__BackingField: 2
   <InteractableItemType>k__BackingField: 2
   <KeyType>k__BackingField: 1
 --- !u!1001 &831002716
@@ -2091,7 +2090,7 @@ MonoBehaviour:
   <SlotView>k__BackingField: {fileID: 1575717279}
   <ItemType>k__BackingField: 2
   <ItemPrefab>k__BackingField: {fileID: 8609604285816421029, guid: 425a07f9f7b91c842a1ca7412cd33239, type: 3}
-  _text: {fileID: 0}
+  _text: 123S
 --- !u!114 &1720487445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2498,7 +2497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436b1590be034750b2e3c48ced2eee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.NPC.Scripts.View.NpcView
-  <Id>k__BackingField: 1
   <InteractableItemType>k__BackingField: 3
 --- !u!33 &923258236752083380
 MeshFilter:

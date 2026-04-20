@@ -16,13 +16,20 @@ namespace _ProjectFiles.Slots.Scripts.Data
             _slotStorage.AddState(model);
             return model;
         }
-        
-        private ISlotRule CreateRule(SlotRuleType slotRuleType, int slotId)
+
+        public SlotModel Create(SlotRuleType slotRuleType, int slotId, int itemId)
+        {
+            SlotModel model = new SlotModel(slotId, CreateRule(slotRuleType, itemId));
+            _slotStorage.AddState(model);
+            return model;
+        }
+
+        private ISlotRule CreateRule(SlotRuleType slotRuleType, int itemId)
         {
             return slotRuleType switch
             {
                 SlotRuleType.Universal => new UniversalSlotRule(),
-                SlotRuleType.FixedByItemId => new FixedByIdSlotRule(slotId),
+                SlotRuleType.FixedByItemId => new FixedByIdSlotRule(itemId),
                 _ => throw new ArgumentOutOfRangeException(nameof(slotRuleType), slotRuleType, null)
             };
         }

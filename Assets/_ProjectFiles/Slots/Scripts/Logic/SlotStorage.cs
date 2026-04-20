@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
-    public class SlotStorage : ISlotStorage //TODO Обязательно сделать один дженериковый класс!
+    public class SlotStorage : ISlotStorage 
     {
         private readonly Dictionary<int, SlotModel> _slots = new();
 
