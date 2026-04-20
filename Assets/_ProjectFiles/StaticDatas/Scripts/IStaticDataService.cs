@@ -7,5 +7,6 @@ namespace _ProjectFiles.StaticDatas.Scripts
     {
         PlayerRotationConfig PlayerRotationConfig { get; }
         PlayerMovementConfig PlayerMovementConfig { get; }
+        void LoadAll();
     }
 }

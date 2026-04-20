@@ -10,11 +10,16 @@ namespace _ProjectFiles.StaticDatas.Scripts
 
         public PlayerRotationConfig PlayerRotationConfig { get; private set; }
         public PlayerMovementConfig PlayerMovementConfig{ get; private set; }
-
+        
         public StaticDataService(IResourceLoader resourceLoader)
         {
             _resourceLoader = resourceLoader;
             
+           
+        }
+        
+        public void LoadAll()
+        {
             LoadRotationConfig();
             LoadMovementConfig();
         }

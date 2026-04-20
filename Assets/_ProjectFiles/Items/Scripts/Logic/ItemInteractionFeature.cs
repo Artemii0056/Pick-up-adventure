@@ -10,11 +10,13 @@ namespace _ProjectFiles.Items.Scripts.Logic
     {
         private readonly IItemStorage _itemStorage;
         private readonly IItemTransferService _transferService;
+        private readonly IStoragePickedUpItems _storagePickedUpItems;
 
-        public ItemInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService)
+        public ItemInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;
+            _storagePickedUpItems = storagePickedUpItems;
         }
 
         public InteractableItemType Type => InteractableItemType.Item;
@@ -37,7 +39,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
             data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Взять"
+                ActionName = "Подобрать"
             };
 
             return true;
@@ -47,6 +49,8 @@ namespace _ProjectFiles.Items.Scripts.Logic
         {
             if (interactableView is not ItemView itemView)
                 return;
+            
+            //Тут Сделать логику с новым/повторным подбором?
 
             _transferService.TryTakeItem(handService, itemView);
         }

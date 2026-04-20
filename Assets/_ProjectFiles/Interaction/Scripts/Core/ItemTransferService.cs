@@ -2,7 +2,6 @@
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Player.Scripts.View;
-using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.Slots.Scripts.View;
 using UnityEngine;
@@ -28,6 +27,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
                 return false;
 
             ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+            
             if (itemModel == null)
                 return false;
 

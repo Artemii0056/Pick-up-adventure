@@ -53,6 +53,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ResourceLoader>(Lifetime.Singleton).As<IResourceLoader>();
         
         builder.Register<GlobalIdService>(Lifetime.Singleton).As<IGlobalIdService>();
+        builder.Register<StoragePickedUpItems>(Lifetime.Singleton).As<IStoragePickedUpItems>();
         
         
 
