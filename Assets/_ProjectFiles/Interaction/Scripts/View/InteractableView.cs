@@ -10,9 +10,7 @@ namespace _ProjectFiles.Interaction.Scripts.View
         
         public int Id { get; private set; }
 
-        public void SetId(int id)
-        {
+        public void SetId(int id) => 
             Id = id;
-        }
     }
 }

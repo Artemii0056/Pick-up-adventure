@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b48cfe2c7774277a4e76e100f6adf19, type: 3}
+  m_Name: NpcQuestConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.NPC.Scripts.Data.Quests.NpcQuestConfig
+  <QuestId>k__BackingField: 1
+  <AvailableQuestItems>k__BackingField:
+  - {fileID: 11400000, guid: a7e57af8041a57d47b225d12eb19fcaa, type: 2}
+  <DialogueSet>k__BackingField:
+    <StartDialogue>k__BackingField: {fileID: 11400000, guid: cbfbf489fad987646800f286d6cd6801, type: 2}
+    <InProgressDialogue>k__BackingField: {fileID: 11400000, guid: de0d056ba1447c84caea721693d11574, type: 2}
+    <CompletedDialogue>k__BackingField: {fileID: 11400000, guid: 280af99968a75094182c4dbc27f8281e, type: 2}

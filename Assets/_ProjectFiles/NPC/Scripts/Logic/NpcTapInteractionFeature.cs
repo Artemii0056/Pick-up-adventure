@@ -1,16 +1,21 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.NPC.Scripts.Data;
 using _ProjectFiles.NPC.Scripts.View;
 
 namespace _ProjectFiles.NPC.Scripts.Logic
 {
     public class NpcTapInteractionFeature : ITapInteractionFeature
     {
-        public InteractableItemType Type => InteractableItemType.NPC;
+        private readonly INpcInteractionService _npcInteractionService;
 
-        public bool TryGetInteractData(InteractableView interactableView,
-            out InteractData data)
+        public NpcTapInteractionFeature(INpcInteractionService npcInteractionService) => 
+            _npcInteractionService = npcInteractionService;
+
+        public InteractableItemType Type => InteractableItemType.NPC; //TODO Надо ли? 
+
+        public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
             data = default;
 
@@ -31,7 +36,7 @@ namespace _ProjectFiles.NPC.Scripts.Logic
             if (interactableView is not NpcView npcView)
                 return;
 
-            npcView.StartDialog();
+            _npcInteractionService.StartDialogue(npcView.Id);
         }
     }
 }

@@ -1,44 +1,13 @@
-﻿using _ProjectFiles.DialogueSystem.Scripts.Data;
-using _ProjectFiles.DialogueSystem.Scripts.Logic;
-using _ProjectFiles.DialogueSystem.Scripts.Logic.Quest;
-using _ProjectFiles.Interaction.Scripts.View;
+﻿using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.NPC.Scripts.Data;
 using UnityEngine;
-using VContainer;
 
 namespace _ProjectFiles.NPC.Scripts.View
 {
     public class NpcView : InteractableView
     {
-        [SerializeField] private DialogueConfig _dialogueConfig;
-        [SerializeField] private DialogueConfig _questCheckConfig;
+        [SerializeField] private NpcConfig _config;
 
-        private IDialogueService _dialogueService;
-        private INpcQuestService _questService;
-
-        [Inject]
-        public void Construct(IDialogueService dialogueService, INpcQuestService questService)
-        {
-            _dialogueService = dialogueService;
-            _questService = questService;
-
-        }
-
-        public void StartDialog()
-        {
-            Debug.Log("TryCompleteQuest failed: quest already completed");
-            
-            DialogueConfig config;
-
-            if (!_questService.HasActiveQuest)
-                config = _dialogueConfig;
-            else if (!_questService.IsCompleted)
-                config = _questCheckConfig;
-            else
-                config = _dialogueConfig; // или снова intro
-
-            Debug.Log($"Selected config: {config.name}");
-            
-            _dialogueService.StartDialogue(config);
-        }
+        public NpcConfig Config => _config;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.NPC.Scripts.Data;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {

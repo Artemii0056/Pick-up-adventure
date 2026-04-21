@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac109d292c6e405a88a35c08a12be073, type: 3}
-  m_Name: DialogueConfig
+  m_Name: SimpleDialog
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Dialogue.Data.DialogueConfig
   DialogueId: npc_intro_1
   StartNodeId: start

@@ -31,8 +31,6 @@ namespace _ProjectFiles.Player.Scripts.LookRotation
 
         public void Handle(Vector2 lookDelta)
         {
-            Debug.Log(_playerRoot == null);
-            
             float mouseX = lookDelta.x * _sensitivity;
             float mouseY = lookDelta.y * _sensitivity;
 

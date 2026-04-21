@@ -45,7 +45,7 @@ namespace _ProjectFiles.DialogueSystem.Scripts.Logic.Quest
                 return;
             }
 
-            _requestedItemType = possibleTypes[UnityEngine.Random.Range(0, possibleTypes.Count)];
+            _requestedItemType = possibleTypes[Random.Range(0, possibleTypes.Count)];
             HasActiveQuest = true;
             IsCompleted = false;
 

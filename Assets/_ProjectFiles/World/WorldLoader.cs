@@ -9,6 +9,8 @@ using _ProjectFiles.Items.Knifes.Scripts.Data;
 using _ProjectFiles.Items.Note.Script.Data;
 using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Logic;
+using _ProjectFiles.NPC.Scripts.Data;
+using _ProjectFiles.NPC.Scripts.View;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.View;
@@ -21,23 +23,25 @@ namespace _ProjectFiles.World
         private readonly IGlobalIdService _globalIdService;
         private readonly IItemStorage _itemStorage;
         private readonly IChestStorage _chestStorage;
+        private readonly INpcStorage _npcStorage;
 
         public WorldLoader(
             ISlotModelFactory slotModelFactory,
             IGlobalIdService globalIdService,
-            IItemStorage itemStorage, 
-            IChestStorage chestStorage)
+            IItemStorage itemStorage,
+            IChestStorage chestStorage, INpcStorage npcStorage)
         {
             _slotModelFactory = slotModelFactory;
             _globalIdService = globalIdService;
             _itemStorage = itemStorage;
             _chestStorage = chestStorage;
+            _npcStorage = npcStorage;
         }
 
         public void Load(SceneData sceneData)
         {
             CreateChest(sceneData.Chest);
-            
+
             foreach (var slot in sceneData.Slots)
             {
                 int slotId = _globalIdService.GetNext();
@@ -68,11 +72,31 @@ namespace _ProjectFiles.World
 
                 itemView.SetId(itemId);
                 slotView.SetItemView(itemView);
-                
             }
+
+            foreach (var item in sceneData.QuestItems)
+                CreateWorldItem(item);
             
-                foreach (var item in sceneData.QuestItems)
-                    CreateWorldItem(item);
+            foreach (var npc in sceneData.Npcs)
+                CreateNpc(npc);
+        }
+
+        private void CreateNpc(NpcSceneData npcSceneData)
+        {
+            if (npcSceneData.Config == null)
+                return;
+
+            int npcId = _globalIdService.GetNext();
+
+            NpcModel npcModel = new NpcModel(npcId, npcSceneData.Config);
+            _npcStorage.AddState(npcModel);
+
+            NpcView npcView = UnityEngine.Object.Instantiate(
+                npcSceneData.Config.Prefab,
+                npcSceneData.Transform.position,
+                npcSceneData.Transform.rotation);
+
+            npcView.SetId(npcId);
         }
 
         private void CreateWorldItem(ItemSceneData itemSceneData)
@@ -95,7 +119,7 @@ namespace _ProjectFiles.World
         private void CreateChest(ChestSceneData sceneDataChest)
         {
             int slotId = _globalIdService.GetNext();
-            
+
             _chestStorage.AddState(new ChestModel(slotId, InteractableItemType.Chest));
         }
 

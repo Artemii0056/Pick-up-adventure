@@ -12,6 +12,7 @@ using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Items.Scripts.Inspection;
 using _ProjectFiles.Items.Scripts.Logic;
+using _ProjectFiles.NPC.Scripts.Data;
 using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.NPC.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
@@ -82,6 +83,10 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<NpcQuestService>(Lifetime.Singleton).As<INpcQuestService>();
         builder.Register<DialogueService>(Lifetime.Singleton).As<IDialogueService>();
         
+        builder.Register<NpcStorage>(Lifetime.Singleton).As<INpcStorage>();
+        builder.Register<NpcDialogueResolver>(Lifetime.Singleton).As<INpcDialogueResolver>();
+        builder.Register<NpcInteractionService>(Lifetime.Singleton).As<INpcInteractionService>();
+
         RegisterInteractionFeatures(builder);
         RegisterInteractionFactories(builder);
         RegisterStateMachine(builder);
