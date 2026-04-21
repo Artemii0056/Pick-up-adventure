@@ -1,12 +1,10 @@
-﻿using _ProjectFiles.Items.Scripts.Data;
-
-namespace _ProjectFiles.Knifes.Scripts.Data
+﻿namespace _ProjectFiles.Knifes.Scripts.Data
 {
     public class KnifeItemModel : ItemModel
     {
-        public KnifeItemModel(int id, ItemType type, int damage) : base(id, type)
+        public KnifeItemModel(int id, KnifeItemConfig config) : base(id, config)
         {
-            Damage = damage;
+            Damage = config.Damage;
         }
 
         public int Damage { get; }

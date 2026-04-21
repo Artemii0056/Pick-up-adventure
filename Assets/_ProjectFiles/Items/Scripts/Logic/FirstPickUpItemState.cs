@@ -1,7 +1,7 @@
-﻿using _ProjectFiles.Interaction.Scripts.Core;
-using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
+﻿using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.StaticDatas.Scripts;
 using _ProjectFiles.UI;
 using UnityEngine;
 using VContainer;
@@ -10,16 +10,17 @@ namespace _ProjectFiles.Items.Scripts.Logic
 {
     public class FirstPickUpItemState : IFirstPickUpItemState
     {
-        private readonly IPlayerInputReader _inputReader;
         private PickUpCanvas _pickUpCanvas;
         private Transform _currentPreview;
+        private readonly IPlayerInputReader _inputReader;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IItemTransferService _transferService;
         private readonly IItemStorage _itemStorage;
         
         private GameObject _currentPreviewInstance;
 
-        public FirstPickUpItemState(IPlayerInputReader inputReader,
+        public FirstPickUpItemState(
+            IPlayerInputReader inputReader,
             IStoragePickedUpItems storagePickedUpItems,
             IItemTransferService transferService, 
             IItemStorage itemStorage)
@@ -44,9 +45,15 @@ namespace _ProjectFiles.Items.Scripts.Logic
         {
             CurrentItemView = itemView;
             IsActive = true;
+            
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+            
+            if (itemModel == null)
+                return;
 
             _pickUpCanvas.gameObject.SetActive(true);
-            _currentPreviewInstance = _pickUpCanvas.SetInfo(itemView.Description, itemView.Prefab);
+            _currentPreviewInstance = _pickUpCanvas.SetInfo(itemModel.Config.Description, itemModel.Config.PreviewPrefab);
+            _currentPreview = _currentPreviewInstance.transform;
         }
 
         public void Hide()

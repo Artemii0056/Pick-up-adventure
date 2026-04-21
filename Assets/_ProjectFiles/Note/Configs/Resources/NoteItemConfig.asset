@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: NoteItemConfig
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Note.Script.Data.NoteItemConfig
   <Type>k__BackingField: 2
+  <Description>k__BackingField: "\"\u0410 \u044D\u0442\u043E \u0437\u0430\u043F\u0438\u0441\u043A\u0430\""
+  <PreviewPrefab>k__BackingField: {fileID: 4035144548031830163, guid: 425a07f9f7b91c842a1ca7412cd33239, type: 3}
   <Prefab>k__BackingField: {fileID: 8609604285816421029, guid: 425a07f9f7b91c842a1ca7412cd33239, type: 3}
   <Content>k__BackingField: {fileID: 11400000, guid: ddcd745f10fef85439c387f06ec3954b, type: 2}

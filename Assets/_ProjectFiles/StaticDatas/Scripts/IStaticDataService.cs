@@ -1,3 +1,5 @@
+using _ProjectFiles.Items;
+using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Knifes.Scripts.Data;
 using _ProjectFiles.Note.Script.Data;
@@ -14,5 +16,6 @@ namespace _ProjectFiles.StaticDatas.Scripts
         NoteItemConfig NoteItemConfig { get; }
         KnifeItemConfig KnifeItemConfig { get; }
         void LoadAll();
+        BaseItemConfig GetItemConfig(ItemType itemType);
     }
 }

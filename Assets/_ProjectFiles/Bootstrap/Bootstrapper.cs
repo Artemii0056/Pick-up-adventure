@@ -86,9 +86,9 @@ namespace _ProjectFiles.Bootstrap
         {
             ItemModel model = config switch
             {
-                KeyItemConfig keyConfig => new KeyItemModel(id, keyConfig.Type, keyConfig.ChestKeyType),
-                NoteItemConfig noteConfig => new NoteItemModel(id, noteConfig.Type, noteConfig.Content.Text),
-                KnifeItemConfig knifeConfig => new KnifeItemModel(id, knifeConfig.Type, knifeConfig.Damage),
+                KeyItemConfig keyConfig => new KeyItemModel(id, keyConfig),
+                NoteItemConfig noteConfig => new NoteItemModel(id, noteConfig),
+                KnifeItemConfig knifeConfig => new KnifeItemModel(id, knifeConfig),
                 _ => throw new ArgumentOutOfRangeException(nameof(config), config, "Unknown item config type")
             };
 

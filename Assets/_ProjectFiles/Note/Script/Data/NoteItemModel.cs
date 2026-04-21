@@ -1,14 +1,12 @@
-﻿using _ProjectFiles.Items.Scripts.Data;
-
-namespace _ProjectFiles.Note.Script.Data
+﻿namespace _ProjectFiles.Note.Script.Data
 {
     public class NoteItemModel : ItemModel
     {
-        public NoteItemModel(int id, ItemType type, string content) : base(id, type)
+        public NoteItemModel(int id, NoteItemConfig config) : base(id, config)
         {
-            Content = content;
+            Content = config.Content.Text;
         }
-        
-        public string Content { get; private set; }
+
+        public string Content { get; }
     }
 }

@@ -26,8 +26,6 @@ namespace _ProjectFiles.Slots.Scripts.Logic
 
         public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
-            Debug.Log("Slot");
-            
             data = default;
 
             if (interactableView is not SlotView slotView)

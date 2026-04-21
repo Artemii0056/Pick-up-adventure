@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: KnifeItemConfig
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Knifes.Scripts.Data.KnifeItemConfig
   <Type>k__BackingField: 3
+  <Description>k__BackingField: "\"\u042D\u0442\u043E \u043D\u043E\u0436\""
+  <PreviewPrefab>k__BackingField: {fileID: 8120259482461164473, guid: b3e3a00d46661dd4eb45404fc1f06443, type: 3}
   <Prefab>k__BackingField: {fileID: -573052792915412280, guid: b3e3a00d46661dd4eb45404fc1f06443, type: 3}
   <Damage>k__BackingField: 50

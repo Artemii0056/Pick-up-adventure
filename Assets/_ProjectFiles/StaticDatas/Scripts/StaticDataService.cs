@@ -1,4 +1,7 @@
-﻿using _ProjectFiles.Keys.Scripts.Data;
+﻿using System;
+using _ProjectFiles.Items;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Knifes.Scripts.Data;
 using _ProjectFiles.Note.Script.Data;
 using _ProjectFiles.Player.Scripts.Movements;
@@ -12,9 +15,9 @@ namespace _ProjectFiles.StaticDatas.Scripts
         private readonly IResourceLoader _resourceLoader;
         public  KeyItemConfig KeyItemConfig{ get; private set; }
         public  NoteItemConfig NoteItemConfig{ get; private set; }
-        public  KnifeItemConfig KnifeItemConfig{ get; private set; }
+        public  KnifeItemConfig KnifeItemConfig{ get; private set; } //TODO Пока не особо расширяемая система, подумать над расширением
         
-        public PlayerRotationConfig PlayerRotationConfig { get; private set; }
+        public PlayerRotationConfig PlayerRotationConfig { get; private set; } 
         public PlayerMovementConfig PlayerMovementConfig{ get; private set; }
         
         public StaticDataService(IResourceLoader resourceLoader)
@@ -31,6 +34,17 @@ namespace _ProjectFiles.StaticDatas.Scripts
             LoadNotePrefab();
             LoadKnifePrefab();
             LoadKeyPrefab();
+        }
+        
+        public BaseItemConfig GetItemConfig(ItemType itemType)
+        {
+            return itemType switch
+            {
+                ItemType.Key => KeyItemConfig,
+                ItemType.Note => NoteItemConfig,
+                ItemType.QuestItem => KnifeItemConfig,
+                _ => throw new ArgumentOutOfRangeException(nameof(itemType), itemType, "Unknown item type")
+            };
         }
         
         private void LoadKnifePrefab() => 
