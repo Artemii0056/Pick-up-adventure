@@ -1,9 +1,9 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
-using UnityEngine;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
@@ -15,7 +15,12 @@ namespace _ProjectFiles.Items.Scripts.Logic
         private readonly IFirstPickUpItemState _firstPickUpItemState;
         private readonly IHandService _handService;
 
-        public ItemTapInteractionFeature(IItemStorage itemStorage, IItemTransferService transferService, IStoragePickedUpItems storagePickedUpItems, IFirstPickUpItemState firstPickUpItemState, IHandService handService)
+        public ItemTapInteractionFeature(
+            IItemStorage itemStorage, 
+            IItemTransferService transferService,
+            IStoragePickedUpItems storagePickedUpItems,
+            IFirstPickUpItemState firstPickUpItemState,
+            IHandService handService)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;
@@ -54,12 +59,12 @@ namespace _ProjectFiles.Items.Scripts.Logic
         {
             if (interactableView is not ItemView itemView)
                 return;
-
+            
             ItemModel itemModel = _itemStorage.GetState(itemView.Id);
 
             if (itemModel == null)
                 return;
-
+            
             bool alreadySeen = _storagePickedUpItems.HasItem(itemModel.Id, itemModel.Type);
 
             if (alreadySeen)
@@ -70,26 +75,5 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
             _firstPickUpItemState.Show(itemView);
         }
-
-        // public void Interact(IHandService handService, InteractableView interactableView)
-        // {
-        //     if (interactableView is not ItemView itemView)
-        //         return;
-        //
-        //     ItemModel itemModel = _itemStorage.GetState(itemView.Id);
-        //     
-        //     if (_storagePickedUpItems.HasItem(itemModel.Id, itemModel.Type))
-        //     {
-        //         _transferService.TryTakeItem(handService, itemView);
-        //         return;
-        //     }
-        //     
-        //     _firstPickUpItemState.Show(itemView);
-        //     
-        //     //TODO Состояние по первому подбору
-        //     //TODO А теперь нужен сервис с подбором
-        //     
-        //     //_transferService.TryTakeItem(handService, itemView);
-        // }
     }
 }

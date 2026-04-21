@@ -1,9 +1,11 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.View;
+using UnityEngine;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
@@ -24,6 +26,8 @@ namespace _ProjectFiles.Slots.Scripts.Logic
 
         public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
+            Debug.Log("Slot");
+            
             data = default;
 
             if (interactableView is not SlotView slotView)
@@ -49,6 +53,8 @@ namespace _ProjectFiles.Slots.Scripts.Logic
 
         public void Interact(InteractableView interactableView)
         {
+            Debug.Log("Slot Interact");
+            
             if (interactableView is not SlotView slotView)
                 return;
 

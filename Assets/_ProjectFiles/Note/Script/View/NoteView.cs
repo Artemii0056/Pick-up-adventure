@@ -2,8 +2,5 @@
 
 namespace _ProjectFiles.Note.Script.View
 {
-    public class NoteView : ItemView
-    {
-    
-    }
+    public class NoteView : ItemView { }
 }

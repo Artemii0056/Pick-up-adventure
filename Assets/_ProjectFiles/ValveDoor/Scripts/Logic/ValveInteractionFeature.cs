@@ -1,9 +1,7 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.ValveDoor.Scripts.Data;
 using _ProjectFiles.ValveDoor.Scripts.View;
-using UnityEngine;
 
 namespace _ProjectFiles.ValveDoor.Scripts.Logic
 {
@@ -39,14 +37,11 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
             if (interactableView is not ValveView valveView)
                 return;
             
-            Debug.Log("ValveInteractionFeature Interact");
-
             _valveRotationService.StartRotate(valveView, valveView.Model);
         }
         
         public void StopInteract()
         {
-            Debug.Log("ValveInteractionFeature StopInteract");
             _valveRotationService.StopRotate();
         }
     }

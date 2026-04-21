@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 
@@ -38,16 +37,15 @@ namespace _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
 
-            feature.Interact(itemView);
+            _activeFeature = feature;
+            _activeFeature.Interact(itemView);
             return true;
         }
 
         public void CancelInteract()
         {
-            foreach (var features in _features.Values)
-            {
-                features.StopInteract();
-            }
+            _activeFeature?.StopInteract();
+            _activeFeature = null;
         }
     }
 }

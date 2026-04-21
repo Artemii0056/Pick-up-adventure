@@ -1,8 +1,7 @@
-﻿using _ProjectFiles.Player.Scripts.Core;
-using _ProjectFiles.Player.Scripts.Resolvers;
+﻿using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.View;
 
-namespace _ProjectFiles.Interaction.Scripts.Core
+namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
 {
     public interface IItemTransferService
     {

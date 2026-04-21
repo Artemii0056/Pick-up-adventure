@@ -5,14 +5,9 @@ namespace _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices
 {
     public interface IHoldInteractionFeatureResolver
     {
-        InteractionInputType Type { get; }
-        
-        bool TryGetInteractData(
-            InteractableView interactableView,
-            out InteractData interactData);
+        bool TryGetInteractData(InteractableView interactableView, out InteractData interactData);
 
-        bool TryInteract(
-            InteractableView interactableView);
+        bool TryInteract(InteractableView interactableView);
         
         void CancelInteract();
     }

@@ -3,6 +3,7 @@ using _ProjectFiles.Chest.Scripts.View;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Player.Scripts.Core;
 using UnityEngine;
@@ -43,9 +44,9 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (_handService.HasItem == false)
                 return false;
 
-            if (_handService.CurrentItem is not KeyModel keyModel)
+            if (_handService.CurrentItem is not KeyItemModel keyModel)
                 return false;
-
+            
             if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
                 return false;
 
@@ -73,12 +74,9 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             
             Debug.Log(_handService.CurrentItem.GetType());
             
-            if (_handService.CurrentItem is not KeyModel keyModel)
+            if (_handService.CurrentItem is not KeyItemModel keyModel)
                 return;
             
-            // if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
-            //     return;
-
             chestModel.Open();
             chestView.Open();
             _handService.Clear();

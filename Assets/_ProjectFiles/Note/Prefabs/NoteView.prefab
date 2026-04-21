@@ -234,9 +234,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Note.Script.View.NoteView
   <InteractableItemType>k__BackingField: 1
+  <InteractionInputType>k__BackingField: 1
   <ItemType>k__BackingField: 2
   <Description>k__BackingField: "\u042D\u0442\u043E \u0432\u043E\u0442 \u0442\u0430\u043A\u0430\u044F
     \u0431\u043E\u043B\u044C\u0448\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u043A\u0430"
+  <Prefab>k__BackingField: {fileID: 4035144548031830163}
 --- !u!65 &3880280082578409821
 BoxCollider:
   m_ObjectHideFlags: 0

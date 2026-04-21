@@ -1,7 +1,7 @@
-﻿namespace _ProjectFiles.Player.Scripts.Rotation
-{
-    using UnityEngine;
+﻿using UnityEngine;
 
+namespace _ProjectFiles.Player.Scripts.Rotation
+{
     namespace _ProjectFiles.Player.Scripts.Movements.Configs
     {
         [CreateAssetMenu(fileName = nameof(PlayerRotationConfig), menuName = "PlayerSettings/" + nameof(PlayerRotationConfig))]

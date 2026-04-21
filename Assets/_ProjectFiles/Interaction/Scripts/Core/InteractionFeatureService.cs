@@ -13,8 +13,6 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         private readonly ITapInteractionFeatureResolver _tapResolver;
         private readonly IHoldInteractionFeatureResolver _holdResolver;
         
-       // private readonly Dictionary<InteractionInputType, IInteractionInputExecutor> _executors;
-
         public InteractionFeatureService(InfoKeyView keyView,
             IHoldInteractionFeatureResolver holdResolver,
             ITapInteractionFeatureResolver tapResolver)
@@ -26,21 +24,13 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 
         public void Interact(IHandService handService, InteractableView itemView)
         {
-            // if (itemView == null)
-            //     return;
-            //
-            // if (_executors.TryGetValue(itemView.InteractionInputType, out var executor) == false)
-            //     return;
-            //
-            // executor.TryStartInteraction(handService, itemView);
-            
             if (itemView == null)
                 return;
             
-            switch (itemView.InteractionInputType) //TODO Вроде как пофиксил и можно под один интерфейс пихнуть 
+            switch (itemView.InteractionInputType) 
             {
                 case InteractionInputType.Tap:
-                    _tapResolver.TryInteract(handService, itemView);
+                    _tapResolver.TryInteract(itemView);
                     break;
             
                 case InteractionInputType.Hold:
@@ -49,10 +39,8 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             }
         }
 
-        public void Cancel()
-        {
+        public void Cancel() => 
             _holdResolver.CancelInteract();
-        }
 
         public void ShowViewData(IHandService handService, InteractableView itemView)
         {
@@ -85,7 +73,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         {
             interactData = default;
 
-            if (_tapResolver.TryGetInteractData(handService, itemView, out interactData))
+            if (_tapResolver.TryGetInteractData(itemView, out interactData))
                 return true;
 
             if (_holdResolver.TryGetInteractData(itemView, out interactData))

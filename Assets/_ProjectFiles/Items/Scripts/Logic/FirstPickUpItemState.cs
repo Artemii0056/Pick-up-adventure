@@ -1,5 +1,5 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core;
-using _ProjectFiles.Player.Scripts.Core;
+using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.UI;
@@ -19,7 +19,10 @@ namespace _ProjectFiles.Items.Scripts.Logic
         
         private GameObject _currentPreviewInstance;
 
-        public FirstPickUpItemState(IPlayerInputReader inputReader, IStoragePickedUpItems storagePickedUpItems, IItemTransferService transferService, IItemStorage itemStorage)
+        public FirstPickUpItemState(IPlayerInputReader inputReader,
+            IStoragePickedUpItems storagePickedUpItems,
+            IItemTransferService transferService, 
+            IItemStorage itemStorage)
         {
             _inputReader = inputReader;
             _storagePickedUpItems = storagePickedUpItems;
@@ -40,7 +43,6 @@ namespace _ProjectFiles.Items.Scripts.Logic
         public void Show(ItemView itemView)
         {
             CurrentItemView = itemView;
-            Debug.Log("Show");
             IsActive = true;
 
             _pickUpCanvas.gameObject.SetActive(true);

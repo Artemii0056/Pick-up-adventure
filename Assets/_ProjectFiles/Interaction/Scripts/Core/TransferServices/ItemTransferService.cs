@@ -6,7 +6,7 @@ using _ProjectFiles.Slots.Scripts.Logic;
 using _ProjectFiles.Slots.Scripts.View;
 using UnityEngine;
 
-namespace _ProjectFiles.Interaction.Scripts.Core
+namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
 {
     public class ItemTransferService : IItemTransferService
     {
@@ -16,21 +16,26 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IHandService _handService;
 
-        public ItemTransferService(ISlotStorage slotStorage, IItemStorage itemStorage, PlayerHandView handView, IStoragePickedUpItems storagePickedUpItems)
+        public ItemTransferService(ISlotStorage slotStorage,
+            IItemStorage itemStorage,
+            PlayerHandView handView,
+            IStoragePickedUpItems storagePickedUpItems,
+            IHandService handService)
         {
             _slotStorage = slotStorage;
             _itemStorage = itemStorage;
             _handView = handView;
             _storagePickedUpItems = storagePickedUpItems;
+            _handService = handService;
         }
 
         public bool TryTakeItem(ItemView itemView)
         {
             if (_handService.HasItem)
                 return false;
-
-            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
             
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
+
             if (itemModel == null)
                 return false;
 
@@ -54,12 +59,13 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 
             ItemModel itemModel = _handService.CurrentItem;
             ItemView itemView = _handService.CurrentItemView;
-
+            
             if (_slotStorage.TryGetState(slotView.Id, out var slotModel) == false)
                 return false;
 
             if (!slotModel.CanPlace(itemModel))
                 return false;
+
 
             slotModel.Place(itemModel);
             slotView.SetItemView(itemView);

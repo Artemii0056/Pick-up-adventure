@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using _ProjectFiles.Chest.Scripts.Data;
+﻿using System.Collections.Generic;
 using _ProjectFiles.Chest.Scripts.View;
-using _ProjectFiles.Interaction.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Keys.Scripts.View;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation;
 using _ProjectFiles.Player.Scripts.View;
-using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.View;
 using _ProjectFiles.UI;
 using UnityEngine;
@@ -33,10 +28,6 @@ namespace _ProjectFiles.Player.Scripts.Core
 
         public List<SlotView> Slots;
 
-        private ISlotModelFactory _slotModelFactory;
-        private IKeyModelFactory _keyModelFactory;
-        private IChestModelFactory _chestModelFactor;
-
         private IPlayerInteractionController _playerInteractionController;
 
         private IPlayerRotator _playerRotator;
@@ -44,18 +35,12 @@ namespace _ProjectFiles.Player.Scripts.Core
         private IPlayerInputReader _playerInputReader;
 
         [Inject]
-        public void Constructor(ISlotModelFactory slotModelFactory,
-            IKeyModelFactory keyModelFactory,
-            IChestModelFactory chestModelFactor,
+        public void Constructor(
             IPlayerRotator playerRotator,
             IPlayerMover playerMover,
             IPlayerInteractionController playerInteractionController,
             IPlayerInputReader playerInputReader)
         {
-            _slotModelFactory = slotModelFactory;
-            _keyModelFactory = keyModelFactory;
-            _chestModelFactor = chestModelFactor;
-
             _playerInteractionController = playerInteractionController;
 
             _playerRotator = playerRotator;
@@ -75,13 +60,6 @@ namespace _ProjectFiles.Player.Scripts.Core
             _playerInteractionController.SetLayer(_layerMask);
             _playerInteractionController.Start();
 
-            // foreach (var slot2 in Slots)
-            // {
-            //     _slotModelFactory.Create(slot2.SlotRuleType, slot2.Id); //Сюда нужно передать id предмета, а не слота
-            // }
-
-            _keyModelFactory.CreateKeyModel(_keyItemView.Id, _keyItemView.ItemType, ChestKeyType.None);
-            _chestModelFactor.CreateKeyModel(_chestItemView.Id, InteractableItemType.Chest);
         }
 
         private void OnDisable()

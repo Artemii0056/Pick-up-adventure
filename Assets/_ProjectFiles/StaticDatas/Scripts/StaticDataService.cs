@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using _ProjectFiles.Chest.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.View;
+﻿using _ProjectFiles.Keys.Scripts.Data;
+using _ProjectFiles.Knifes.Scripts.Data;
+using _ProjectFiles.Note.Script.Data;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation._ProjectFiles.Player.Scripts.Movements.Configs;
 using _ProjectFiles.ResourceLoader.Scripts;
-using Unity.VisualScripting;
-using UnityEngine;
 
 namespace _ProjectFiles.StaticDatas.Scripts
 {
     public class StaticDataService : IStaticDataService
     {
         private readonly IResourceLoader _resourceLoader;
-        private List<KeyConfig> _keyConfigs;
-
+        public  KeyItemConfig KeyItemConfig{ get; private set; }
+        public  NoteItemConfig NoteItemConfig{ get; private set; }
+        public  KnifeItemConfig KnifeItemConfig{ get; private set; }
+        
         public PlayerRotationConfig PlayerRotationConfig { get; private set; }
         public PlayerMovementConfig PlayerMovementConfig{ get; private set; }
         
@@ -29,27 +27,25 @@ namespace _ProjectFiles.StaticDatas.Scripts
         {
             LoadRotationConfig();
             LoadMovementConfig();
-            LoadKeysPrefab();
-        }
 
-        public KeyConfig GetKeyByType(ChestKeyType type)
-        {
-            foreach (var config in _keyConfigs)
-            {
-                if (config.KeyView.ChestKeyType == type)
-                    return config;
-            }
-            
-            throw new KeyNotFoundException($"Chest key type {type} not found");
+            LoadNotePrefab();
+            LoadKnifePrefab();
+            LoadKeyPrefab();
         }
+        
+        private void LoadKnifePrefab() => 
+            KnifeItemConfig = _resourceLoader.Load<KnifeItemConfig>("KnifeItemConfig"); //TODO В константы
+        
+        private void LoadKeyPrefab() => 
+            KeyItemConfig = _resourceLoader.Load<KeyItemConfig>("KeyItemConfig");
 
-        private void LoadKeysPrefab() => 
-            _keyConfigs = _resourceLoader.LoadAll<KeyConfig>("KeysConfigs").ToList();
+        private void LoadNotePrefab() => 
+            NoteItemConfig = _resourceLoader.Load<NoteItemConfig>("NoteItemConfig");
 
         private void LoadRotationConfig() => 
-            PlayerRotationConfig = _resourceLoader.Load<PlayerRotationConfig>("PlayerRotationConfig"); //TODO В Константу
+            PlayerRotationConfig = _resourceLoader.Load<PlayerRotationConfig>(Constants.PlayerRotationConfigPath); 
 
         private void LoadMovementConfig() => 
-            PlayerMovementConfig = _resourceLoader.Load<PlayerMovementConfig>("PlayerMovementConfig");
+            PlayerMovementConfig = _resourceLoader.Load<PlayerMovementConfig>(Constants.PlayerMovementConfigPath);
     }
 }

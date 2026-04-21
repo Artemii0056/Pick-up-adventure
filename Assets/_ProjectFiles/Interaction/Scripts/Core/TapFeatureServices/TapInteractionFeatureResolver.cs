@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
-using _ProjectFiles.Player.Scripts.Core;
-using _ProjectFiles.UI;
 
 namespace _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices
 {
@@ -19,9 +16,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices
                 _features[feature.Type] = feature;
         }
 
-        public InteractionInputType Type => InteractionInputType.Tap;
-
-        public bool TryGetInteractData(IHandService handService, InteractableView itemView, out InteractData interactData)
+        public bool TryGetInteractData(InteractableView itemView, out InteractData interactData)
         {
             interactData = default;
 
@@ -31,11 +26,11 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices
             return feature.TryGetInteractData(itemView, out interactData);
         }
 
-        public bool TryInteract(IHandService handService, InteractableView itemView)
+        public bool TryInteract(InteractableView itemView)
         {
             if (!_features.TryGetValue(itemView.InteractableItemType, out var feature))
                 return false;
-
+            
             feature.Interact(itemView);
             return true;
         }
