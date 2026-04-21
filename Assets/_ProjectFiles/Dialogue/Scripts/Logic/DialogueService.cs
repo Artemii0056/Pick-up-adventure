@@ -62,6 +62,8 @@ namespace _ProjectFiles.Dialogue.Scripts.Logic
             Cursor.visible = false;
 
             _dialogueCanvas.Hide();
+            _dialogueCanvas.UpdateQuest(_questService.GetQuestText(), _questService.HasActiveQuest);
+
             DialogueClosed?.Invoke();
         }
 
@@ -75,7 +77,6 @@ namespace _ProjectFiles.Dialogue.Scripts.Logic
                 return;
 
             DialogueNode node = _currentConfig.GetNode(nodeId);
-
             if (node == null)
             {
                 Debug.LogError($"Dialogue node not found: {nodeId}");
@@ -84,32 +85,43 @@ namespace _ProjectFiles.Dialogue.Scripts.Logic
 
             CurrentNode = node;
 
-            ExecuteAction(node.Action);
-
-            if (!IsActive || CurrentNode == null)
+            if (TryExecuteActionAndRedirect(node))
                 return;
 
             _dialogueCanvas.SetNode(CurrentNode, SelectChoice, Close);
             _dialogueCanvas.UpdateQuest(_questService.GetQuestText(), _questService.HasActiveQuest);
-
             NodeChanged?.Invoke(CurrentNode);
         }
 
-        private void ExecuteAction(DialogueNodeAction action)
+        private bool TryExecuteActionAndRedirect(DialogueNode node)
         {
-            switch (action)
+            switch (node.Action)
             {
                 case DialogueNodeAction.None:
-                    break;
+                    return false;
 
                 case DialogueNodeAction.StartFetchQuest:
                     _questService.StartQuest();
-                    break;
+                    _dialogueCanvas.UpdateQuest(_questService.GetQuestText(), _questService.HasActiveQuest);
+                    return false;
 
                 case DialogueNodeAction.TryCompleteFetchQuest:
                     bool success = _questService.TryCompleteQuest();
-                    MoveToNode(success ? "success_end" : "fail_end");
-                    break;
+                    _dialogueCanvas.UpdateQuest(_questService.GetQuestText(), _questService.HasActiveQuest);
+
+                    string nextNodeId = success ? node.SuccessNextNodeId : node.FailNextNodeId;
+
+                    if (string.IsNullOrWhiteSpace(nextNodeId))
+                    {
+                        Debug.LogError($"Next node is not configured for action on node {node.Id}");
+                        return false;
+                    }
+
+                    MoveToNode(nextNodeId);
+                    return true;
+
+                default:
+                    return false;
             }
         }
     }

@@ -14,6 +14,10 @@ namespace _ProjectFiles.Dialogue.Scripts.Data
 
         public bool IsEnd;
         public DialogueNodeAction Action;
-        public  List<DialogueChoice> Choices;
+
+        public string SuccessNextNodeId;
+        public string FailNextNodeId;
+
+        public List<DialogueChoice> Choices;
     }
 }

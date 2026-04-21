@@ -43,8 +43,8 @@ namespace _ProjectFiles.Dialogue
             ClearChoices();
             _closeButton.gameObject.SetActive(false);
 
-            if (_questRoot != null)
-                _questRoot.SetActive(false);
+            // ВАЖНО:
+            // квестовый UI не прячем тут
         }
 
         public void SetNode(DialogueNode node, Action<int> onChoiceSelected, Action onClose)
@@ -76,19 +76,22 @@ namespace _ProjectFiles.Dialogue
 
         public void UpdateQuest(string text, bool show)
         {
-            if (_questRoot == null || _questText == null)
+            if (_questRoot == null)
                 return;
 
             _questRoot.SetActive(show);
 
-            if (show)
+            if (_questText != null)
                 _questText.text = text;
         }
 
         private void ClearChoices()
         {
             foreach (Button button in _spawnedButtons)
-                Destroy(button.gameObject);
+            {
+                if (button != null)
+                    Destroy(button.gameObject);
+            }
 
             _spawnedButtons.Clear();
         }
