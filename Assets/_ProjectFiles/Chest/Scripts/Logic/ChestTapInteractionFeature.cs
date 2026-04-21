@@ -40,22 +40,18 @@ namespace _ProjectFiles.Chest.Scripts.Logic
 
             if (chestModel.IsOpened)
                 return false;
-
-            if (_handService.HasItem == false)
-                return false;
-
-            if (_handService.CurrentItem is not KeyItemModel keyModel)
-                return false;
             
-            if (keyModel.ChestKeyType != chestModel.ReqiereKeyType)
-                return false;
-
+            bool canInteract =
+                _handService.HasItem &&
+                _handService.CurrentItem is KeyItemModel keyModel &&
+                keyModel.ChestKeyType == chestModel.ReqiereKeyType;
+            
             data = new InteractData
             {
                 CanInteract = true,
                 ActionName = "Открыть"
             };
-
+            
             return true;
         }
 

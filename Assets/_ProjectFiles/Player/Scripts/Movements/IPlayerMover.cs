@@ -6,5 +6,7 @@ namespace _ProjectFiles.Player.Scripts.Movements
     {
         void Tick();
         void Init(Transform playerTransform, CharacterController characterController);
+        void Activate();
+        void Deactivate();
     }
 }

@@ -3,12 +3,10 @@ using UnityEngine;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
-    public interface IFirstPickUpItemState
+    public interface IFirstPickUpItemFlow
     {
         void Show( ItemView itemView);
-        bool IsActive { get; set; }
-        ItemView CurrentItemView { get; set; }
+        bool IsActive { get;  }
         void Hide();
-        void Tick();
     }
 }

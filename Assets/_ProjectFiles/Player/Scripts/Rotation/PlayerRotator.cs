@@ -8,6 +8,7 @@ namespace _ProjectFiles.Player.Scripts.Rotation
     public class PlayerRotator : IPlayerRotator
     {
         private readonly IPlayerInputReader _inputReader;
+        
         private float _pitch;
 
         private readonly float _lookSensitivity;

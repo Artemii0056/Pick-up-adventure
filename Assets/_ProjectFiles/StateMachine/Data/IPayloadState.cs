@@ -1,4 +1,4 @@
-namespace _ProjectFiles.StateMachine.States
+namespace _ProjectFiles.StateMachine.Data
 {
     public interface IPayloadState<TPayload> : IExitableState
     {

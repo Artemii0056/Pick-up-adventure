@@ -21,6 +21,7 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
         public Vector2 LookValue { get; private set; }
 
         public bool InteractHeld { get; private set; }
+        public bool MouseHeld { get; private set; }
 
         public void OnEnable()
         {
@@ -34,6 +35,9 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
 
             _input.Player.Interact.started += OnInteractStarted;
             _input.Player.Interact.canceled += OnInteractCanceled;
+            
+            _input.Player.MouseHold.started += OnMouseStarted;
+            _input.Player.MouseHold.canceled += OnMouseCanceled;
         }
 
         public void OnDisable()
@@ -46,6 +50,9 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
 
             _input.Player.Interact.started -= OnInteractStarted;
             _input.Player.Interact.canceled -= OnInteractCanceled;
+            
+            _input.Player.MouseHold.started -= OnMouseStarted;
+            _input.Player.MouseHold.canceled -= OnMouseCanceled;
 
             _input.Disable();
         }
@@ -53,6 +60,16 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
         private void OnMovePerformed(InputAction.CallbackContext context)
         {
             MoveValue = context.ReadValue<Vector2>();
+        }
+        
+        private void OnMouseStarted(InputAction.CallbackContext context)
+        {
+            MouseHeld = true;
+        }
+        
+        private void OnMouseCanceled(InputAction.CallbackContext context)
+        {
+            MouseHeld = false;
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext context)

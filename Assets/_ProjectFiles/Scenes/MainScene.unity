@@ -345,6 +345,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1823053696274813177, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 193352669}
+    - targetCorrespondingSourceObject: {fileID: 1823053696274813177, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 193352675}
   m_SourcePrefab: {fileID: 100100000, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
 --- !u!1 &193352664 stripped
 GameObject:
@@ -371,12 +374,6 @@ MonoBehaviour:
   _keyItemView: {fileID: 1829547885}
   _chestItemView: {fileID: 823612482}
   _characterController: {fileID: 193352673}
-  Slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!143 &193352673 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 5019237877358924180, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
@@ -387,6 +384,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1752138326071659798, guid: de895c176eceb8d4e920b51963ed84dc, type: 3}
   m_PrefabInstance: {fileID: 180843671}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &193352675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193352664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1a455113a5452b8b2378a16fd1c288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.PlayerTransformRoot
+  _transform: {fileID: 193352674}
 --- !u!1001 &201746530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1097,7 +1107,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
       propertyPath: m_Name
-      value: Animated PBR Chest _Wood_Demo
+      value: Chest
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
       propertyPath: m_Layer
@@ -1205,7 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Chest
   <InteractableItemType>k__BackingField: 2
-  <InteractionInputType>k__BackingField: 0
+  <InteractionInputType>k__BackingField: 1
   <KeyType>k__BackingField: 1
 --- !u!1 &824742489
 GameObject:
@@ -2674,6 +2684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.Bootstrap.Bootstrapper
   _data: {fileID: 1720487448}
+  _playerRoot: {fileID: 193352674}
 --- !u!114 &1720487448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2702,6 +2713,8 @@ MonoBehaviour:
   - SlotPrefab: {fileID: 3422614240515845873, guid: ee147a41e9bd92c49b9881fc62f1ed8c, type: 3}
     Position: {fileID: 977590186}
     ItemConfig: {fileID: 0}
+  _chest:
+    <ChestView>k__BackingField: {fileID: 823612482}
 --- !u!1 &1720509679
 GameObject:
   m_ObjectHideFlags: 0

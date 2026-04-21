@@ -12,18 +12,9 @@ namespace _ProjectFiles.Slots.Scripts.View
 
         public ItemView CurrentItemView { get; private set; }
 
-        public bool IsEmpty => CurrentItemView == null;
-
         public void SetItemView(ItemView itemView)
         {
             CurrentItemView = itemView;
-        }
-
-        public ItemView RemoveItemView()
-        {
-            var itemView = CurrentItemView;
-            CurrentItemView = null;
-            return itemView;
         }
     }
 }

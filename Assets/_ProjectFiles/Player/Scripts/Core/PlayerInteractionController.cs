@@ -9,8 +9,8 @@ namespace _ProjectFiles.Player.Scripts.Core
     public class PlayerInteractionController : IPlayerInteractionController
     {
         private readonly IPlayerInputReader _playerInputReader;
-        private readonly IInteractionTargetResolver _interactionTargetResolver;
         private readonly IHandService _handService;
+        private readonly IInteractionTargetResolver _interactionTargetResolver;
         private readonly IInteractionFeatureService _interactionFeatureService;
         
         private LayerMask _interactionLayerMask;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _ProjectFiles.Chest.Scripts.View
 {
-    public class ChestView : InteractableView
+    public class ChestView : InteractableView //TODO Разделить на вьюшку и конфиг
     {
        [field: SerializeField] public ChestKeyType KeyType { get; private set; }
 

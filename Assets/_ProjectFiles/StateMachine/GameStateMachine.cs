@@ -5,5 +5,9 @@
         public GameStateMachine(IStateFactory stateFactory) : base(stateFactory)
         {
         }
+
+        public void Tick()
+        {
+        }
     }
 }

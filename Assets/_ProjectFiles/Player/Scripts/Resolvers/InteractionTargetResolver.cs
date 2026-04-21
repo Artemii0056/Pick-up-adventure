@@ -32,9 +32,4 @@ namespace _ProjectFiles.Player.Scripts.Resolvers
             return true;
         }
     }
-
-    public interface IInteractionTargetResolver
-    {
-        bool TryResolveTarget(Camera camera, float distance, LayerMask layerMask, out InteractableView entity);
-    }
 }

@@ -1,19 +1,18 @@
 ﻿using System;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using UnityEditor;
+using UnityEngine;
+using Object = System.Object;
 
 namespace _ProjectFiles.Player.Scripts.Core
 {
     public class PlayerHandService : IHandService
     {
         private readonly PlayerHandModel _playerHandModel;
-        private IItemStorage _itemStorage;
 
-        public PlayerHandService(IItemStorage itemStorage)
-        {
+        public PlayerHandService() => 
             _playerHandModel = new PlayerHandModel();
-            _itemStorage = itemStorage;
-        }
 
         public ItemView CurrentItemView { get; private set; }
 
@@ -33,6 +32,8 @@ namespace _ProjectFiles.Player.Scripts.Core
         public void Clear()
         {
             _playerHandModel.Clear();
+            
+            UnityEngine.Object.Destroy(CurrentItemView.gameObject);
         }
     }
 }

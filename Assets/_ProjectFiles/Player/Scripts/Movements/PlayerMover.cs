@@ -9,11 +9,13 @@ namespace _ProjectFiles.Player.Scripts.Movements
         private readonly IPlayerInputReader _inputReader;
         private CharacterController _characterController;
 
-        private float _moveSpeed;
-        private float _gravity;
+        private readonly float _moveSpeed;
+        private readonly float _gravity;
 
         private float _verticalVelocity;
         private Transform _playerTransform;
+        
+        private bool _isActive;
 
         public PlayerMover(
             IPlayerInputReader inputReader,
@@ -25,6 +27,8 @@ namespace _ProjectFiles.Player.Scripts.Movements
             _gravity = config.Gravity;
             
             _inputReader = inputReader;
+
+            _isActive = true;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -39,6 +43,9 @@ namespace _ProjectFiles.Player.Scripts.Movements
 
         public void Tick()
         {
+            if (_isActive == false)
+                return;
+            
             Vector2 moveInput = _inputReader.MoveValue;
 
             Vector3 moveDirection = _playerTransform.right * moveInput.x + _playerTransform.forward * moveInput.y;
@@ -54,5 +61,11 @@ namespace _ProjectFiles.Player.Scripts.Movements
 
             _characterController.Move(velocity * Time.deltaTime);
         }
+
+        public void Activate() => 
+            _isActive = true;
+
+        public void Deactivate() => 
+            _isActive = false;
     }
 }

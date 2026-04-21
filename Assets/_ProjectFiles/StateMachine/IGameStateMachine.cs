@@ -2,6 +2,6 @@
 {
     public interface IGameStateMachine : IStateMachine
     {
-        
+        void Tick();
     }
 }

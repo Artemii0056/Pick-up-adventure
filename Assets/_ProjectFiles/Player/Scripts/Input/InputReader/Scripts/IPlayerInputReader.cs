@@ -8,6 +8,7 @@ namespace _ProjectFiles.Player.Scripts.Input.InputReader.Scripts
         Vector2 MoveValue { get; }
         Vector2 LookValue { get; }
         bool InteractHeld { get; }
+        bool MouseHeld { get; }
         event Action InteractStarted;
         event Action InteractCanceled;
         void OnEnable();

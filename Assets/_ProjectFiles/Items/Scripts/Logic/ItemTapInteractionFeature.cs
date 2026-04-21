@@ -4,6 +4,8 @@ using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Resolvers;
+using _ProjectFiles.StateMachine;
+using _ProjectFiles.StateMachine.States;
 
 namespace _ProjectFiles.Items.Scripts.Logic
 {
@@ -12,21 +14,23 @@ namespace _ProjectFiles.Items.Scripts.Logic
         private readonly IItemStorage _itemStorage;
         private readonly IItemTransferService _transferService;
         private readonly IStoragePickedUpItems _storagePickedUpItems;
-        private readonly IFirstPickUpItemState _firstPickUpItemState;
+        private readonly IFirstPickUpItemFlow _firstPickUpItemFlow;
         private readonly IHandService _handService;
+        private readonly IStateMachine _stateMachine;
 
         public ItemTapInteractionFeature(
             IItemStorage itemStorage, 
             IItemTransferService transferService,
             IStoragePickedUpItems storagePickedUpItems,
-            IFirstPickUpItemState firstPickUpItemState,
-            IHandService handService)
+            IFirstPickUpItemFlow firstPickUpItemFlow,
+            IHandService handService, IStateMachine stateMachine)
         {
             _itemStorage = itemStorage;
             _transferService = transferService;
             _storagePickedUpItems = storagePickedUpItems;
-            _firstPickUpItemState = firstPickUpItemState;
+            _firstPickUpItemFlow = firstPickUpItemFlow;
             _handService = handService;
+            _stateMachine = stateMachine;
         }
 
         public InteractableItemType Type => InteractableItemType.Item;
@@ -73,7 +77,8 @@ namespace _ProjectFiles.Items.Scripts.Logic
                 return;
             }
 
-            _firstPickUpItemState.Show(itemView);
+            _stateMachine.Enter<FirstPickUpState, ItemView>(itemView);
+            _firstPickUpItemFlow.Show(itemView);
         }
     }
 }

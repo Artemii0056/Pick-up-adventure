@@ -1,21 +1,16 @@
-﻿using _ProjectFiles.StaticDatas.Scripts;
+﻿using _ProjectFiles.StateMachine.Data;
 
 namespace _ProjectFiles.StateMachine.States
 {
     public class BootstrapState : IState
     {
         private readonly IGameStateMachine _gameStateMachine;
-        private readonly IStaticDataService _staticDataService;
 
-        public BootstrapState(IGameStateMachine gameStateMachine, IStaticDataService staticDataService)
-        {
+        public BootstrapState(IGameStateMachine gameStateMachine) => 
             _gameStateMachine = gameStateMachine;
-            _staticDataService = staticDataService;
-        }
 
         public void Enter()
         {
-            _staticDataService.LoadAll();
             _gameStateMachine.Enter<LoadState>();
         }
 

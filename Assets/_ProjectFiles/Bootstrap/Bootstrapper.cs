@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using _ProjectFiles.GlobalId.Scripts;
-using _ProjectFiles.Items;
-using _ProjectFiles.Items.Scripts.Logic;
-using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Knifes.Scripts.Data;
-using _ProjectFiles.Note.Script.Data;
-using _ProjectFiles.Player.Scripts.Resolvers;
-using _ProjectFiles.Slots.Scripts.Data;
-using _ProjectFiles.Slots.Scripts.View;
-using _ProjectFiles.StaticDatas.Scripts;
+﻿using _ProjectFiles.Player.Scripts.Movements;
+using _ProjectFiles.StateMachine;
+using _ProjectFiles.StateMachine.States;
 using UnityEngine;
 using VContainer;
 
@@ -19,92 +10,39 @@ namespace _ProjectFiles.Bootstrap
     {
         [SerializeField] private SceneData _data;
         
-        private ISlotModelFactory _slotModelFactory;
-        private IGlobalIdService _globalIdService;
-        private IFirstPickUpItemState _firstPickUpItemState;
+        [SerializeField] private Transform _playerRoot;
+
+        private IGameStateMachine _gameStateMachine;
         private IValveRotationService _valveRotationService;
-        private  IItemStorage _itemStorage;
+        private IActiveLookRotation _activeLookRotation;
+        private IPlayerMover _playerMover;
 
         [Inject]
         public void Init(
-            ISlotModelFactory slotModelFactory, 
-            IGlobalIdService globalIdService,
-            IFirstPickUpItemState firstPickUpItemState,
-            IValveRotationService valveRotationService, 
-            IItemStorage itemStorage)
+            IGameStateMachine gameStateMachine,
+            IValveRotationService valveRotationService,
+            IActiveLookRotation activeLookRotation,
+            IPlayerMover playerMover)
         {
-            _slotModelFactory = slotModelFactory;
-            _globalIdService = globalIdService;
-            _firstPickUpItemState = firstPickUpItemState;
+            _gameStateMachine = gameStateMachine;
             _valveRotationService = valveRotationService;
-            _itemStorage = itemStorage;
-
+            _activeLookRotation = activeLookRotation;
+            _playerMover = playerMover;
         }
+
+        public SceneData SceneData => _data;
 
         private void Start()
         {
-            Load(_data);
-
+            _gameStateMachine.Enter<BootstrapState>();
         }
 
-        public void Load(SceneData data)
+        private void Update()
         {
-            foreach (var slot in data.Slots)
-            {
-                int slotId = _globalIdService.GetNext();
-
-                SlotView slotView = Instantiate(
-                    slot.SlotPrefab,
-                    slot.Position.position,
-                    slot.Position.rotation);
-
-                slotView.SetId(slotId);
-
-                if (slot.ItemConfig == null)
-                {
-                    _slotModelFactory.Create(SlotRuleType.Universal, slotId);
-                    continue;
-                }
-
-                int itemId = _globalIdService.GetNext();
-
-                ItemModel itemModel = Create(itemId, slot.ItemConfig);
-                _slotModelFactory.Create(slotId, itemModel);
-
-                ItemView itemView = Instantiate(
-                    slot.ItemConfig.Prefab,
-                    slotView.ItemAnchor.position,
-                    slotView.ItemAnchor.rotation,
-                    slotView.ItemAnchor);
-
-                itemView.SetId(itemId);
-                slotView.SetItemView(itemView);
-            }
-        }
-        
-        public ItemModel Create(int id, BaseItemConfig config)
-        {
-            ItemModel model = config switch
-            {
-                KeyItemConfig keyConfig => new KeyItemModel(id, keyConfig),
-                NoteItemConfig noteConfig => new NoteItemModel(id, noteConfig),
-                KnifeItemConfig knifeConfig => new KnifeItemModel(id, knifeConfig),
-                _ => throw new ArgumentOutOfRangeException(nameof(config), config, "Unknown item config type")
-            };
-
-            _itemStorage.AddState(model);
-            return model;
-        }
-        
-
-        private void Update() //TODO На тест
-        {
-            if (_firstPickUpItemState.IsActive)
-            {
-                _firstPickUpItemState.Tick();
-            }
-            
+            _gameStateMachine.Tick();
             _valveRotationService.Tick();
+            _activeLookRotation.Tick();
+            _playerMover.Tick();
         }
     }
 }

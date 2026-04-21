@@ -8,8 +8,6 @@ using _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Items.Scripts.Logic;
-using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Note.Script.Data;
 using _ProjectFiles.NPC.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
@@ -21,6 +19,9 @@ using _ProjectFiles.Player.Scripts.View;
 using _ProjectFiles.ResourceLoader.Scripts;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.Logic;
+using _ProjectFiles.StateMachine;
+using _ProjectFiles.StateMachine.Data;
+using _ProjectFiles.StateMachine.States;
 using _ProjectFiles.StaticDatas.Scripts;
 using _ProjectFiles.UI;
 using _ProjectFiles.ValveDoor.Scripts.Logic;
@@ -36,6 +37,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<InfoKeyView>();
         builder.RegisterComponentInHierarchy<Bootstrapper>();
         builder.RegisterComponentInHierarchy<PickUpCanvas>();
+        builder.RegisterComponentInHierarchy<PlayerTransformRoot>();
         
         
         
@@ -60,11 +62,29 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<GlobalIdService>(Lifetime.Singleton).As<IGlobalIdService>();
         builder.Register<StoragePickedUpItems>(Lifetime.Singleton).As<IStoragePickedUpItems>();
         
-        builder.Register<FirstPickUpItemState>(Lifetime.Singleton).As<IFirstPickUpItemState>();
+        builder.Register<FirstPickUpFlow>(Lifetime.Singleton).As<IFirstPickUpItemFlow>();
+        builder.Register<WorldLoader>(Lifetime.Singleton).As<IWorldLoader>();
         
-
+        builder.Register<ActiveLookRotation>(Lifetime.Singleton).As<IActiveLookRotation>();
+        
+        builder.Register<PlayerLookRotationHandler>(Lifetime.Singleton);
+        builder.Register<InspectItemRotationHandler>(Lifetime.Singleton);
+        
         RegisterInteractionFeatures(builder);
         RegisterInteractionFactories(builder);
+        RegisterStateMachine(builder);
+    }
+
+    private void RegisterStateMachine(IContainerBuilder builder)
+    {
+        builder.Register<GameStateMachine>(Lifetime.Singleton).As<IGameStateMachine>().As<IStateMachine>();
+        builder.Register<StateFactory>(Lifetime.Singleton).As<IStateFactory>();
+
+        builder.Register<BootstrapState>(Lifetime.Singleton);
+        builder.Register<LoadState>(Lifetime.Singleton);
+        builder.Register<GamePlayState>(Lifetime.Singleton);
+        builder.Register<FirstPickUpState>(Lifetime.Singleton);
+        builder.Register<DialogState>(Lifetime.Singleton);
     }
 
     private void RegisterInteractionFeatures(IContainerBuilder builder)

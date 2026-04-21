@@ -26,8 +26,6 @@ namespace _ProjectFiles.Player.Scripts.Core
 
         [SerializeField] private CharacterController _characterController;
 
-        public List<SlotView> Slots;
-
         private IPlayerInteractionController _playerInteractionController;
 
         private IPlayerRotator _playerRotator;
@@ -71,8 +69,8 @@ namespace _ProjectFiles.Player.Scripts.Core
         private void Update()
         {
             _playerInteractionController.Tick();
-            _playerRotator.Tick();
-            _playerMover.Tick();
+            // _playerRotator.Tick();
+            // _playerMover.Tick();
         }
     }
 }
