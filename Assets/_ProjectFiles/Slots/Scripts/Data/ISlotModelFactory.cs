@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.Slots.Scripts.View;
+﻿using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Slots.Scripts.View;
 using UnityEngine;
 
 namespace _ProjectFiles.Slots.Scripts.Data

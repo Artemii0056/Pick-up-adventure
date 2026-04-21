@@ -1,6 +1,8 @@
-﻿using _ProjectFiles.Player.Scripts.Movements;
+﻿using _ProjectFiles.Player.Scripts.LookRotation;
+using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.StateMachine;
 using _ProjectFiles.StateMachine.States;
+using _ProjectFiles.ValveDoor.Scripts.Logic;
 using UnityEngine;
 using VContainer;
 

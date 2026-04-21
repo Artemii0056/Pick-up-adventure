@@ -1,4 +1,5 @@
-﻿using _ProjectFiles.StateMachine.Data;
+﻿using _ProjectFiles.Player.Scripts.LookRotation;
+using _ProjectFiles.StateMachine.Data;
 
 namespace _ProjectFiles.StateMachine.States
 {

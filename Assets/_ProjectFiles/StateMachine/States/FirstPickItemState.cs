@@ -1,4 +1,6 @@
-﻿using _ProjectFiles.Items.Scripts.Logic;
+﻿using _ProjectFiles.Items.Scripts.Inspection;
+using _ProjectFiles.Items.Scripts.Logic;
+using _ProjectFiles.Player.Scripts.LookRotation;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.StateMachine.Data;

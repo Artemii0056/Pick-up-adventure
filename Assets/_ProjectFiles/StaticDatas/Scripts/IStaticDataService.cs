@@ -1,8 +1,8 @@
 using _ProjectFiles.Items;
+using _ProjectFiles.Items.Keys.Scripts.Data;
+using _ProjectFiles.Items.Knifes.Scripts.Data;
+using _ProjectFiles.Items.Note.Script.Data;
 using _ProjectFiles.Items.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.Data;
-using _ProjectFiles.Knifes.Scripts.Data;
-using _ProjectFiles.Note.Script.Data;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation._ProjectFiles.Player.Scripts.Movements.Configs;
 

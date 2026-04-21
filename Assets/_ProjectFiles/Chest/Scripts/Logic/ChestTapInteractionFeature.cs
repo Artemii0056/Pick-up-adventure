@@ -3,8 +3,8 @@ using _ProjectFiles.Chest.Scripts.View;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Items.Keys.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Data;
-using _ProjectFiles.Keys.Scripts.Data;
 using _ProjectFiles.Player.Scripts.Core;
 using UnityEngine;
 

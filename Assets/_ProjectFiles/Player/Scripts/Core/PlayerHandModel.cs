@@ -1,4 +1,6 @@
-﻿namespace _ProjectFiles.Player.Scripts.Core
+﻿using _ProjectFiles.Items.Scripts.Data;
+
+namespace _ProjectFiles.Player.Scripts.Core
 {
     public class PlayerHandModel
     {

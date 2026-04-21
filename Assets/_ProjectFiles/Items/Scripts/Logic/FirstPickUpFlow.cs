@@ -1,4 +1,6 @@
 ﻿using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Items.Scripts.Inspection;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.StateMachine;

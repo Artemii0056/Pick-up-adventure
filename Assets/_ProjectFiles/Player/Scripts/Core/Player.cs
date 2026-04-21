@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using _ProjectFiles.Chest.Scripts.View;
-using _ProjectFiles.Keys.Scripts.View;
+using _ProjectFiles.Items.Keys.Scripts.View;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation;

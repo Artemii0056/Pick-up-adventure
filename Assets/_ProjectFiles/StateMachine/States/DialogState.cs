@@ -1,5 +1,5 @@
-﻿using _ProjectFiles.Dialogue.Scripts.Data;
-using _ProjectFiles.Dialogue.Scripts.Logic;
+﻿using _ProjectFiles.DialogueSystem.Scripts.Data;
+using _ProjectFiles.DialogueSystem.Scripts.Logic;
 using _ProjectFiles.StateMachine.Data;
 
 namespace _ProjectFiles.StateMachine.States
