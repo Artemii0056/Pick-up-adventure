@@ -36,6 +36,7 @@ namespace _ProjectFiles.DialogueSystem
 
         public void Show()
         {
+            gameObject.SetActive(true);
             _root.SetActive(true);
         }
 
