@@ -22,5 +22,8 @@ namespace _ProjectFiles.Chest.Scripts.Data
 
             return state;
         }
+
+        public void Remove(int keyModelId) => 
+            _states.Remove(keyModelId);
     }
 }

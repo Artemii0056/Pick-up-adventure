@@ -20,13 +20,13 @@ namespace _ProjectFiles.NPC.Scripts.Logic
         {
             data = default;
 
-            if (interactableView is not NpcView)
+            if (interactableView is not NpcView npcView)
                 return false;
 
             data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Говорить"
+                ActionName = npcView.Config.ActionName
             };
 
             return true;

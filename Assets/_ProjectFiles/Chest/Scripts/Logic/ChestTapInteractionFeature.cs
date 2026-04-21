@@ -35,13 +35,16 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (chestModel == null || chestModel.IsOpened)
                 return false;
 
-            bool canInteract = _handService.HasItem && _handService.CurrentItem is KeyItemModel;
-
+            bool canInteract =
+                _handService.CurrentItem is KeyItemModel keyModel &&
+                chestModel.CanOpenWith(keyModel);
+            
             data = new InteractData
             {
                 CanInteract = canInteract,
-                ActionName = "Открыть"
+                ActionName = chestView.Config.ActionName
             };
+
 
             return true;
         }
@@ -50,25 +53,22 @@ namespace _ProjectFiles.Chest.Scripts.Logic
         {
             if (interactableView is not ChestView chestView)
                 return;
-            
+
             ChestModel chestModel = _chestStorage.GetState(chestView.Id);
-            
-            if (chestModel.IsOpened)
+
+            if (chestModel == null || chestModel.IsOpened)
                 return;
-            
-            if (!_handService.HasItem)
-                return;
-            
-            Debug.Log(_handService.CurrentItem.GetType());
-            
+
             if (_handService.CurrentItem is not KeyItemModel keyModel)
                 return;
-            
+
+            if (!chestModel.CanOpenWith(keyModel))
+                return;
+
             chestModel.Open();
             chestView.Open();
+            _chestStorage.Remove(keyModel.Id);
             _handService.Clear();
-
-            Debug.Log($"Chest {chestView.Id} opened");
         }
     }
 }

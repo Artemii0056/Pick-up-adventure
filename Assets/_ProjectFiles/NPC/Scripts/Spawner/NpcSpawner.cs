@@ -31,6 +31,7 @@ namespace _ProjectFiles.NPC.Scripts.Spawner
                 npcSceneData.Transform.position,
                 npcSceneData.Transform.rotation);
 
+            npcView.Initialize(npcSceneData.Config);
             npcView.SetId(npcId);
         }
     }

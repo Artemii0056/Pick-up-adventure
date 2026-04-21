@@ -6,8 +6,11 @@ namespace _ProjectFiles.NPC.Scripts.View
 {
     public class NpcView : InteractableView
     {
-        [SerializeField] private NpcConfig _config;
+        public NpcConfig Config { get; private set; }
 
-        public NpcConfig Config => _config;
+        public void Initialize(NpcConfig config)
+        {
+            Config = config;
+        }
     }
 }

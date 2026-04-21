@@ -15,6 +15,7 @@ namespace _ProjectFiles.NPC.Scripts.Data
 
         [Header("Quest")]
         [field: SerializeField] public NpcQuestConfig QuestConfig { get; private set; }
+        [field: SerializeField] public string ActionName { get; private set; } = "Говорить";
 
         public bool HasQuest => QuestConfig != null;
     }

@@ -10,5 +10,6 @@ namespace _ProjectFiles.Items
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public GameObject PreviewPrefab { get; private set; }
         [field: SerializeField] public ItemView Prefab { get; private set; } 
+        [field: SerializeField] public string ActionName { get; private set; } = "Подобрать";
     }
 }

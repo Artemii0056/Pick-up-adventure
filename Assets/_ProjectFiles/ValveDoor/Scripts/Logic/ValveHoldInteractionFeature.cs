@@ -20,13 +20,13 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
         {
             data = default;
 
-            if (interactableView is not ValveView)
+            if (interactableView is not ValveView valveView )
                 return false;
 
             data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Крутить"
+                ActionName = valveView.Config.ActionName
             };
 
             return true;

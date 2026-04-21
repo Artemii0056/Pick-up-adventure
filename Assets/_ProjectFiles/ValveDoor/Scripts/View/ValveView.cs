@@ -9,9 +9,12 @@ namespace _ProjectFiles.ValveDoor.Scripts.View
     {
         [SerializeField] private ValveVisual _visual;
 
+        public ValveConfig Config { get; private set; }
+
         public void Initialize(ValveConfig config, Transform doorTransform)
         {
             _visual.Initialize(config, doorTransform);
+            Config = config;
         }
 
         public void Render(float progress)

@@ -13,5 +13,6 @@ namespace _ProjectFiles.ValveDoor.Scripts.Data
 
         [field: SerializeField, Min(0f)] public float DoorMaxOffsetY { get; private set; } = 2f;
         [field: SerializeField, Min(0f)] public float ValveMaxAngle { get; private set; } = 360f;
+        [field: SerializeField] public string ActionName { get; private set; } = "Крутить";
     }
 }

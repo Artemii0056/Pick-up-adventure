@@ -4,15 +4,23 @@ using UnityEngine;
 
 namespace _ProjectFiles.Chest.Scripts.View
 {
-    public class ChestView : InteractableView //TODO Разделить на вьюшку и конфиг
+    public class ChestView : InteractableView
     {
-       [field: SerializeField] public ChestKeyType KeyType { get; private set; }
+        [SerializeField] private Animator _animator;
 
-        public bool IsOpen { get; private set; } = false;
+        public ChestConfig Config { get; private set; }
+
+        public void Initialize(ChestConfig config)
+        {
+            Config = config;
+        }
 
         public void Open()
         {
-            IsOpen = true;
+            if (Config != null && _animator != null)
+            {
+                _animator.SetBool(Config.OpenAnimationParam, true);
+            }
         }
     }
 }

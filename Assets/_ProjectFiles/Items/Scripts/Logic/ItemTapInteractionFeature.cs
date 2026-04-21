@@ -54,7 +54,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
             data = new InteractData
             {
                 CanInteract = true,
-                ActionName = "Подобрать"
+                ActionName =  itemModel.Config.ActionName
             };
 
             return true;
