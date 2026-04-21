@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using _ProjectFiles.DialogueSystem.Scripts.Data;
+using _ProjectFiles.NPC.Scripts.Data.Quests;
+using _ProjectFiles.NPC.Scripts.Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,9 +44,6 @@ namespace _ProjectFiles.DialogueSystem
             _root.SetActive(false);
             ClearChoices();
             _closeButton.gameObject.SetActive(false);
-
-            // ВАЖНО:
-            // квестовый UI не прячем тут
         }
 
         public void SetNode(DialogueNode node, Action<int> onChoiceSelected, Action onClose)
@@ -52,6 +51,7 @@ namespace _ProjectFiles.DialogueSystem
             _onChoiceSelected = onChoiceSelected;
             _onClose = onClose;
 
+            Show();
             _replicaText.text = node.Text;
 
             ClearChoices();
@@ -72,6 +72,32 @@ namespace _ProjectFiles.DialogueSystem
             _closeButton.gameObject.SetActive(node.IsEnd);
             _closeButton.onClick.RemoveAllListeners();
             _closeButton.onClick.AddListener(() => _onClose?.Invoke());
+        }
+
+        public void ShowSelector(
+            string title,
+            IReadOnlyList<DialogueSelectorOption> options,
+            Action<int> onSelected,
+            Action onClose)
+        {
+            Show();
+            _replicaText.text = title;
+
+            ClearChoices();
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                int index = i;
+                Button button = Instantiate(_choiceButtonPrefab, _choicesRoot);
+                TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
+                text.text = options[i].Title;
+                button.onClick.AddListener(() => onSelected?.Invoke(index));
+                _spawnedButtons.Add(button);
+            }
+
+            _closeButton.gameObject.SetActive(true);
+            _closeButton.onClick.RemoveAllListeners();
+            _closeButton.onClick.AddListener(() => onClose?.Invoke());
         }
 
         public void UpdateQuest(string text, bool show)

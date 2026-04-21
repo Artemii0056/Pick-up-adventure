@@ -86,6 +86,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<NpcStorage>(Lifetime.Singleton).As<INpcStorage>();
         builder.Register<NpcDialogueResolver>(Lifetime.Singleton).As<INpcDialogueResolver>();
         builder.Register<NpcInteractionService>(Lifetime.Singleton).As<INpcInteractionService>();
+        builder.Register<NpcDialogueSelectorService>(Lifetime.Singleton).As<INpcDialogueSelectorService>();
 
         RegisterInteractionFeatures(builder);
         RegisterInteractionFactories(builder);

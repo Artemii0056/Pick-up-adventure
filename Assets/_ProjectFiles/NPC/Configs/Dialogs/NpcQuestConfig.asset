@@ -15,7 +15,8 @@ MonoBehaviour:
   <QuestId>k__BackingField: 1
   <AvailableQuestItems>k__BackingField:
   - {fileID: 11400000, guid: a7e57af8041a57d47b225d12eb19fcaa, type: 2}
+  <Title>k__BackingField: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u043D\u0438\u0435"
   <DialogueSet>k__BackingField:
     <StartDialogue>k__BackingField: {fileID: 11400000, guid: cbfbf489fad987646800f286d6cd6801, type: 2}
-    <InProgressDialogue>k__BackingField: {fileID: 11400000, guid: de0d056ba1447c84caea721693d11574, type: 2}
+    <Title>k__BackingField: "\u041E\u0431\u0441\u0443\u0434\u0438\u0442\u044C \u0437\u0430\u0434\u0430\u043D\u0438\u0435"
     <CompletedDialogue>k__BackingField: {fileID: 11400000, guid: 280af99968a75094182c4dbc27f8281e, type: 2}

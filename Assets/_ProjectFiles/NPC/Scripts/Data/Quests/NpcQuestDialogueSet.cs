@@ -8,6 +8,7 @@ namespace _ProjectFiles.NPC.Scripts.Data.Quests
     public class NpcQuestDialogueSet
     {
         [field: SerializeField] public DialogueConfig StartDialogue { get; private set; }
+        [field: SerializeField] public string Title { get; private set; } = "Обсудить задание";
         [field: SerializeField] public DialogueConfig CompletedDialogue { get; private set; }
     }
 }

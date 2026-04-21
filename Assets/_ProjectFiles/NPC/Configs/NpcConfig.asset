@@ -15,6 +15,7 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 1468984812316001919, guid: 08317b37dd0e4e643bbd24a03bb4d19b, type: 3}
   <RegularDialogues>k__BackingField:
   - <Id>k__BackingField: 1
+    <Title>k__BackingField: "\u0420\u0430\u0441\u0441\u043A\u0430\u0436\u0438 \u043D\u043E\u0432\u043E\u0441\u0442\u0438"
     <Dialogue>k__BackingField: {fileID: 11400000, guid: d990a4017d2092f478c10e14c7bd7d0b, type: 2}
   <DefaultDialogueId>k__BackingField: 1
   <QuestConfig>k__BackingField: {fileID: 11400000, guid: 4bbba0f295ea18145864e4cd4dc71afc, type: 2}

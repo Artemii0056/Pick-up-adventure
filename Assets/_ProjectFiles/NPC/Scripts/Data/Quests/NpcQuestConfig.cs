@@ -8,6 +8,7 @@ namespace _ProjectFiles.NPC.Scripts.Data.Quests
     {
         [field: SerializeField] public string QuestId { get; private set; }
         [field: SerializeField] public BaseItemConfig[] AvailableQuestItems { get; private set; }
+        [field: SerializeField] public string Title { get; private set; }
         [field: SerializeField] public NpcQuestDialogueSet DialogueSet { get; private set; }
     }
 }

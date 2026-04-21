@@ -21,6 +21,4 @@ MonoBehaviour:
     Action: 0
     SuccessNextNodeId: 
     FailNextNodeId: 
-    Choices:
-    - Text: 
-      NextNodeId: 
+    Choices: []
