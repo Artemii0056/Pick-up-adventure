@@ -19,7 +19,8 @@ namespace _ProjectFiles.World.Scripts
             IChestSpawner chestSpawner,
             ISlotSpawner slotSpawner,
             IWorldItemSpawner worldItemSpawner,
-            INpcSpawner npcSpawner, IValveSpawner valveSpawner)
+            INpcSpawner npcSpawner,
+            IValveSpawner valveSpawner)
         {
             _chestSpawner = chestSpawner;
             _slotSpawner = slotSpawner;

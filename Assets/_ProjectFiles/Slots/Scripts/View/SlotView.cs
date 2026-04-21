@@ -9,6 +9,7 @@ namespace _ProjectFiles.Slots.Scripts.View
     {
         [field: SerializeField] public SlotRuleType SlotRuleType { get; private set; }
         [field: SerializeField] public Transform ItemAnchor { get; private set; }
+        [field: SerializeField] public string PutActionName { get; private set; } = "Положить";
 
         public ItemView CurrentItemView { get; private set; }
 

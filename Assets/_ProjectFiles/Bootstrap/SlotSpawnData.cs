@@ -1,5 +1,6 @@
 ﻿using System;
 using _ProjectFiles.Items;
+using _ProjectFiles.Items.Scripts;
 using _ProjectFiles.Slots.Scripts.View;
 using UnityEngine;
 

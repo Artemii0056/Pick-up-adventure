@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.Items.Scripts;
+using UnityEngine;
 
 namespace _ProjectFiles.Items.Knifes.Scripts.Data
 {

@@ -79,7 +79,6 @@ namespace _ProjectFiles.DialogueSystem.Scripts.Logic
             DialogueNode node = _currentConfig.GetNode(nodeId);
             if (node == null)
             {
-                Debug.LogError($"Dialogue node not found: {nodeId}");
                 return;
             }
 
@@ -113,7 +112,6 @@ namespace _ProjectFiles.DialogueSystem.Scripts.Logic
 
                     if (string.IsNullOrWhiteSpace(nextNodeId))
                     {
-                        Debug.LogError($"Next node is not configured for action on node {node.Id}");
                         return false;
                     }
 

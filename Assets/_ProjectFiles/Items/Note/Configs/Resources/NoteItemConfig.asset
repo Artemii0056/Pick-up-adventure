@@ -16,4 +16,6 @@ MonoBehaviour:
   <Description>k__BackingField: "\"\u0410 \u044D\u0442\u043E \u0437\u0430\u043F\u0438\u0441\u043A\u0430\""
   <PreviewPrefab>k__BackingField: {fileID: 4035144548031830163, guid: 425a07f9f7b91c842a1ca7412cd33239, type: 3}
   <Prefab>k__BackingField: {fileID: 8609604285816421029, guid: 425a07f9f7b91c842a1ca7412cd33239, type: 3}
+  <ActionName>k__BackingField: "\u041F\u043E\u0434\u043E\u0431\u0440\u0430\u0442\u044C"
   <Content>k__BackingField: {fileID: 11400000, guid: ddcd745f10fef85439c387f06ec3954b, type: 2}
+  <OpenAnimationParam>k__BackingField: Circle

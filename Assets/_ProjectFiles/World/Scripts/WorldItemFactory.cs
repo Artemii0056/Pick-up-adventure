@@ -3,6 +3,7 @@ using _ProjectFiles.Items;
 using _ProjectFiles.Items.Keys.Scripts.Data;
 using _ProjectFiles.Items.Knifes.Scripts.Data;
 using _ProjectFiles.Items.Note.Script.Data;
+using _ProjectFiles.Items.Scripts;
 using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.World.Scripts.Factory;

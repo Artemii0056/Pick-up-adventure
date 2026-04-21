@@ -18,12 +18,10 @@ namespace _ProjectFiles.StateMachine.States
         public void Enter()
         {
             _activeLookRotation.SetHandler(_playerLookRotationHandler);
-            //Иипут/хаб и т.д.
         }
 
         public void Exit()
         {
-            //выключить обычный ввод? 
         }
     }
 }

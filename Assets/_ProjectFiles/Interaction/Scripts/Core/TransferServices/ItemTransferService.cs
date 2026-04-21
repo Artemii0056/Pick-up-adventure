@@ -17,7 +17,8 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
         private readonly IStoragePickedUpItems _storagePickedUpItems;
         private readonly IHandService _handService;
 
-        public ItemTransferService(ISlotStorage slotStorage,
+        public ItemTransferService(
+            ISlotStorage slotStorage,
             IItemStorage itemStorage,
             PlayerHandView handView,
             IStoragePickedUpItems storagePickedUpItems,
@@ -34,7 +35,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
         {
             if (_handService.HasItem)
                 return false;
-            
+
             ItemModel itemModel = _itemStorage.GetState(itemView.Id);
 
             if (itemModel == null)
@@ -44,7 +45,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
             {
                 slot.Take();
             }
-            
+
             _storagePickedUpItems.AddState(itemModel.Type, itemView.Id);
 
             _handService.Put(itemModel, itemView);
@@ -60,13 +61,12 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
 
             ItemModel itemModel = _handService.CurrentItem;
             ItemView itemView = _handService.CurrentItemView;
-            
+
             if (_slotStorage.TryGetState(slotView.Id, out var slotModel) == false)
                 return false;
 
             if (!slotModel.CanPlace(itemModel))
                 return false;
-
 
             slotModel.Place(itemModel);
             slotView.SetItemView(itemView);
@@ -77,7 +77,14 @@ namespace _ProjectFiles.Interaction.Scripts.Core.TransferServices
 
             return true;
         }
-        
+
+        public void MoveToInspect(ItemView itemView, Transform inspectAnchor)
+        {
+            itemView.transform.SetParent(inspectAnchor);
+            itemView.transform.localPosition = Vector3.zero;
+            itemView.transform.localRotation = Quaternion.identity;
+        }
+
         private void MoveToHand(ItemView itemView)
         {
             itemView.transform.SetParent(_handView.Transform);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _ProjectFiles.Items.Scripts;
+using UnityEngine;
 
 namespace _ProjectFiles.Items.Note.Script.Data
 {
@@ -6,5 +7,7 @@ namespace _ProjectFiles.Items.Note.Script.Data
     public class NoteItemConfig : BaseItemConfig
     {
         [field: SerializeField] public NoteContent Content { get; private set; }
+        [field: SerializeField] public string OpenAnimationParam { get; private set; } = "Circle";
+
     }
 }

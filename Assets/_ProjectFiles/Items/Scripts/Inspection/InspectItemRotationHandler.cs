@@ -9,7 +9,7 @@ namespace _ProjectFiles.Items.Scripts.Inspection
         private readonly float _rotateSpeed;
 
         public InspectItemRotationHandler() => 
-            _rotateSpeed = 10; //TODO В конфиг
+            _rotateSpeed = 10; 
 
         public void SetTarget(Transform target) => 
             _target = target;

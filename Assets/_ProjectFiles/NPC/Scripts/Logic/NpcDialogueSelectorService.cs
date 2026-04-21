@@ -32,7 +32,6 @@ namespace _ProjectFiles.NPC.Scripts.Logic
         {
             if (!_npcStorage.TryGetState(npcId, out NpcModel npcModel))
             {
-                Debug.LogError($"Npc with id {npcId} was not found in storage");
                 return;
             }
 
@@ -40,7 +39,6 @@ namespace _ProjectFiles.NPC.Scripts.Logic
 
             if (options.Count == 0)
             {
-                Debug.LogError($"No dialogue options found for npc {npcId}");
                 return;
             }
 

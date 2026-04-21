@@ -53,9 +53,7 @@ namespace DI
             builder.RegisterComponentInHierarchy<Bootstrapper>();
             builder.RegisterComponentInHierarchy<PickUpCanvas>();
             builder.RegisterComponentInHierarchy<PlayerTransformRoot>();
-            builder.RegisterComponentInHierarchy<NpcView>();
             builder.RegisterComponentInHierarchy<DialogueCanvas>();
-        
         
         
             builder.Register<SlotStorage>(Lifetime.Singleton).As<ISlotStorage>();

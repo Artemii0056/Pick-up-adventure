@@ -32,6 +32,7 @@ namespace _ProjectFiles.World.Scripts
                 itemSceneData.Position.position,
                 itemSceneData.Position.rotation);
 
+            itemView.Initialize(itemSceneData.ItemConfig);
             itemView.SetId(itemId);
         }
     }

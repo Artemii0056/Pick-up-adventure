@@ -2,7 +2,7 @@
 using _ProjectFiles.Player.Scripts.Resolvers;
 using UnityEngine;
 
-namespace _ProjectFiles.Items
+namespace _ProjectFiles.Items.Scripts
 {
     public class BaseItemConfig : ScriptableObject
     {

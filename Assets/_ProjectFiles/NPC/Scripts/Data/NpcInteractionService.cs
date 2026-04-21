@@ -24,7 +24,6 @@ namespace _ProjectFiles.NPC.Scripts.Data
         {
             if (!_npcStorage.TryGetState(npcId, out NpcModel npcModel))
             {
-                Debug.LogError($"Npc with id {npcId} was not found in storage");
                 return;
             }
 
@@ -32,7 +31,6 @@ namespace _ProjectFiles.NPC.Scripts.Data
 
             if (dialogue == null)
             {
-                Debug.LogError($"Dialogue for npc {npcId} was not resolved");
                 return;
             }
 

@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using _ProjectFiles.Chest.Scripts.View;
+﻿using _ProjectFiles.Chest.Scripts.View;
 using _ProjectFiles.Items.Keys.Scripts.View;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation;
 using _ProjectFiles.Player.Scripts.View;
-using _ProjectFiles.Slots.Scripts.View;
 using _ProjectFiles.UI;
 using UnityEngine;
 using VContainer;
@@ -69,8 +67,6 @@ namespace _ProjectFiles.Player.Scripts.Core
         private void Update()
         {
             _playerInteractionController.Tick();
-            // _playerRotator.Tick();
-            // _playerMover.Tick();
         }
     }
 }

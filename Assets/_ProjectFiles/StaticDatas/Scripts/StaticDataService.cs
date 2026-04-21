@@ -4,6 +4,7 @@ using _ProjectFiles.Items;
 using _ProjectFiles.Items.Keys.Scripts.Data;
 using _ProjectFiles.Items.Knifes.Scripts.Data;
 using _ProjectFiles.Items.Note.Script.Data;
+using _ProjectFiles.Items.Scripts;
 using _ProjectFiles.Items.Scripts.Data;
 using _ProjectFiles.Player.Scripts.Movements;
 using _ProjectFiles.Player.Scripts.Rotation._ProjectFiles.Player.Scripts.Movements.Configs;
@@ -13,10 +14,13 @@ namespace _ProjectFiles.StaticDatas.Scripts
 {
     public class StaticDataService : IStaticDataService
     {
+        private const string KnifeItemConfigPath = "KnifeItemConfig";
+        private const string KeyItemConfigPath = "KeyItemConfig";
+        private const string NoteItemConfigPath = "NoteItemConfig";
         private readonly IResourceLoader _resourceLoader;
         public  KeyItemConfig KeyItemConfig{ get; private set; }
         public  NoteItemConfig NoteItemConfig{ get; private set; }
-        public  KnifeItemConfig KnifeItemConfig{ get; private set; } //TODO Пока не особо расширяемая система, подумать над расширением
+        public  KnifeItemConfig KnifeItemConfig{ get; private set; } 
         
         public PlayerRotationConfig PlayerRotationConfig { get; private set; } 
         public PlayerMovementConfig PlayerMovementConfig{ get; private set; }
@@ -49,13 +53,13 @@ namespace _ProjectFiles.StaticDatas.Scripts
         }
         
         private void LoadKnifePrefab() => 
-            KnifeItemConfig = _resourceLoader.Load<KnifeItemConfig>("KnifeItemConfig"); //TODO В константы
+            KnifeItemConfig = _resourceLoader.Load<KnifeItemConfig>(KnifeItemConfigPath); 
         
         private void LoadKeyPrefab() => 
-            KeyItemConfig = _resourceLoader.Load<KeyItemConfig>("KeyItemConfig");
+            KeyItemConfig = _resourceLoader.Load<KeyItemConfig>(KeyItemConfigPath);
 
         private void LoadNotePrefab() => 
-            NoteItemConfig = _resourceLoader.Load<NoteItemConfig>("NoteItemConfig");
+            NoteItemConfig = _resourceLoader.Load<NoteItemConfig>(NoteItemConfigPath);
 
         private void LoadRotationConfig() => 
             PlayerRotationConfig = _resourceLoader.Load<PlayerRotationConfig>(Constants.PlayerRotationConfigPath); 
