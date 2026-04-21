@@ -5,13 +5,13 @@ using _ProjectFiles.ValveDoor.Scripts.View;
 
 namespace _ProjectFiles.ValveDoor.Scripts.Logic
 {
-    public class ValveInteractionFeature : IHoldInteractionFeature
+    public class ValveHoldInteractionFeature : IHoldInteractionFeature
     {
-        private IValveRotationService _valveRotationService;
+        private readonly IValveRotationService _rotationService;
 
-        public ValveInteractionFeature(IValveRotationService valveRotationService)
+        public ValveHoldInteractionFeature(IValveRotationService rotationService)
         {
-            _valveRotationService = valveRotationService;
+            _rotationService = rotationService;
         }
 
         public InteractableItemType Type => InteractableItemType.Valve;
@@ -36,13 +36,13 @@ namespace _ProjectFiles.ValveDoor.Scripts.Logic
         {
             if (interactableView is not ValveView valveView)
                 return;
-            
-            _valveRotationService.StartRotate(valveView, valveView.Model);
+
+            _rotationService.StartRotate(valveView);
         }
-        
+
         public void StopInteract()
         {
-            _valveRotationService.StopRotate();
+            _rotationService.StopRotate();
         }
     }
 }

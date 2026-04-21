@@ -22,7 +22,7 @@ namespace _ProjectFiles.Interaction.Scripts.Core
             _tapResolver = tapResolver;
         }
 
-        public void Interact(IHandService handService, InteractableView itemView)
+        public void Interact(InteractableView itemView)
         {
             if (itemView == null)
                 return;
@@ -42,15 +42,9 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         public void Cancel() => 
             _holdResolver.CancelInteract();
 
-        public void ShowViewData(IHandService handService, InteractableView itemView)
+        public void ShowViewData(InteractableView itemView)
         {
-            if (itemView == null)
-            {
-                HideViewData();
-                return;
-            }
-
-            if (TryGetInteractData(handService, itemView, out InteractData interactData) == false)
+            if (TryGetInteractData(itemView, out InteractData interactData) == false)
             {
                 HideViewData();
                 return;
@@ -67,7 +61,6 @@ namespace _ProjectFiles.Interaction.Scripts.Core
         }
 
         private bool TryGetInteractData(
-            IHandService handService,
             InteractableView itemView,
             out InteractData interactData)
         {

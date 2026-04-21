@@ -1,6 +1,6 @@
 ﻿using _ProjectFiles.Bootstrap;
 
-namespace _ProjectFiles.World
+namespace _ProjectFiles.World.Scripts
 {
     public interface IWorldLoader
     {

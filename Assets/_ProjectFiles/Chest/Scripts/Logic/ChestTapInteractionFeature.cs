@@ -26,27 +26,23 @@ namespace _ProjectFiles.Chest.Scripts.Logic
         public bool TryGetInteractData(InteractableView interactableView, out InteractData data)
         {
             data = default;
-            
-            data = new InteractData
-            {
-                CanInteract = false,
-                ActionName = "Открыть"
-            };
-            
+
             if (interactableView is not ChestView chestView)
                 return false;
 
             ChestModel chestModel = _chestStorage.GetState(chestView.Id);
 
-            if (chestModel.IsOpened)
+            if (chestModel == null || chestModel.IsOpened)
                 return false;
-            
+
+            bool canInteract = _handService.HasItem && _handService.CurrentItem is KeyItemModel;
+
             data = new InteractData
             {
-                CanInteract = true,
+                CanInteract = canInteract,
                 ActionName = "Открыть"
             };
-            
+
             return true;
         }
 

@@ -2,10 +2,12 @@
 using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Interaction.Scripts.Data;
 using _ProjectFiles.Interaction.Scripts.View;
+using _ProjectFiles.Items.Scripts.Data;
+using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.Player.Scripts.Core;
+using _ProjectFiles.Player.Scripts.Resolvers;
 using _ProjectFiles.Slots.Scripts.Data;
 using _ProjectFiles.Slots.Scripts.View;
-using UnityEngine;
 
 namespace _ProjectFiles.Slots.Scripts.Logic
 {
@@ -14,12 +16,14 @@ namespace _ProjectFiles.Slots.Scripts.Logic
         private readonly ISlotStorage _slotStorage;
         private readonly IItemTransferService _transferService;
         private readonly IHandService _handService;
+        private readonly IItemStorage _itemStorage;
 
-        public SlotTapInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService, IHandService handService)
+        public SlotTapInteractionFeature(ISlotStorage slotStorage, IItemTransferService transferService, IHandService handService, IItemStorage itemStorage)
         {
             _slotStorage = slotStorage;
             _transferService = transferService;
             _handService = handService;
+            _itemStorage = itemStorage;
         }
 
         public InteractableItemType Type => InteractableItemType.Slot;
@@ -28,22 +32,18 @@ namespace _ProjectFiles.Slots.Scripts.Logic
         {
             data = default;
 
-            if (interactableView is not SlotView slotView)
+            if (interactableView is not ItemView itemView)
                 return false;
 
-            if (!_handService.HasItem)
-                return false;
+            ItemModel itemModel = _itemStorage.GetState(itemView.Id);
 
-            if (!_slotStorage.TryGetState(slotView.Id, out SlotModel slotModel))
-                return false;
-
-            if (!slotModel.CanPlace(_handService.CurrentItem))
+            if (itemModel == null)
                 return false;
 
             data = new InteractData
             {
-                CanInteract = true,
-                ActionName = "Положить"
+                CanInteract = !_handService.HasItem,
+                ActionName = "Подобрать"
             };
 
             return true;
@@ -51,8 +51,6 @@ namespace _ProjectFiles.Slots.Scripts.Logic
 
         public void Interact(InteractableView interactableView)
         {
-            Debug.Log("Slot Interact");
-            
             if (interactableView is not SlotView slotView)
                 return;
 

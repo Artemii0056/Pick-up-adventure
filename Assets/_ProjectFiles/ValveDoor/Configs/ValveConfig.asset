@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c70435a4d7543d992ebea2cc15525a8, type: 3}
+  m_Name: ValveConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_ProjectFiles.ValveDoor.Scripts.Data.ValveConfig
+  <Prefab>k__BackingField: {fileID: 7148740317737135646, guid: 4de13e38aa9b46940bad534d2cca5fab, type: 3}
+  <OpenSpeed>k__BackingField: 1
+  <ReturnSpeed>k__BackingField: 1
+  <DoorMaxOffsetY>k__BackingField: 2
+  <ValveMaxAngle>k__BackingField: 360

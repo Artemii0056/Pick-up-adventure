@@ -1,7 +1,7 @@
 ﻿using _ProjectFiles.Bootstrap;
 using _ProjectFiles.StateMachine.States;
 using _ProjectFiles.StaticDatas.Scripts;
-using _ProjectFiles.World;
+using _ProjectFiles.World.Scripts;
 
 namespace _ProjectFiles.StateMachine.Data
 {

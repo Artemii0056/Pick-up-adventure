@@ -5,8 +5,8 @@ namespace _ProjectFiles.Interaction.Scripts.Core
 {
     public interface IInteractionFeatureService
     {
-        void ShowViewData(IHandService handService, InteractableView itemView);
-        void Interact(IHandService handService, InteractableView itemView);
+        void ShowViewData(InteractableView itemView);
+        void Interact(InteractableView itemView);
         void Cancel();
     }
 }

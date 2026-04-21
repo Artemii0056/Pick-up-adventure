@@ -44,7 +44,7 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView interactableView))
             {
-                _interactionFeatureService.ShowViewData(_handService, interactableView);;
+                _interactionFeatureService.ShowViewData(interactableView);;
             }
         }
 
@@ -67,7 +67,7 @@ namespace _ProjectFiles.Player.Scripts.Core
                     _interactionLayerMask,
                     out InteractableView interactableView))
             {
-                _interactionFeatureService.Interact(_handService, interactableView);
+                _interactionFeatureService.Interact(interactableView);
             }
         }
     }
