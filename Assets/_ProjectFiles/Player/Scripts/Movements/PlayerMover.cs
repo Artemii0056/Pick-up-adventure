@@ -29,9 +29,6 @@ namespace _ProjectFiles.Player.Scripts.Movements
             _inputReader = inputReader;
 
             _isActive = true;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         public void Init(Transform playerTransform, CharacterController characterController)

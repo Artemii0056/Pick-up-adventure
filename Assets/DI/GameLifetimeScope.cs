@@ -2,6 +2,9 @@ using _ProjectFiles;
 using _ProjectFiles.Bootstrap;
 using _ProjectFiles.Chest.Scripts.Data;
 using _ProjectFiles.Chest.Scripts.Logic;
+using _ProjectFiles.Dialogue;
+using _ProjectFiles.Dialogue.Scripts.Logic;
+using _ProjectFiles.Dialogue.Scripts.Logic.Quest;
 using _ProjectFiles.GlobalId.Scripts;
 using _ProjectFiles.Interaction.Scripts.Core;
 using _ProjectFiles.Interaction.Scripts.Core.HoldFeatureServices;
@@ -9,6 +12,7 @@ using _ProjectFiles.Interaction.Scripts.Core.TapFeatureServices;
 using _ProjectFiles.Interaction.Scripts.Core.TransferServices;
 using _ProjectFiles.Items.Scripts.Logic;
 using _ProjectFiles.NPC.Scripts.Logic;
+using _ProjectFiles.NPC.Scripts.View;
 using _ProjectFiles.Player.Scripts.Core;
 using _ProjectFiles.Player.Scripts.Input.InputReader.Scripts;
 using _ProjectFiles.Player.Scripts.Movements;
@@ -38,6 +42,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<Bootstrapper>();
         builder.RegisterComponentInHierarchy<PickUpCanvas>();
         builder.RegisterComponentInHierarchy<PlayerTransformRoot>();
+        builder.RegisterComponentInHierarchy<NpcView>();
+        builder.RegisterComponentInHierarchy<DialogueCanvas>();
         
         
         
@@ -69,6 +75,9 @@ public class GameLifetimeScope : LifetimeScope
         
         builder.Register<PlayerLookRotationHandler>(Lifetime.Singleton);
         builder.Register<InspectItemRotationHandler>(Lifetime.Singleton);
+        
+        builder.Register<NpcQuestService>(Lifetime.Singleton).As<INpcQuestService>();
+        builder.Register<DialogueService>(Lifetime.Singleton).As<IDialogueService>();
         
         RegisterInteractionFeatures(builder);
         RegisterInteractionFactories(builder);

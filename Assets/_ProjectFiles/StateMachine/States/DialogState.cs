@@ -1,48 +1,31 @@
-﻿using _ProjectFiles.StateMachine.Data;
+﻿using _ProjectFiles.Dialogue.Scripts.Data;
+using _ProjectFiles.Dialogue.Scripts.Logic;
+using _ProjectFiles.StateMachine.Data;
 
 namespace _ProjectFiles.StateMachine.States
 {
-    public class DialogState: IPayloadState<DialogueData>
-{
-    private readonly IDialogueService _dialogueService;
-    private readonly IGameStateMachine _stateMachine;
-
-    public DialogState(
-        IDialogueService dialogueService,
-        IGameStateMachine stateMachine)
+    public class DialogState : IPayloadState<DialogueData>
     {
-        _dialogueService = dialogueService;
-        _stateMachine = stateMachine;
-    }
+        private readonly IDialogueService _dialogueService;
 
-    public void Enter()
-    {
-    }
+        public DialogState(IDialogueService dialogueService)
+        {
+            _dialogueService = dialogueService;
+        }
 
-    public void Enter(DialogueData payload)
-    {
-        _dialogueService.Show(payload);
-    }
+        public void Enter(DialogueData payload)
+        {
+            _dialogueService.StartDialogue(payload.DialogueConfig);
+        }
 
-    public void Exit()
-    {
-        _dialogueService.Hide();
-    }
+        public void Exit()
+        {
+            _dialogueService.Close();
+        }
 
-    public void Tick()
-    {
-        _dialogueService.Tick();
-    }
-}
-
-    public interface IDialogueService
-    {
-        void Show(DialogueData payload);
-        void Hide();
-        void Tick();
-    }
-
-    public class DialogueData
-    {
+        public void Tick()
+        {
+            _dialogueService.Tick();
+        }
     }
 }

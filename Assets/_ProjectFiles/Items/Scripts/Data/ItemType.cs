@@ -5,6 +5,6 @@
         None = 0,
         Key = 1,
         Note = 2,
-        QuestItem = 3,
+        SomeObject = 3,
     }
 }

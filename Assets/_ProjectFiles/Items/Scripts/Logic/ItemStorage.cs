@@ -22,5 +22,10 @@ namespace _ProjectFiles.Items.Scripts.Logic
             
             return _items[id];
         }
+
+        public IReadOnlyCollection<ItemModel> GetAll()
+        {
+            return _items.Values;
+        }
     }
 }

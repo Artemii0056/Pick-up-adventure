@@ -42,7 +42,7 @@ namespace _ProjectFiles.StaticDatas.Scripts
             {
                 ItemType.Key => KeyItemConfig,
                 ItemType.Note => NoteItemConfig,
-                ItemType.QuestItem => KnifeItemConfig,
+                ItemType.SomeObject => KnifeItemConfig,
                 _ => throw new ArgumentOutOfRangeException(nameof(itemType), itemType, "Unknown item type")
             };
         }

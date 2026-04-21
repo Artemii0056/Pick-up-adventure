@@ -41,11 +41,6 @@ namespace _ProjectFiles.Chest.Scripts.Logic
             if (chestModel.IsOpened)
                 return false;
             
-            bool canInteract =
-                _handService.HasItem &&
-                _handService.CurrentItem is KeyItemModel keyModel &&
-                keyModel.ChestKeyType == chestModel.ReqiereKeyType;
-            
             data = new InteractData
             {
                 CanInteract = true,

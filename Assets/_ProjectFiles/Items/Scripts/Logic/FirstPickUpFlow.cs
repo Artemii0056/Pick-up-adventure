@@ -63,6 +63,7 @@ namespace _ProjectFiles.Items.Scripts.Logic
             IsActive = true;
 
             _pickUpCanvas.gameObject.SetActive(true);
+            
             _currentPreviewInstance = _pickUpCanvas.SetInfo(
                 itemModel.Config.Description,
                 itemModel.Config.PreviewPrefab);
@@ -82,8 +83,8 @@ namespace _ProjectFiles.Items.Scripts.Logic
 
             _inspectItemRotationHandler.ClearTarget(); //TODO Убрать? 
 
-            if (_currentPreviewInstance != null)
-                Object.Destroy(_currentPreviewInstance);
+            // if (_currentPreviewInstance != null)
+            //     Object.Destroy(_currentPreviewInstance);
 
             _currentPreviewInstance = null;
             _currentPreview = null;
